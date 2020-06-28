@@ -21,6 +21,7 @@
     "react-dropzone": "^4.2.12",
     "react-images": "^0.5.17",
     "react-moment": "^0.7.7",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-slick": "^0.23.1"
   },
