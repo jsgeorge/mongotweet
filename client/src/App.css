@@ -1,0 +1,513 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.container {
+}
+.header {
+  border-bottom: 1px solid #cddded;
+  padding: 0;
+  margin: 0;
+}
+.logo-wrapper {
+  width: 200px;
+
+  margin: 0;
+  padding: 0;
+}
+.logo {
+  font-weight: bold;
+  font-size: 18px;
+
+  text-decoration: none;
+}
+.page-wrapper {
+  margin-top: 40px;
+  background: #fff;
+}
+.content {
+  padding-top: 20px;
+}
+.Rsidebar {
+  border-left: 1px solid rgb(174, 174, 245);
+  padding-top: 20px;
+}
+.Lsidebar {
+  border-right: 1px solid rgb(183, 183, 240);
+  padding-top: 20px;
+}
+.noborder {
+  border: none;
+}
+nav .navbar a {
+  font-size: 16px;
+}
+:double-button {
+  border: none;
+}
+a:link,
+a:hover,
+a:active {
+  color: #111;
+  text-decoration: none;
+}
+.tweet-author {
+  font-size: 12px;
+  font-weight: bold;
+}
+.card_item_wrapper a {
+  color: #111;
+}
+button,
+.btn {
+  border-radius: 100px;
+}
+.logo:hover,
+.logo.active {
+  text-decoration: none;
+}
+.home-wrapper {
+  width: 100%;
+}
+.home-wrapper .welcome-text {
+  font-size: 30px;
+  color: blue;
+  text-align: center;
+  margin-bottom: 100px;
+}
+.add-tweet-panel {
+  font-size: 20px;
+}
+.add-tweet {
+  padding: 20px 0;
+  border-bottom: 14px solid #ccc;
+  height: 500px;
+}
+
+.dropzone {
+}
+.dropzone_box {
+}
+.dropzone_box .wrap {
+  /* width: 200px;
+  height: 200px;
+  background-position: center !important;
+  background-size: cover !important;
+  margin: 0;
+  padding: "5px 10px";
+  margin-top: 5px; */
+}
+
+textarea {
+  font-size: 20px;
+}
+
+.card_item_wrapper {
+  width: 100%;
+  padding: 15px 0;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  min-width: 500px;
+  margin: 0;
+  border-bottom: 1px solid #ccc;
+}
+.card_item_wrapper .card-text {
+  padding: 0 15px;
+}
+.image {
+  width: 100%;
+  height: 300px;
+  background-position: center !important;
+  background-size: cover !important;
+  margin: 0;
+  margin-top: 5px;
+}
+.avatar {
+  width: 30px;
+  height: 30px;
+  background-position: center !important;
+  background-size: cover !important;
+  margin: 0;
+  margin-right: 3px;
+  border-radius: 100px;
+  float: left;
+  border: 1px solid blue;
+}
+#avt-lg {
+  width: 60px;
+  height: 60px;
+}
+#avt-sm {
+  width: 30px;
+  height: 30px;
+}
+
+.card_item_wrapper .tags {
+  position: relative;
+}
+.card_item_wrapper .tags .prod_info {
+  padding: 5px 0;
+}
+.cart_item_wrapper .tags .prod_info a {
+  color: blue;
+}
+.item-text {
+  color: gray;
+}
+.card_item_wrapper .tags .brand,
+.card_item_wrapper .tags .name,
+.card_item_wrapper .tags .price {
+  text-align: left;
+  margin: 5px;
+}
+
+.card_item_wrapper .tags .brand {
+  font-size: 17px;
+  font-weight: 700;
+  color: #2196f3;
+}
+
+.card_item_wrapper .tags .name {
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.card_item_wrapper .tags .price {
+  font-weight: 300;
+  font-size: 21px;
+}
+
+.card_item_wrapper .actions {
+  clear: left;
+  display: flex;
+  padding: 1px 10px 10px 15px;
+  font-size: 12px;
+  color: gray;
+  margin-top: 20px;
+}
+.card_item_wrapper .actions .button_wrapp button {
+  border: none;
+  background: transparent;
+}
+.card_item_wrapper .actions .button_wrapp:nth-child(1) {
+  width: 60px;
+  padding-right: 10px;
+}
+
+.card_item_wrapper.grid_bars {
+  float: none;
+  width: 100%;
+  display: flex;
+}
+
+.card_item_wrapper.grid_bars .image {
+  width: 100%;
+  height: 211px;
+  border: none;
+  margin: 10px 0;
+}
+
+.card_item_wrapper.grid_bars .action_container {
+  flex-grow: 1;
+  border: 1px solid #e6e6e6;
+}
+
+.card_item_wrapper.grid_bars .description {
+  clear: both;
+  padding: 0px 25px;
+  border-top: 1px solid #eeeeee;
+}
+
+.card_item_wrapper.grid_bars .tags {
+  border-bottom: 0px;
+  padding: 5px 20px;
+}
+
+.card_item_wrapper.grid_bars .tags .brand {
+  font-size: 21px;
+}
+
+.card_item_wrapper.grid_bars .tags .brand,
+.card_item_wrapper.grid_bars .tags .name {
+  float: left;
+}
+.comments {
+  width: 100%;
+  clear: left;
+  font-size: 14px;
+  margin: 0 15px;
+}
+
+.has-error {
+  color: red;
+}
+.buttons a {
+  border-radius: 100px;
+  margin-right: 5px;
+}
+.user-edit-buttons {
+  padding: 10px 15px;
+}
+.user-edit-buttons a {
+  margin-right: 5px;
+  color: #fff;
+}
+.nav a FontAwesomeIcon,
+.add-tweet FontAwesomeIcon {
+}
+.btnWide {
+  width: 200px;
+  margin-bottom: 10px;
+}
+.btnMed {
+  width: 80px;
+  border: none;
+  padding: 6px;
+  margin-bottom: 10px;
+  background: blue;
+}
+.btnDefault {
+  border: 1px solid blue;
+}
+.btnAddTweet {
+  display: none;
+}
+.mobile-search {
+  display: none;
+}
+.btnMobileSrch {
+  display: none;
+}
+
+.desktop-search {
+  display: block;
+  width: 450px;
+}
+.search-form {
+  width: 100%;
+  background: #eee;
+  border-radius: 80px;
+}
+.search-form input {
+  background: transparent;
+  border: none;
+  border-radius: 80px;
+  padding: 5px 10px;
+  font-size: 14px;
+  width: 85%;
+}
+.search-form button {
+  border: none;
+}
+.chat-date {
+  color: gray;
+  font-size: 14px;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  margin: 20px 0;
+}
+.desktop-categories {
+  display: block;
+}
+.chat-text {
+  font-size: 18px;
+}
+.usertweets {
+  margin-top: 30px;
+}
+.tweet-user-section {
+  clear: left;
+  width: 100%;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.tweet-user-buttons {
+  width: 200px;
+  margin-left: 0px;
+  margin-bottom: 10px;
+  height: 40px;
+}
+.tweet-user-buttons .button_wrap {
+  width: 50%;
+  height: 20px;
+  padding: 0;
+  margin: 0;
+  float: left;
+}
+.tweet-user-buttons .button_wrap button {
+  border: none;
+  background: transparent;
+}
+.add-comment {
+  margin: 0 15px;
+}
+.user-tweets {
+  margin: 0 20px;
+}
+.desktop-categories {
+  padding-top: 20px;
+}
+.category-card ul li {
+  font-size: 20px;
+}
+.category-card ul li a {
+  color: #111;
+  text-decoration: none;
+}
+.user-card {
+  padding-top: 20px;
+}
+.userlinks li a {
+  font-size: 20px;
+  font-weight: bold;
+}
+@media (min-width: 771px) and (max-width: 990px) {
+  .container {
+  }
+  .page-wrapper {
+  }
+  .Lsidebar {
+    display: none;
+  }
+
+  .Rsidebar {
+  }
+  .content {
+    min-width: 72%;
+  }
+  .card_item_wrapper {
+  }
+}
+@media (min-width: 581px) and (max-width: 770px) {
+  .container {
+  }
+  .Lsidebar {
+    display: none;
+  }
+  .user-card {
+    display: none;
+  }
+  .desktop-search {
+    display: block;
+    width: 200px;
+  }
+  .content {
+    min-width: 70%;
+    float: left;
+  }
+  .card_item_wrapper {
+    min-width: 80%;
+  }
+  .Rsidebar {
+    min-width: 140px;
+    background: #eee;
+    margin-left: 20px;
+  }
+  .category-card ul li {
+    font-size: 16px;
+  }
+}
+@media (max-width: 580px) {
+  .container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  header {
+    margin: 0;
+    padding: 0;
+  }
+  .logo-wrapper {
+    width: 150px;
+  }
+  .page-wrapper {
+    margin: 0;
+    padding: 0;
+    margin-top: 50px;
+  }
+  .tweet-wrapper {
+    margin: 0;
+    padding: 0;
+  }
+  .tweets-wrapper {
+    margin: 0;
+    padding: 0;
+  }
+  .row {
+    margin: 0;
+    padding: 0;
+  }
+  .Rsidebar,
+  .Lsidebar {
+    display: none;
+  }
+  .content {
+    margin: 0;
+    padding: 0;
+  }
+
+  .card_item_wrapper {
+    width: 100%;
+    min-width: 100px;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+  }
+  .chat-text {
+    font-size: 14px;
+  }
+  .card-text {
+    padding: 0 15px;
+  }
+  .card_item_wrapper .image {
+    width: 100%;
+  }
+  .card_item_wrapper .actions {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .cart_item_wrapper .tweet-author {
+    font-size: 12px;
+    font-weight: bold;
+  }
+  .desktop-categories {
+    display: none;
+  }
+  .add-tweet-panel {
+    display: none;
+  }
+  .btnAddTweet {
+    display: block;
+  }
+  .btnMobileSrch {
+    display: block;
+  }
+  .mobile-search {
+    display: block;
+    clear: left;
+    padding: 10px 0;
+    width: 100%;
+  }
+  .desktop-search {
+    display: none;
+  }
+  .user-wrapper {
+    padding-top: 30px;
+  }
+  .mobile-search input {
+    width: 90%;
+    background: #eee;
+    border-radius: 80px;
+    border: none;
+    padding: 4px;
+  }
+  #tag-input {
+    width: 130px;
+  }
+}
