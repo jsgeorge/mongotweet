@@ -22,7 +22,8 @@ const LikeTweetButton = ({ id, uid, userlikes }) => {
     like ? (
       <FontAwesomeIcon
         icon={faStar}
-        style={{ color: "rgb(25, 123, 189)", marginLeft: "4px" }}
+        style={{ marginLeft: "4px" }}
+        className="primary"
       />
     ) : (
       <FontAwesomeIcon

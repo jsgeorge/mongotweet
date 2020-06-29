@@ -25,7 +25,6 @@ const Avatar = ({ images, size }) => {
           style={{
             border: "2px solid blue",
             borderRadius: "100px",
-            color: "blue",
           }}
         />
       )}

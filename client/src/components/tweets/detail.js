@@ -102,7 +102,8 @@ export default function TweetDetail({ match }) {
               <FontAwesomeIcon
                 icon={faLongArrowAltLeft}
                 size="lg"
-                style={{ color: "blue", marginRight: "10px" }}
+                style={{ marginRight: "10px" }}
+                className="primary"
               />
             </Link>
 

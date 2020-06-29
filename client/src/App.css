@@ -3,9 +3,11 @@ body {
   padding: 0;
 }
 .primary {
-  background: rgb(17, 47, 184);
+  background: rgb(6, 77, 170);
 }
-
+.primary-clr {
+  color: rgb(6, 77, 170);
+}
 .header {
   border-bottom: 1px solid #cddded;
   padding: 0;
@@ -116,7 +118,7 @@ button,
 }
 .home-wrapper .welcome-text {
   font-size: 30px;
-  color: rgb(17, 47, 184);
+  color: rgb(6, 77, 170);
   text-align: center;
   margin-bottom: 100px;
 }
@@ -181,7 +183,7 @@ textarea {
   margin-right: 3px;
   border-radius: 100px;
   float: left;
-  border: 1px solid rgb(17, 47, 184);
+  border: 1px solid rgb(6, 77, 170);
 }
 #avt-lg {
   width: 60px;
@@ -199,7 +201,7 @@ textarea {
   padding: 5px 0;
 }
 .cart_item_wrapper .tags .prod_info a {
-  color: rgb(17, 47, 184);
+  color: rgb(6, 77, 170);
 }
 .item-text {
   color: gray;
@@ -312,10 +314,10 @@ textarea {
   border: none;
   padding: 6px;
   margin-bottom: 10px;
-  background: rgb(17, 47, 184);
+  background: rgb(6, 77, 170);
 }
 .btnDefault {
-  border: 1px solid rgb(17, 47, 184);
+  border: 1px solid rgb(6, 77, 170);
 }
 .btnAddTweet {
   display: none;
@@ -365,7 +367,7 @@ ul li {
   float: left;
 }
 a.tag-link {
-  color: rgb(17, 47, 184);
+  color: rgb(6, 77, 170);
 }
 .like_link {
 }
