@@ -2,6 +2,9 @@ body {
   margin: 0;
   padding: 0;
 }
+.primary {
+  background: rgb(17, 47, 184);
+}
 
 .header {
   border-bottom: 1px solid #cddded;
@@ -113,7 +116,7 @@ button,
 }
 .home-wrapper .welcome-text {
   font-size: 30px;
-  color: blue;
+  color: rgb(17, 47, 184);
   text-align: center;
   margin-bottom: 100px;
 }
@@ -125,7 +128,11 @@ button,
   border-bottom: 14px solid #ccc;
   height: 300px;
 }
-
+.add-tweet input,
+.add-tweet textarea {
+  background: #eee;
+  border: none;
+}
 .dropzone {
 }
 .dropzone_box {
@@ -174,7 +181,7 @@ textarea {
   margin-right: 3px;
   border-radius: 100px;
   float: left;
-  border: 1px solid blue;
+  border: 1px solid rgb(17, 47, 184);
 }
 #avt-lg {
   width: 60px;
@@ -192,7 +199,7 @@ textarea {
   padding: 5px 0;
 }
 .cart_item_wrapper .tags .prod_info a {
-  color: blue;
+  color: rgb(17, 47, 184);
 }
 .item-text {
   color: gray;
@@ -305,10 +312,10 @@ textarea {
   border: none;
   padding: 6px;
   margin-bottom: 10px;
-  background: blue;
+  background: rgb(17, 47, 184);
 }
 .btnDefault {
-  border: 1px solid blue;
+  border: 1px solid rgb(17, 47, 184);
 }
 .btnAddTweet {
   display: none;
@@ -358,7 +365,7 @@ ul li {
   float: left;
 }
 a.tag-link {
-  color: blue;
+  color: rgb(17, 47, 184);
 }
 .like_link {
 }

@@ -59,7 +59,7 @@ const FileUpload = ({ images, setImages }) => {
   return (
     <div
       style={{
-        width: "100px",
+        width: "300px",
         background: "#fff",
         float: "left",
       }}
@@ -82,7 +82,7 @@ const FileUpload = ({ images, setImages }) => {
               <FontAwesomeIcon
                 icon={faImage}
                 size="lg"
-                style={{ margin: "0 20px", color: "blue" }}
+                style={{ margin: "0 20px", color: "rgb(17, 47, 184)" }}
               />
             </div>
           </Dropzone>

@@ -77,7 +77,7 @@ const Header = () => {
               <FontAwesomeIcon
                 icon={faHome}
                 size="lg"
-                style={{ color: "blue" }}
+                style={{ color: "rgb(17, 47, 184)" }}
               />{" "}
               <span className="nav-link-lbl"> Home</span>
             </Link>
@@ -85,7 +85,7 @@ const Header = () => {
               <FontAwesomeIcon
                 icon={faSearch}
                 size="lg"
-                style={{ color: "blue" }}
+                style={{ color: "rgb(17, 47, 184)" }}
               />
             </Link>
             {state.user && state.user[0] ? (
@@ -97,7 +97,7 @@ const Header = () => {
                 <FontAwesomeIcon
                   icon={faPlusCircle}
                   size="lg"
-                  style={{ color: "blue" }}
+                  style={{ color: "rgb(17, 47, 184)" }}
                 />
               </Link>
             ) : null}
@@ -108,9 +108,9 @@ const Header = () => {
                     icon={faUser}
                     size="lg"
                     style={{
-                      border: "2px solid blue",
+                      border: "2px solid rgb(17, 47, 184)",
                       borderRadius: "100px",
-                      color: "blue",
+                      color: "rgb(17, 47, 184)",
                     }}
                   /> */}
                 <Avatar images={state.user[0].user.images} size="avt-sm" />

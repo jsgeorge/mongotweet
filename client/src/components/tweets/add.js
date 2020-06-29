@@ -129,7 +129,7 @@ const AddTweet = ({ type, uid, username }) => {
         /> */}
       <FileUpload images={images} setImages={setImages} reset={formSuccess} />
 
-      <div className="form-cmds">
+      <div className="tweet-cmds">
         <button
           type="button"
           className="btn btn-primary btn-sm btnMed"
