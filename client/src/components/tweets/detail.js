@@ -97,14 +97,15 @@ export default function TweetDetail({ match }) {
           <UserCard />
         </div>
         <div className="col-lg-6 col-md-6 col-sm-6 content">
-          <Link to="/tweets">
-            <FontAwesomeIcon
-              icon={faLongArrowAltLeft}
-              size="lg"
-              style={{ color: "blue" }}
-            />
-          </Link>
           <div className="card-text">
+            <Link to="/tweets">
+              <FontAwesomeIcon
+                icon={faLongArrowAltLeft}
+                size="lg"
+                style={{ color: "blue", marginRight: "10px" }}
+              />
+            </Link>
+
             <strong>{tag ? tag : null}</strong>
             {author ? <AuthorDetail author={author} /> : null}
             <span className="chat-date"> {displayDate(createdAt)}</span>
@@ -119,26 +120,27 @@ export default function TweetDetail({ match }) {
               }}
             />
           ) : null}
-
-          <UserEditCommands id={match.params.id} author={author} />
-          <div className="actions">
-            Comments {comments ? comments.length : "0"} Likes:{" "}
-            {likes ? likes : "0"}
-          </div>
-          <UserCommands id={match.params.id} author={author} />
-          <div className="comments">
-            {comments && comments.length > 0 ? (
-              <span>
-                <h5>Comments</h5>
-                {comments.map((c) => (
-                  <p key={c.id}>
-                    <strong>{c.user}</strong> <br /> {c.text}
-                  </p>
-                ))}
-              </span>
-            ) : (
-              <p> No comments yet</p>
-            )}
+          <div className="card-text">
+            <UserEditCommands id={match.params.id} author={author} />
+            <div className="actions">
+              Comments {comments ? comments.length : "0"} Likes:{" "}
+              {likes ? likes : "0"}
+            </div>
+            <UserCommands id={match.params.id} author={author} />
+            <div className="comments">
+              {comments && comments.length > 0 ? (
+                <span>
+                  <h5>Comments</h5>
+                  {comments.map((c) => (
+                    <p key={c.id}>
+                      <strong>{c.user}</strong> <br /> {c.text}
+                    </p>
+                  ))}
+                </span>
+              ) : (
+                <p> No comments yet</p>
+              )}
+            </div>
           </div>
         </div>
         <div className="col-lg-3 col-md-3 col-sm-3 Rsidebar">

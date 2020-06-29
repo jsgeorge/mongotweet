@@ -2,16 +2,19 @@ body {
   margin: 0;
   padding: 0;
 }
-.container {
-}
+
 .header {
   border-bottom: 1px solid #cddded;
   padding: 0;
   margin: 0;
 }
-.logo-wrapper {
-  width: 200px;
-
+.container {
+  min-width: 220px;
+}
+nav .navbar {
+}
+.navbar-header {
+  width: 300px;
   margin: 0;
   padding: 0;
 }
@@ -21,27 +24,66 @@ body {
 
   text-decoration: none;
 }
+.mobile-search {
+  display: none;
+}
+.btnMobileSrch {
+  display: none;
+}
+
+.desktop-search {
+  margin-top: 5px;
+  width: 30%;
+}
+.search-form {
+  width: 100%;
+  background: #eee;
+  border-radius: 80px;
+}
+.search-form input {
+  background: transparent;
+  border: none;
+  border-radius: 80px;
+  padding: 5px 10px;
+  font-size: 14px;
+  width: 85%;
+  color: #111;
+}
+.search-form button {
+  border: none;
+}
+.navbar-right {
+  margin-top: 5px;
+  width: 300px;
+}
+.navbar-right a {
+  margin-right: 20px;
+  float: left;
+  width: 100px;
+  margin-right: 40px;
+}
+.navbar-right a:last-child {
+  margin: 0;
+}
 .page-wrapper {
-  margin-top: 40px;
+  margin-top: 0px;
   background: #fff;
 }
 .content {
   padding-top: 20px;
+  border-left: 1px solid rgb(174, 174, 245);
+  border-right: 1px solid rgb(183, 183, 240);
 }
 .Rsidebar {
-  border-left: 1px solid rgb(174, 174, 245);
   padding-top: 20px;
 }
 .Lsidebar {
-  border-right: 1px solid rgb(183, 183, 240);
   padding-top: 20px;
 }
 .noborder {
   border: none;
 }
-nav .navbar a {
-  font-size: 16px;
-}
+
 :double-button {
   border: none;
 }
@@ -81,7 +123,7 @@ button,
 .add-tweet {
   padding: 20px 0;
   border-bottom: 14px solid #ccc;
-  height: 500px;
+  height: 300px;
 }
 
 .dropzone {
@@ -236,7 +278,7 @@ textarea {
   width: 100%;
   clear: left;
   font-size: 14px;
-  margin: 0 15px;
+  margin: 0;
 }
 
 .has-error {
@@ -253,9 +295,7 @@ textarea {
   margin-right: 5px;
   color: #fff;
 }
-.nav a FontAwesomeIcon,
-.add-tweet FontAwesomeIcon {
-}
+
 .btnWide {
   width: 200px;
   margin-bottom: 10px;
@@ -273,33 +313,7 @@ textarea {
 .btnAddTweet {
   display: none;
 }
-.mobile-search {
-  display: none;
-}
-.btnMobileSrch {
-  display: none;
-}
 
-.desktop-search {
-  display: block;
-  width: 450px;
-}
-.search-form {
-  width: 100%;
-  background: #eee;
-  border-radius: 80px;
-}
-.search-form input {
-  background: transparent;
-  border: none;
-  border-radius: 80px;
-  padding: 5px 10px;
-  font-size: 14px;
-  width: 85%;
-}
-.search-form button {
-  border: none;
-}
 .chat-date {
   color: gray;
   font-size: 14px;
@@ -326,12 +340,15 @@ ul li {
   width: 100%;
   font-size: 14px;
   margin-bottom: 20px;
+  margin-left: 0;
+  padding: 10px 0;
 }
 .tweet-user-buttons {
   width: 200px;
   margin-left: 0px;
   margin-bottom: 10px;
   height: 40px;
+  padding: 0;
 }
 .tweet-user-buttons .button_wrap {
   width: 50%;
@@ -340,12 +357,17 @@ ul li {
   margin: 0;
   float: left;
 }
+a.tag-link {
+  color: blue;
+}
+.like_link {
+}
 .tweet-user-buttons .button_wrap button {
   border: none;
   background: transparent;
 }
 .add-comment {
-  margin: 0 15px;
+  margin: 0px;
 }
 .user-tweets {
   margin: 0 20px;
@@ -367,24 +389,68 @@ ul li {
   font-size: 20px;
   font-weight: bold;
 }
-@media (min-width: 771px) and (max-width: 990px) {
-  .container {
+.form {
+  padding: 0 30px;
+}
+.form .form-header {
+  padding: 20px 0;
+}
+.form input {
+  border: none;
+  background: #eee;
+  padding: 20px 15px;
+}
+.form .btn-login {
+  width: 45%;
+  margin-right: 20px;
+}
+.form .btn-login:last-child {
+  margin: o;
+}
+.form #upl-avatar {
+  min-height: 50px;
+}
+.form-cmds {
+  clear: left;
+  width: 100%;
+  padding-top: 40px;
+}
+.btnHome {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.error-space {
+  height: 25px;
+  display: block;
+}
+
+@media (min-width: 991px) and (max-width: 1000px) {
+  .desktop-search {
+    width: 300px;
   }
-  .page-wrapper {
+}
+@media (min-width: 771px) and (max-width: 990px) {
+  .navbar-header {
+    width: 200px;
+  }
+  .navbar-right {
+  }
+  .navbar-right a {
+  }
+  .navbar-right a:last-child {
+    width: 40px;
   }
   .Lsidebar {
     display: none;
   }
-
-  .Rsidebar {
-  }
   .content {
     min-width: 72%;
   }
-  .card_item_wrapper {
+  .desktop-search {
+    width: 30%;
   }
 }
-@media (min-width: 581px) and (max-width: 770px) {
+/*@media (min-width: 581px) and (max-width: 770px) {
   .container {
   }
   .Lsidebar {
@@ -412,19 +478,49 @@ ul li {
   .category-card ul li {
     font-size: 16px;
   }
-}
-@media (max-width: 580px) {
+} */
+@media (max-width: 770px) {
   .container {
     margin: 0;
     padding: 0;
     width: 100%;
   }
-  header {
+  .header {
     margin: 0;
     padding: 0;
   }
-  .logo-wrapper {
-    width: 150px;
+  .header .container {
+    width: 95%;
+    margin: 0 15px;
+  }
+  h4 {
+    margin-left: 15px;
+    margin-bottom: 20px;
+  }
+  .categories-wrapper h4 {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+  .navbar-header {
+    width: 60px;
+    margin-left: 25px;
+    float: left;
+  }
+  a.logo {
+    width: 60px;
+  }
+  .navbar-right {
+    width: 200px;
+    float: right;
+  }
+  .navbar-right a {
+    margin-top: 5px;
+    width: 40px;
+    float: left;
+    margin-right: 10px;
+  }
+  .nav-link-lbl {
+    display: none;
   }
   .page-wrapper {
     margin: 0;
@@ -456,11 +552,11 @@ ul li {
     width: 100%;
     min-width: 100px;
     margin: 0;
-    padding: 0;
+    padding: 10px 0;
     background: #fff;
   }
   .chat-text {
-    font-size: 14px;
+    font-size: 18px;
   }
   .card-text {
     padding: 0 15px;
@@ -471,6 +567,8 @@ ul li {
   .card_item_wrapper .actions {
     width: 100%;
     margin-top: 10px;
+    margin-left: 0px;
+    font-size: 14px;
   }
   .cart_item_wrapper .tweet-author {
     font-size: 12px;

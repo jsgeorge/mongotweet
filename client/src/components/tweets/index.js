@@ -60,7 +60,9 @@ export default function TweetsPage() {
         <TweetListing />
       </div>
       <div className="col-lg-3 col-md-3 col-sm-3 Rsidebar">
-        <Categories />
+        <div className="desktop-categories">
+          <Categories />
+        </div>
       </div>
     </div>
     // </div>

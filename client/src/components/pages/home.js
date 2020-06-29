@@ -22,14 +22,20 @@ export default function HomePage() {
           background: "#fff",
         }}
       >
-        <div className="buttons" style={{ width: "190px", margin: "0px auto" }}>
+        <div
+          className="home-buttons"
+          style={{ width: "190px", margin: "0px auto" }}
+        >
           {/* <MyButton type="home" title="Login" linkTo="/login" />
           <MyButton type="home" title="Register" linkTo="/Register" /> */}
-          <Link to="/auth/signin" className="btn btn-primary">
+          <Link
+            to="/auth/signin"
+            className="btn btn-default btnDefault btnHome  "
+          >
             {" "}
             Login
           </Link>
-          <Link to="/auth/signup" className="btn btn-primary">
+          <Link to="/auth/signup" className="btn btn-primary btnHome ">
             Signup
           </Link>{" "}
         </div>{" "}

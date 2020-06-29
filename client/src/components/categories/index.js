@@ -26,7 +26,7 @@ const Categories = () => {
   const qrytype = "tag";
 
   return (
-    <div className="desktop-categories">
+    <div className="categories-wrapper">
       <h4>
         {" "}
         <strong>Explore Categories</strong>{" "}

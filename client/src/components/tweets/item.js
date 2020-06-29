@@ -79,7 +79,9 @@ const TweetItem = ({ tweet }) => {
   return (
     <div className="card_item_wrapper">
       <div className="card-text">
-        <strong>{tag ? tag : null}</strong>
+        <Link to={`/tweets/query/${tag}`} className="tag-link">
+          <strong>{tag ? tag : null}</strong>
+        </Link>
         <AuthorDetail author={author} />{" "}
         <span className="chat-date">{displayDate(createdAt)}</span>
         <br />

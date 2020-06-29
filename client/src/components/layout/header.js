@@ -58,7 +58,7 @@ const Header = () => {
         }}
       >
         <div className="container">
-          <div className="logo-wrapper">
+          <div className="navbar-header">
             {!state.user && !state.user[0] ? (
               <Link to="/">
                 <img src="images/logo.jpeg" alt="img" />
@@ -69,42 +69,42 @@ const Header = () => {
               </Link>
             )}
           </div>
-          <div className="desktop-search">
+          <div className="navbar-left desktop-search">
             <SearchTweets />{" "}
           </div>
-
-          <Link to="/tweets">
-            <FontAwesomeIcon
-              icon={faHome}
-              size="lg"
-              style={{ color: "blue" }}
-            />{" "}
-            Home
-          </Link>
-          <Link to="/tweets/search" className="btnMobileSrch">
-            <FontAwesomeIcon
-              icon={faSearch}
-              size="lg"
-              style={{ color: "blue" }}
-            />
-          </Link>
-          {state.user && state.user[0] ? (
-            <Link
-              to="/tweets/add"
-              className="btnAddTweet"
-              style={{ background: "transparent", border: "none" }}
-            >
+          <div className="navbar-right">
+            <Link to="/tweets">
               <FontAwesomeIcon
-                icon={faPlusCircle}
+                icon={faHome}
+                size="lg"
+                style={{ color: "blue" }}
+              />{" "}
+              <span className="nav-link-lbl"> Home</span>
+            </Link>
+            <Link to="/tweets/search" className="btnMobileSrch">
+              <FontAwesomeIcon
+                icon={faSearch}
                 size="lg"
                 style={{ color: "blue" }}
               />
             </Link>
-          ) : null}
+            {state.user && state.user[0] ? (
+              <Link
+                to="/tweets/add"
+                className="btnAddTweet"
+                style={{ background: "transparent", border: "none" }}
+              >
+                <FontAwesomeIcon
+                  icon={faPlusCircle}
+                  size="lg"
+                  style={{ color: "blue" }}
+                />
+              </Link>
+            ) : null}
 
-          {state.user && state.user[0] ? (
-            <Link to="/user">
-              {/* <FontAwesomeIcon
+            {state.user && state.user[0] ? (
+              <Link to="/user">
+                {/* <FontAwesomeIcon
                     icon={faUser}
                     size="lg"
                     style={{
@@ -113,22 +113,23 @@ const Header = () => {
                       color: "blue",
                     }}
                   /> */}
-              <Avatar images={state.user[0].user.images} size="avt-sm" />
-            </Link>
-          ) : (
-            <Link to="/auth/signin">
-              <FontAwesomeIcon
-                icon={faUser}
-                size="lg"
-                style={{
-                  border: "2px solid #aaa",
-                  borderRadius: "100px",
-                  color: "#aaa",
-                }}
-              />
-              Signin or Signup
-            </Link>
-          )}
+                <Avatar images={state.user[0].user.images} size="avt-sm" />
+              </Link>
+            ) : (
+              <Link to="/auth/signin">
+                {/* <FontAwesomeIcon
+                  icon={faUser}
+                  size="lg"
+                  style={{
+                    border: "2px solid #aaa",
+                    borderRadius: "100px",
+                    color: "#aaa",
+                  }}
+                /> */}
+                <span>Signin</span>
+              </Link>
+            )}
+          </div>
         </div>
       </nav>
     </div>

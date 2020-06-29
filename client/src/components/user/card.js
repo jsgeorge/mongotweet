@@ -24,7 +24,7 @@ const UserCard = () => {
 
   return (
     <div className="user-card">
-      {user ? (
+      {state.user && state.user[0] ? (
         <span>
           <ul className="userlinks">
             <li>
