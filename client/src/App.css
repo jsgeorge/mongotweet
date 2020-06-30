@@ -127,28 +127,29 @@ button,
 }
 .add-tweet {
   padding: 20px 0;
+
+  height: 280px;
+  background: #fff;
+}
+.add-tweet-full {
+  padding: 20px 0;
   border-bottom: 14px solid #ccc;
-  height: 300px;
+  height: 580px;
 }
 .add-tweet input,
 .add-tweet textarea {
   background: #eee;
   border: none;
 }
-.dropzone {
+/*file upload */
+.file_upload_wrapper {
+  width: 70%;
+  float: left;
 }
-.dropzone_box {
+.tweet-btn-wrapper {
+  width: 30%;
+  float: right;
 }
-.dropzone_box .wrap {
-  /* width: 200px;
-  height: 200px;
-  background-position: center !important;
-  background-size: cover !important;
-  margin: 0;
-  padding: "5px 10px";
-  margin-top: 5px; */
-}
-
 textarea {
   font-size: 20px;
 }
@@ -161,7 +162,11 @@ textarea {
   overflow: hidden;
   min-width: 500px;
   margin: 0;
+  background: #fff;
   border-bottom: 1px solid #ccc;
+}
+.card_item_wrapper:first-child {
+  border-top: 14px solid #ccc;
 }
 .card_item_wrapper .card-text {
   padding: 0 15px;
@@ -194,6 +199,10 @@ textarea {
   height: 30px;
 }
 
+.tweets-wrapper {
+  margin: 0;
+  padding: 0;
+}
 .card_item_wrapper .tags {
   position: relative;
 }
@@ -304,7 +313,10 @@ textarea {
   margin-right: 5px;
   color: #fff;
 }
-
+.tweet-cmds {
+  float: right;
+  margin-right: 20px;
+}
 .btnWide {
   width: 200px;
   margin-bottom: 10px;
@@ -437,6 +449,9 @@ a.tag-link {
   .desktop-search {
     width: 300px;
   }
+  .card_item_wrapper {
+    width: 90%;
+  }
 }
 @media (min-width: 771px) and (max-width: 990px) {
   .navbar-header {
@@ -457,6 +472,9 @@ a.tag-link {
   }
   .desktop-search {
     width: 30%;
+  }
+  .card_item_wrapper {
+    width: 90%;
   }
 }
 /*@media (min-width: 581px) and (max-width: 770px) {
@@ -564,6 +582,9 @@ a.tag-link {
     padding: 10px 0;
     background: #fff;
   }
+  .card_item_wrapper:first-child {
+    border-top: none;
+  }
   .chat-text {
     font-size: 18px;
   }
@@ -616,5 +637,21 @@ a.tag-link {
   }
   #tag-input {
     width: 130px;
+  }
+  .file_upload_wrapper {
+    width: 50%;
+    margin-top: 30px;
+  }
+  .tweet-btn-wrapper {
+    margin-top: 30px;
+  }
+  .add-tweet {
+    border: none;
+  }
+  .dropzone_box {
+    margin-left: 15px;
+  }
+  .wrap {
+    width: 200px;
   }
 }

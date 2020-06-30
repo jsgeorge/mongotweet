@@ -33,6 +33,7 @@ const FileUpload = ({ images, setImages }) => {
       .post("/users/uploadimage", formData, config)
       .then((response) => {
         setUploading(false);
+        console.log("onDrop response.data", response.data);
         setUploadedFiles(response.data);
         imagesHandler(response.data);
       })
@@ -47,23 +48,32 @@ const FileUpload = ({ images, setImages }) => {
       key={uploadedFiles.public_id}
       onClick={() => onRemove(uploadedFiles.public_id)}
     >
-      <div
-        className="wrap"
-        style={{ background: `url(${uploadedFiles.url}) no-repeat` }}
-      />
+      {uploadedFiles && uploadedFiles.url ? (
+        <div
+          className="wrap"
+          style={{
+            background: `url(${uploadedFiles.url}) no-repeat`,
+            height: "230px",
+            width: "320px",
+            backgroundSize: "cover",
+          }}
+        />
+      ) : (
+        <div
+          className="wrap"
+          style={{
+            background: `url(${uploadedFiles.url}) no-repeat`,
+            height: "50px",
+            width: "320px",
+            backgroundSize: "cover",
+          }}
+        />
+      )}
     </div>
   );
 
-  //));
-
   return (
-    <div
-      style={{
-        width: "300px",
-        background: "#fff",
-        float: "left",
-      }}
-    >
+    <div>
       <section>
         <div className="dropzone clear">
           <Dropzone
@@ -74,25 +84,26 @@ const FileUpload = ({ images, setImages }) => {
             <div
               className="wrap"
               style={{
-                padding: "5px 10px",
-                height: "30px",
-                width: "120px",
+                background: "#fff",
+                padding: "5px 0px",
+                height: "40px",
+                width: "200px",
               }}
             >
               <FontAwesomeIcon
                 icon={faImage}
                 size="lg"
-                style={{ margin: "0 20px", color: "rgb(17, 47, 184)" }}
+                className="primary-clr"
               />
             </div>
           </Dropzone>
 
-          {uploadedFiles && showUploadedImages}
+          {showUploadedImages()}
 
           {uploading ? (
             <div
               className="dropzone_box"
-              style={{ textAlign: "center", paddingTop: "30px" }}
+              style={{ textAlign: "center", paddingTop: "60px" }}
             >
               <div className="spinner-border" role="status">
                 <span className="sr-only">Loading...</span>

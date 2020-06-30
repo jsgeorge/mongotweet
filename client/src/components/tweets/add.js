@@ -102,7 +102,12 @@ const AddTweet = ({ type, uid, username }) => {
   }
   const placeholder = `What is on you mind ${uname}`;
   return (
-    <div className="add-tweet">
+    // <div className="add-tweet">
+    <div
+      className={classnames("add-tweet", {
+        "add-tweet-full": images && images.length > 0,
+      })}
+    >
       <div className="form-group">
         <textarea
           className="form-control"
@@ -123,13 +128,11 @@ const AddTweet = ({ type, uid, username }) => {
           onChange={(e) => setCategory(e.target.value)}
         />
       </div>
-      {/* <FileUpload
-          imagesHandler={(images) => imagesHandler(images)}
-          reset={formSuccess}
-        /> */}
-      <FileUpload images={images} setImages={setImages} reset={formSuccess} />
 
-      <div className="tweet-cmds">
+      <div className="file_upload_wrapper">
+        <FileUpload images={images} setImages={setImages} reset={formSuccess} />
+      </div>
+      <div className="tweet-btn-wrapper">
         <button
           type="button"
           className="btn btn-primary btn-sm btnMed"
