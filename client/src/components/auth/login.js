@@ -126,13 +126,13 @@ const SigninPage = () => {
               <div className="form-cmds">
                 <Link
                   to="/auth/signup"
-                  className="btn btn-default .btn-default btnDefault btn-login "
+                  className="btn btn-default btn-sm btnDefault btn-login "
                 >
                   Signup
                 </Link>
                 <button
                   type="button"
-                  className="btn btn-primary btn-login"
+                  className="btn btn-primary btn-sm btn-login"
                   data-testid="add-shout"
                   onClick={() => onSubmit()}
                 >

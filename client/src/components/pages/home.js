@@ -12,7 +12,7 @@ export default function HomePage() {
 
   return (
     <div className="home-wrapper">
-      <h1 className="welcome-text">Welcome to mongoTweet</h1>
+      <h1 className="welcome-text primary-clr">Welcome to mongoTweet</h1>
       <div
         className="button_wrapper"
         style={{

@@ -2,11 +2,14 @@ body {
   margin: 0;
   padding: 0;
 }
+button {
+  color: #fff;
+}
 .primary {
-  background: rgb(6, 77, 170);
+  background: rgb(6, 135, 199);
 }
 .primary-clr {
-  color: rgb(6, 77, 170);
+  color: rgb(6, 135, 199);
 }
 .header {
   border-bottom: 1px solid #cddded;
@@ -118,7 +121,6 @@ button,
 }
 .home-wrapper .welcome-text {
   font-size: 30px;
-  color: rgb(6, 77, 170);
   text-align: center;
   margin-bottom: 100px;
 }
@@ -423,10 +425,10 @@ a.tag-link {
 }
 .form .btn-login {
   width: 45%;
-  margin-right: 20px;
+  margin-right: 15px;
 }
 .form .btn-login:last-child {
-  margin: o;
+  margin: 0;
 }
 .form #upl-avatar {
   min-height: 50px;

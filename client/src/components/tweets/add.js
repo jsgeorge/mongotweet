@@ -135,7 +135,7 @@ const AddTweet = ({ type, uid, username }) => {
       <div className="tweet-btn-wrapper">
         <button
           type="button"
-          className="btn btn-primary btn-sm btnMed"
+          className="btn btn-info btn-sm primary btnMed"
           onClick={() => onSubmit()}
         >
           Tweet
