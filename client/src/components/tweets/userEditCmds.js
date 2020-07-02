@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { UserContext } from "../../context/user-context";
 import axios from "axios";
 import Modal from "react-bootstrap/Modal";
+import jwtDecode from "jwt-decode";
 
 const UserEditCommands = ({ id, author }) => {
   const [state, dispatch] = useContext(UserContext);
@@ -11,6 +12,22 @@ const UserEditCommands = ({ id, author }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+ useEffect(() => {
+   const setAuthUser = async (token) => {
+    const response = await axios.post("/users/id", { id: token.id });
+    dispatch({
+        type: "SET_USER",
+        payload: response.data,
+    });
+    };
+    if (localStorage.jwtToken){
+        console.log('User is authenticted')
+        setAuthUser(jwtDecode(localStorage.getItem("jwtToken")));
+    }   
+      },[]);
+      
+
   const deleteTweet = async () => {
     try {
       await axios.delete(`/chats?id=${id}`);
@@ -26,6 +43,7 @@ const UserEditCommands = ({ id, author }) => {
   };
 
   if (!state.user && !state.user[0]) return null;
+  
   if (redirect) {
     return <Redirect to="/tweets" />;
   }
@@ -47,7 +65,7 @@ const UserEditCommands = ({ id, author }) => {
           >
             Delete
           </button>
-          {/* Modal */}
+         
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>Are you sure?</Modal.Title>

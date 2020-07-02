@@ -8,7 +8,6 @@ import { flashErrorMessage } from "../layout/flash-message";
 const SigninPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //const [errMsg, setErrMsg] = useState("");
   const [redirect, setRedirect] = useState(false);
   const [state, dispatch] = useContext(UserContext);
   const [errors, setErrors] = useState({});
@@ -48,7 +47,6 @@ const SigninPage = () => {
           type: "LOGIN_USER",
           payload: response.data,
         });
-        //console.log(response.data);
         if (!response.data.loginSuccess) {
           console.log(response.data.message);
           setErrors({ form: response.data.message });
@@ -74,10 +72,11 @@ const SigninPage = () => {
   }
   //if (state.user && state.user[0]) return <Redirect to="/tweets" />;
   return (
-    <div className="page-wrapper">
+    <div>
       <div className="row">
         <div className="col-lg-3 col-md-3  col-sm-2  Lsidebar "></div>
         <div className="col-lg-6 col-md-6 col-sm-6 content noborder">
+        
           <div className="form">
             <div className="form-header">
               <h3>Sign In</h3>

@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../context/user-context";
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import AddTweet from "./add";
+import { UserContext } from "../../context/user-context";
+
 import TweetListing from "./listing";
 import UserCard from "../user/card";
 import Categories from "../categories";
@@ -11,23 +12,25 @@ import Categories from "../categories";
 
 export default function TweetsPage() {
   const [state, dispatch] = useContext(UserContext);
+  
   //const [isAuthenticted, setIsAuthenticated] = useState(false);
   const [error, setError] = useState("");
   const [user, setUser] = useState({});
+
   useEffect(() => {
-    // console.log("tweets user ", state.user);
-    if (!state.user && localStorage.jwtToken) {
-      try {
-        setAuthUser(jwtDecode(localStorage.jwtToken));
-        //setIsAuthenticated(true);
-      } catch (err) {
-        setError("Error. Cannot set user. user logged off or time expired");
-      }
-    }
-    if (state.user[0]) {
-      setUser(state.user[0].user);
-    }
-  }, []);
+   const setAuthUser = async (token) => {
+    const response = await axios.post("/users/id", { id: token.id });
+    dispatch({
+        type: "SET_USER",
+        payload: response.data,
+    });
+    };
+    if (localStorage.jwtToken){
+        console.log('User is authenticted')
+        setAuthUser(jwtDecode(localStorage.getItem("jwtToken")));
+    }   
+      },[]);
+      
   const setAuthUser = async (token) => {
     const response = await axios.post("/users/id", { id: token.id });
     dispatch({
@@ -39,12 +42,12 @@ export default function TweetsPage() {
   if (error) return <Redirect to="/auth/signin" />;
   // if (state.user) console.log(state.user[0]);
   return (
-    // <div className="tweet-wrapper">
+   <div className="page-wrapper">
     <div className="row">
-      <div className="col-lg-3 col-md-3  col-sm-2  Lsidebar">
+      <div className="col-lg-3 col-md-2  col-sm-3 col-xs-3 Lsidebar">
         <UserCard />
       </div>
-      <div className="col-lg-6 col-md-6 col-sm-6 content">
+      <div className="col-lg-6 col-md-7 col-sm-8 col-xs-9 content">
         <h4>
           <strong>Home</strong>
         </h4>
@@ -52,19 +55,18 @@ export default function TweetsPage() {
           {state.user && state.user[0] ? (
             <AddTweet
               type="desktop"
-              uid={state.user[0].user._id}
-              username={state.user[0].user.username}
+              user={state.user[0].user}
             />
           ) : null}
         </div>
         <TweetListing />
       </div>
-      <div className="col-lg-3 col-md-3 col-sm-3 Rsidebar">
+      <div className="col-lg-3 col-md-3 col-sm-2 col-xs-4 Rsidebar">
         <div className="desktop-categories">
           <Categories />
         </div>
       </div>
     </div>
-    // </div>
+    </div>
   );
 }

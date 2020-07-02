@@ -2,13 +2,28 @@ import React, { useEffect, useContext, useState } from "react";
 //import { MyButton } from "../utils/button";
 import { Link, Redirect } from "react-router-dom";
 import { UserContext } from "../../context/user-context";
+// import jwtDecode from "jwt-decode";
+// import axios from "axios";
 
 export default function HomePage() {
   const [state, dispatch] = useContext(UserContext);
 
-  useEffect(() => {});
+  // useEffect(() => {
+  //   const setAuthUser = async (token) => {
+  //   const response = await axios.post("/users/id", { id: token.id });
+  //   dispatch({
+  //       type: "SET_USER",
+  //       payload: response.data,
+  //   });
+  //   };
+  //   if (localStorage.jwtToken){
+  //       console.log('User is authenticted')
+  //       setAuthUser(jwtDecode(localStorage.getItem("jwtToken")));
+  //   }   
+  //     },[]);
 
-  if (state.user && state.user[0]) return <Redirect to="/tweets" />;
+ 
+  if (localStorage.jwtToken) return <Redirect to="/tweets" />;
 
   return (
     <div className="home-wrapper">

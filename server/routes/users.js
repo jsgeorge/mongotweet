@@ -75,10 +75,8 @@ router.post("/id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  console.log(req.body.email);
   User.findOne({ email: req.body.email }, function (err, existingUser) {
     if (existingUser) {
-      console.log("user email already exists");
       return res
         .status(400)
         .json({ regSuccess: false, message: "Email already in use" });
@@ -90,6 +88,7 @@ router.post("/", (req, res) => {
         name: req.body.name,
         lastname: req.body.lastname,
         likes: [],
+        following: []
       });
       user.save((err, doc) => {
         if (err)
@@ -201,6 +200,13 @@ router.get("/by_id", (req, res) => {
     });
 });
 
+router.get("/list", (req, res) => {
+  User.find().exec((err, users) => {
+    if (err) return res.status(400).send(err);
+    res.status(200).send(users);
+  });
+});
+
 router.get("/logout", auth, (req, res) => {
   User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, doc) => {
     if (err) return res.json({ success: false, err });
@@ -224,11 +230,5 @@ router.post("/uploadimage", formidable(), (req, res) => {
   );
 });
 
-router.get("/list", (req, res) => {
-  User.find().exec((err, users) => {
-    if (err) return res.status(400).send(err);
-    res.status(200).send(users);
-  });
-});
 
 module.exports = router;

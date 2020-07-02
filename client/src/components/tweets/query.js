@@ -58,65 +58,19 @@ export default function TweetQuery({ match }) {
         console.log(err);
         setError("Cannot retrieve the selected tweets");
       }
-      // } else if (listype == "user") {
-      //   filters = [{ author: uid }];
-      //   try {
-      //     const response = await axios.post("/chats/view", filters);
-      //     dispatch({
-      //       type: "FETCH_TWEETS",
-      //       payload: response.data,
-      //     });
-      //   } catch (err) {
-      //     console.log(err);
-      //     setError("Cannot retrieve the selected tweets. Network error");
-      //   }
-      // }
+      
     };
     fetchData();
-    // if (match.params.qrytype == 'tag' && (!state.tweets == 0 || state.tweets.articles && state.tweets.articles.length == 0) ){
-    //   console.log('fetching categoryies instead');
-    //    filters = {filters: [{ category: match.params.id}]};
-    //    fetchData();
-    // }
+   
   }, [dispatch]);
 
-  //if (state.tweets) console.log(state.tweets);
-  if (error) {
-    return <div className="has-error">{error}</div>;
-  }
-  if (
-    !state.tweets ||
-    (state.tweets.articles && state.tweets.articles.length == 0)
-  ) {
-    return (
-      <div className="row">
-        <div className="col-lg-3 col-md-3  col-sm-2  Lsidebar">
-          <UserCard />
-        </div>
-        <div className="col-lg-6 col-md-6 col-sm-6 content">
-          <Link to="/tweets">
-            <FontAwesomeIcon
-              icon={faLongArrowAltLeft}
-              size="lg"
-              style={{ color: "blue" }}
-            />
-          </Link>
-          <div className="tweets-wrapper">
-            <p>No current tweets matching the selected criteria</p>
-          </div>
-        </div>
-        <div className="col-lg-3 col-md-3 col-sm-3 Rsidebar">
-          <Categories />
-        </div>
-      </div>
-    );
-  }
+
   return (
     <div className="row">
-      <div className="col-lg-3 col-md-3  col-sm-2  Lsidebar">
+      <div className="col-lg-3 col-md-2  col-sm-3 col-xs-3 Lsidebar">
         <UserCard />
       </div>
-      <div className="col-lg-6 col-md-6 col-sm-6 content">
+      <div className="col-lg-6 col-md-7 col-sm-8 col-xs-9 content">
         <div>
           <Link to="/tweets">
             <FontAwesomeIcon
@@ -127,17 +81,17 @@ export default function TweetQuery({ match }) {
           </Link>
         </div>
         <div className="tweets-wrapper">
-          {/* {header ? <h4>{header} </h4> : null} */}
-          {state.tweets && state.tweets.articles ? (
+
+          {state.tweets && state.tweets.articles && state.tweets.articles.length > 0 ? (
             state.tweets.articles.map((tweet) => (
               <TweetItem key={tweet._id} tweet={tweet} />
             ))
           ) : (
-            <p>No current tweets</p>
+            <p>Sorry, No current tweets for the selected criteria</p>
           )}
         </div>
       </div>
-      <div className="col-lg-3 col-md-3 col-sm-3 Rsidebar">
+      <div className="col-lg-3 col-md-3 col-sm-2 col-xs-4 Rsidebar">
         <Categories />
       </div>
     </div>

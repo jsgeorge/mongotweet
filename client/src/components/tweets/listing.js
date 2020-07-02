@@ -31,12 +31,11 @@ export default function TweetListing({ uid }) {
   }, [dispatch]);
 
   //if (state.tweets) console.log(state.tweets);
-  if (error) {
-    return <div className="has-error">{error}</div>;
-  }
+
 
   return (
     <div className="tweets-wrapper">
+    {error ? <div className="has-error">{error}</div> : null}
       {state.tweets &&
       state.tweets.articles &&
       state.tweets.articles.length > 0 ? (

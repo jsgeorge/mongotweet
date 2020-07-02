@@ -33,7 +33,6 @@ const FileUpload = ({ images, setImages }) => {
       .post("/users/uploadimage", formData, config)
       .then((response) => {
         setUploading(false);
-        console.log("onDrop response.data", response.data);
         setUploadedFiles(response.data);
         imagesHandler(response.data);
       })

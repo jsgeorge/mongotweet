@@ -1,7 +1,7 @@
 const { User } = require("./../models/user");
 
 let auth = (req, res, next) => {
-  let token = req.localStorage.jwtToken;
+  let token = localStorage.jwtToken;
 
   User.findByToken(token, (err, user) => {
     if (err) throw err;

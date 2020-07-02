@@ -7,44 +7,17 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Avatar from "./../user/avatar";
-import jwtDecode from "jwt-decode";
-import axios from "axios";
 import SearchTweets from "../tweets/search";
+
 const Header = () => {
   //const [redirect, setRedirect] = useState(false);
   const [state, dispatch] = useContext(UserContext);
-  //const [images, setImages] = useState({});
-  const [user, setUser] = useState({});
-  //const [showSearch, setShowSearch] = useState(false);
-  //const [ setIsAuthenticated] = useState(false);
   const [setError] = useState("");
-  //const [showAdd, setShowAdd] = useState(false);
+ 
+  useEffect(() => {});
 
-  useEffect(() => {
-    //  console.log("header user", state.user);
-    if (!state.user[0] && localStorage.jwtToken) {
-      try {
-        setAuthUser(jwtDecode(localStorage.getItem("jwtToken")));
-        //setIsAuthenticated(true);
-      } catch (err) {
-        setError("Error. Cannot set user. user logged off or time expired");
-      }
-    }
-    if (state.user[0]) setUser(state.user[0].user);
-    // if (state.user[0]) {
-    //console.log("in header - user2 =", state.user[0]);
-    //setIsAuthenticated(true);
-    //}
-  });
   const renderCardImage = (images) => {
     return images[0].url;
-  };
-  const setAuthUser = async (token) => {
-    const response = await axios.post("/users/id", { id: token.id });
-    dispatch({
-      type: "SET_USER",
-      payload: response.data,
-    });
   };
 
   return (
@@ -61,11 +34,11 @@ const Header = () => {
           <div className="navbar-header">
             {!state.user && !state.user[0] ? (
               <Link to="/">
-                <img src="images/logo.jpeg" alt="img" />
+                 <div className="logo"/>
               </Link>
             ) : (
               <Link to="/tweets">
-                <img src="images/logo.jpeg" alt="img" />
+                <div className="logo"/>
               </Link>
             )}
           </div>
@@ -102,7 +75,7 @@ const Header = () => {
               </Link>
             ) : null}
 
-            {state.user && state.user[0] ? (
+            { state.user && state.user[0] && state.user[0].user && state.user[0].user.images ? (
               <Link to="/user">
                 {/* <FontAwesomeIcon
                     icon={faUser}
@@ -113,7 +86,7 @@ const Header = () => {
                       color: "rgb(17, 47, 184)",
                     }}
                   /> */}
-                <Avatar images={state.user[0].user.images} size="avt-sm" />
+              <Avatar images={state.user[0].user.images} size="avt-sm" /> 
               </Link>
             ) : (
               <Link to="/auth/signin">

@@ -10,13 +10,12 @@ export default function AuthorDetail({ author }) {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    // console.log("author", author);
-    const id = author;
-    if (id) {
-      // console.log("id", id);
+    
+    if (author) {
+
       const getUser = async () => {
         try {
-          const response = await axios.get(`/users/id?id=${id}`);
+          const response = await axios.get(`/users/id?id=${author}`);
           dispatch({
             type: "FETCH_AUTHOR",
             payload: response.data,
@@ -34,13 +33,9 @@ export default function AuthorDetail({ author }) {
       setError("Invalid author error");
     }
   }, [author, dispatch]);
+
   const a = user.userdata;
-  // if (error)
-  //   return (
-  //     <span className="tweet-author">
-  //       User {author} Error={error}
-  //     </span>
-  //   );
+ 
   if (error || !user) return <span>{error}</span>;
   return (
     <span className="tweet-author">

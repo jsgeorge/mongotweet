@@ -8,20 +8,38 @@ import { TweetContext } from "../../context/tweet-context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //import { faHashtag } from "@fortawesome/react-fontawesome";
 
-const AddTweet = ({ type, uid, username }) => {
+const AddTweet = ({ type, user}) => {
   const [mode] = useState(type);
-  const [id] = useState(uid);
-  const [uname] = useState(username);
-  const [dispatch] = useContext(TweetContext);
+  // const [id] = useState(uid);
+  const [username, setUsername] = useState("");
+   const [dispatch] = useContext(TweetContext);
+  const [avatar, setAvatar] = useState("");
   const [errors, setErrors] = useState({});
   const [category, setCategory] = useState("");
   const [tweet, setTweet] = useState("");
   const [formSuccess, setFormSucess] = useState(false);
-  const [formError, setFormError] = useState(false);
+  const [formError, setFormError] = useState("");
   const [images, setImages] = useState({});
-  const [redirect, setRedirect] = useState(false);
-  //const [uploadedImages, setUploadedImages] = userState([]);
-  useEffect(() => {});
+   const [redirect, setRedirect] = useState(false);
+     const [redirectDesk, setRedirectDesk] = useState(false);
+  const [uploadedImages, setUploadedImages] = useState([]);
+  
+  useEffect(() => {
+   
+       try {
+       setAvatar(user.images)
+       }catch(err){
+          console.log(err);
+       }
+       try{
+      if (user.username) setUsername(user.username);
+      else setUsername(user.name + ' ' + user.lastname)
+       }
+       catch(err){
+         console.log(err);
+       }
+   
+  },[user]);
 
   const validData = () => {
     let errs = {};
@@ -42,24 +60,25 @@ const AddTweet = ({ type, uid, username }) => {
 
     return true;
   };
-  const fetchTweets = async () => {
-    console.log("uid", uid);
 
-    const response = await axios.post("/chats/view");
-    dispatch({
-      type: "FETCH_TWEETS",
-      payload: response.data,
-    });
-  };
+  // const fetchTweets = async () => {
+  //   const response = await axios.post("/chats/view");
+  //   dispatch({
+  //     type: "FETCH_TWEETS",
+  //     payload: response.data,
+  //   });
+  // };
+
   const addTweet = async () => {
     if (validData()) {
       let newTweet = {
-        author: id,
+        author: user._id,
+        avatar: avatar,
         text: tweet,
         category: category,
         images: images,
       };
-      console.log(newTweet);
+    
       //***Removed const response = await axios.post("/chats/article", newTweet);
       // dispatch({
       //   type: "CREATE_TWEET",
@@ -79,16 +98,16 @@ const AddTweet = ({ type, uid, username }) => {
           setTweet("");
           setCategory("");
           setFormError(false);
-
-          if (mode === "mobile") setRedirect(true);
+           if (mode === "mobile") setRedirect(true);
+          else  setRedirectDesk(true);
+          
         })
         .catch((err) => {
           setFormError(true);
           console.log(err);
         });
-    } else {
-      console.log("invalid data");
-    }
+    } 
+   
   };
   const renderCardImage = (images) => {
     return images[0].url;
@@ -100,7 +119,12 @@ const AddTweet = ({ type, uid, username }) => {
   if (redirect) {
     return <Redirect to="/tweets" />;
   }
-  const placeholder = `What is on you mind ${uname}`;
+  if (redirectDesk) {
+  return <Redirect to="/" />;
+  }
+  const placeholder = `What is on you mind ${username}`;
+  
+
   return (
     // <div className="add-tweet">
     <div
@@ -108,6 +132,7 @@ const AddTweet = ({ type, uid, username }) => {
         "add-tweet-full": images && images.length > 0,
       })}
     >
+    
       <div className="form-group">
         <textarea
           className="form-control"
@@ -128,10 +153,21 @@ const AddTweet = ({ type, uid, username }) => {
           onChange={(e) => setCategory(e.target.value)}
         />
       </div>
+      
+       {errors.tweet ? (
+        <div className="has-error">Error {errors.tweet}</div>
+      ) : null}
+      {errors.category ? (
+        <div className="has-error">Error {errors.category}</div>
+      ) : null}
 
+      {formError ? (
+        <div className="has-error">Error - Could not add tweet {formError}</div>
+      ) : null}
       <div className="file_upload_wrapper">
         <FileUpload images={images} setImages={setImages} reset={formSuccess} />
       </div>
+      
       <div className="tweet-btn-wrapper">
         <button
           type="button"
@@ -141,16 +177,7 @@ const AddTweet = ({ type, uid, username }) => {
           Tweet
         </button>
       </div>
-      {errors.tweet ? (
-        <div className="has-error">Error {errors.tweet}</div>
-      ) : null}
-      {errors.category ? (
-        <div className="has-error">Error {errors.category}</div>
-      ) : null}
-
-      {formError ? (
-        <div className="has-error">Error - Could not add tweet</div>
-      ) : null}
+    
     </div>
   );
 };

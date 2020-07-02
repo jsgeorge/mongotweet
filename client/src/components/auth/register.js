@@ -57,12 +57,10 @@ const SignupPage = () => {
         lastname: lastname,
         images: images,
       };
-      console.log("newUser", newUser);
       try {
         const response = await axios.post("/users", newUser);
         if (!response.data.regSuccess) {
-          console.log(response.data.message);
-          setErrors({ form: response.data.message });
+         setErrors({ form: response.data.message });
         } else {
           setRedirect(true);
         }

@@ -34,7 +34,7 @@ const Categories = () => {
       <div className="category-card">
         <div>
           {state.categories.length > 0 ? (
-            <ul>
+            <ul className="category-nav">
               {state.categories.map((ctgry) => (
                 <li key={ctgry._id}>
                   <Link

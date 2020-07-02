@@ -26,28 +26,7 @@ router.post("/view", (req, res) => {
   let order = "desc";
   let sortBy = "createdAt";
   let limit = 1000;
-  // let skip = parseInt(req.body.skip);
-
-  //for (let key in req.body.filters) {
-  // console.log(req.body.filters[key].length);
-  //   if (req.body.filters[key].length > 0) {
-  //     if (key == "text") {
-  //       findArgs[key] = { $regex: "/*" + req.body.filters[key] + "/*" };
-  //     } else {
-  //       //other filters
-  //       findArgs[key] = req.body.filters[key];
-  //     }
-  //     console.log(key, req.body.filters[key])
-  //   }
-  // }
-  // if (req.body.filters[0].text)
-  //   findArgs = { text : { $regex: "/*" + req.body.filters[text] + "/*" }}
-  //   else
-
-  // if (req.body) {
-  //   findArgs = req.body;
-  // }
-  console.log(findArgs);
+  
   Chat.find(findArgs)
     .sort([["createdAt", "desc"]])
     .limit(limit)
@@ -60,14 +39,18 @@ router.post("/view", (req, res) => {
       });
     });
 });
+
 router.post("/article", (req, res) => {
   let newChat = {
     author: req.body.author,
+    avatar: req.body.avatar,
     text: req.body.text,
     tag: req.body.category,
     images: req.body.images,
+    comments:[],
+    likes:0
   };
-
+  console.log(newChat);
   const chat = new Chat(newChat);
   chat.save((err, doc) => {
     if (err) return res.json({ addSuccess: false, errmsg: err });

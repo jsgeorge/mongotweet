@@ -11,8 +11,9 @@ router.get("/", auth, (req, res) => {
     name: req.user.name,
     lastname: req.user.lastname,
     username: req.user.username,
+    images: req.user.images,
     role: req.user.role,
-    lies: req.user.likes,
+    likes: req.user.likes,
     following: req.user.following,
   });
 });
@@ -21,14 +22,14 @@ router.post("/", (req, res) => {
   console.log(req.body);
 
   User.findOne({ email: req.body.email }, (err, user) => {
-    if (!user)
+    if (!user){
+      console.log("Wrong email. user not found")
       return res.json({
         loginSuccess: false,
         message: "Login failed, email not found",
       });
-    else {
-      console.log("user found");
     }
+    
     user.comparePassword(req.body.password, (err, isMatch) => {
       if (!isMatch) {
         console.log("wrong password");

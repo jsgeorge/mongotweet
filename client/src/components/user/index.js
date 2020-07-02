@@ -5,22 +5,19 @@ import FileUpload from "../utils/fileupload";
 import Avatar from "./avatar";
 import UserCard from "../user/card";
 import Categories from "../categories";
-
 //import jwtDecode from "jwt-decode";
 import TweetListing from "../tweets/listing";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const UserPage = () => {
-  // const [errMsg, setErrMsg] = useState("");
   const [redirect, setRedirect] = useState(false);
   const [state, dispatch] = useContext(UserContext);
-  // const [user, setUser] = useState({});
   const [images, setImages] = useState({});
   const [formSuccess, setFormSucess] = useState(false);
 
   useEffect(() => {
-    //console.log("user page- user ", state.user);
+   
   }, []);
 
   const onLogout = () => {
@@ -34,18 +31,18 @@ const UserPage = () => {
   const renderCardImage = (images) => {
     return images[0].url;
   };
-  // if (!state.user && !localStorage.jwtToken) return <Redirect to="/" />;
-  //if (!state.user) return <Redirect to="/auth/signin" />;
-  if (redirect) return <Redirect to="/" />;
-  // if (state.user && state.user[0] && state.user[0].user._id)
+
+ 
+ if (redirect) return <Redirect to="/" />;
+
   return (
     <div className="user-wrapper">
       <div className="row">
-        <div className="col-lg-3 col-md-3  col-sm-2  Lsidebar">
+        <div className="col-lg-3 col-md-2  col-sm-3 col-xs-3 Lsidebar">
           {state.user ? <UserCard user={state.user[0]} /> : null}
         </div>
-        <div className="col-lg-6 col-md-6 col-sm-6 content">
-          <div className="card-text">
+         <div className="col-lg-6 col-md-7 col-sm-8 col-xs-9 content">
+          <div className="user-page">
             <h4>User Profile</h4>
             <h5>
               {state.user[0] && state.user[0] ? (
@@ -96,7 +93,7 @@ const UserPage = () => {
             </div>
           </div>
         </div>
-        <div className="col-lg-3 col-md-3 col-sm-3 Rsidebar">
+        <div className="col-lg-3 col-md-3 col-sm-2 col-xs-4 Rsidebar">
           <Categories />
         </div>
       </div>
