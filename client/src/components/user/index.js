@@ -14,23 +14,23 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const UserPage = () => {
   const [redirect, setRedirect] = useState(false);
- // const [state, dispatch] = useContext(UserContext);
-  const {user, setuser, isloggedin, setisloggedin } = useContext(UserContext)
+  // const [state, dispatch] = useContext(UserContext);
+  const { user, setuser, isloggedin, setisloggedin } = useContext(UserContext);
   const [formSuccess, setFormSucess] = useState(false);
 
   useEffect(() => {
-    console.log('UserPage user:',user);
-  // const setAuthUser = async (token) => {
-  //     const response = await axios.post("/users/id", { id: token.id });
-  //     dispatch({
-  //         type: "SET_USER",
-  //         payload: response.data,
-  //     });
-  //   };
-  //   if (localStorage.jwtToken){
-  //       console.log('User is authenticted')
-  //       setAuthUser(jwtDecode(localStorage.getItem("jwtToken")));
-  //   }   
+    console.log("UserPage user:", user, isloggedin);
+    // const setAuthUser = async (token) => {
+    //     const response = await axios.post("/users/id", { id: token.id });
+    //     dispatch({
+    //         type: "SET_USER",
+    //         payload: response.data,
+    //     });
+    //   };
+    //   if (localStorage.jwtToken){
+    //       console.log('User is authenticted')
+    //       setAuthUser(jwtDecode(localStorage.getItem("jwtToken")));
+    //   }
   }, []);
 
   const onLogout = () => {
@@ -38,7 +38,7 @@ const UserPage = () => {
     // dispatch({
     //   type: "LOGOUT_USER",
     // });
-   setuser({});
+    setuser({});
     setisloggedin(false);
     setRedirect(true);
   };
@@ -47,9 +47,10 @@ const UserPage = () => {
     return images[0].url;
   };
 
- 
- if (redirect) return <Redirect to="/" />;
-const { name, lastname, username, images, email } = user;
+  if (!isloggedin || !user) return <Redirect to="/" />;
+  if (redirect) return <Redirect to="/" />;
+
+  const { name, lastname, username, images, email } = user;
 
   return (
     <div className="user-wrapper">
@@ -57,11 +58,11 @@ const { name, lastname, username, images, email } = user;
         <div className="col-lg-3 col-md-2  col-sm-3 col-xs-3 Lsidebar">
           {user ? <UserCard user={user} /> : null}
         </div>
-         <div className="col-lg-6 col-md-7 col-sm-8 col-xs-9 content">
+        <div className="col-lg-6 col-md-7 col-sm-8 col-xs-9 content">
           <div className="user-page">
             <h4>User Profile</h4>
             <h5>
-              {user && user ? (
+              {user && user && user.images.length > 0 ? (
                 <Avatar images={user.images} size="avt-lg" />
               ) : (
                 <FontAwesomeIcon
@@ -74,19 +75,13 @@ const { name, lastname, username, images, email } = user;
                   }}
                 />
               )}
-              {user &&
-              !user.username &&
-              user.name
+              {user && !user.username && user.name
                 ? user.name + " " + user.lastname
                 : null}
 
-              {user && user.username
-                ? user.username
-                : null}
+              {user && user.username ? user.username : null}
             </h5>
-            {user && user.name
-              ? user.name + " " + user.lastname
-              : null}
+            {user && user.name ? user.name + " " + user.lastname : null}
             <h6>{user ? user.email : null}</h6>
             <button
               className="btn btn-default btn-sm"
@@ -102,9 +97,7 @@ const { name, lastname, username, images, email } = user;
             <div className="usertweets">
               <h5>Your Tweets</h5>
               <div>
-                {user && user._id ? (
-                  <TweetListing uid={user._id} />
-                ) : null}
+                {user && user._id ? <TweetListing uid={user._id} /> : null}
               </div>
             </div>
           </div>

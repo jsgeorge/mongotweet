@@ -10,9 +10,9 @@ const SigninPage = () => {
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
   //const [state, dispatch] = useContext(UserContext);
-  const {user, setuser, loggedin, setisloggedin} =  useContext(UserContext);
+  const { user, setuser, isloggedin, setisloggedin } = useContext(UserContext);
   const [errors, setErrors] = useState({});
- 
+
   useEffect(() => {});
 
   const validData = () => {
@@ -52,8 +52,8 @@ const SigninPage = () => {
           setErrors({ form: response.data.message });
         } else {
           console.log(response.data.user);
-           setuser(response.data.user);
-           setisloggedin(true);
+          setuser(response.data.user);
+          setisloggedin(true);
           localStorage.setItem("jwtToken", response.data.token);
           setRedirect(true);
         }
@@ -74,12 +74,12 @@ const SigninPage = () => {
     return <Redirect to="/tweets" />;
   }
   //if (state.user && state.user[0]) return <Redirect to="/tweets" />;
+  if (isloggedin) return <Redirect to="/tweets" />;
   return (
     <div>
       <div className="row">
         <div className="col-lg-3 col-md-3  col-sm-2  Lsidebar "></div>
         <div className="col-lg-6 col-md-6 col-sm-6 content noborder">
-        
           <div className="form">
             <div className="form-header">
               <h3>Sign In</h3>

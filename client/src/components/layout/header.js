@@ -13,14 +13,11 @@ const Header = () => {
   //const [redirect, setRedirect] = useState(false);
   //const [state, dispatch] = useContext(UserContext);
   const [setError] = useState("");
-  const {user, setuser} = useContext(UserContext)
+  const { user, isloggedin } = useContext(UserContext);
   useEffect(() => {
-     console.log('Header user:', user);
+    console.log("isloggedin", isloggedin);
+    console.log("Header user:", user);
   });
-
-  const renderCardImage = (images) => {
-    return images[0].url;
-  };
 
   return (
     <div className="header">
@@ -35,13 +32,13 @@ const Header = () => {
         <div className="container">
           <div className="navbar-header">
             {/* {!state.user && !state.user[0] ? ( */}
-           {  user ? (
+            {!isloggedin ? (
               <Link to="/">
-                 <div className="logo"/>
+                <div className="logo" />
               </Link>
             ) : (
               <Link to="/tweets">
-                <div className="logo"/>
+                <div className="logo" />
               </Link>
             )}
           </div>
@@ -65,7 +62,7 @@ const Header = () => {
               />
             </Link>
             {/* {state.user && state.user[0] ? ( */}
-            {user ? (
+            {isloggedin ? (
               <Link
                 to="/tweets/add"
                 className="btnAddTweet"
@@ -80,10 +77,10 @@ const Header = () => {
             ) : null}
 
             {/* { state.user && state.user[0] && state.user[0].user && state.user[0].user.images ? ( */}
-                 { user && user.images ? (
+            {isloggedin && user ? (
               <Link to="/user">
-              {/* <Avatar images={state.user[0].user.images} size="avt-sm" />  */}
-              <Avatar images={user.images} size="avt-sm"/>
+                {/* <Avatar images={state.user[0].user.images} size="avt-sm" />  */}
+                <Avatar images={user.images} size="avt-sm" />
               </Link>
             ) : (
               <Link to="/auth/signin">

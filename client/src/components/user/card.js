@@ -5,9 +5,9 @@ import { UserContext } from "../../context/user-context";
 
 const UserCard = () => {
   const [redirect, setRedirect] = useState(false);
- // const [state, dispatch] = useContext(UserContext);
+  // const [state, dispatch] = useContext(UserContext);
   //const [user, setUser] = useState({});
-  const {user, setuser, isloggedin, setisloggedin} = useContext(UserContext)
+  const { user, setuser, isloggedin, setisloggedin } = useContext(UserContext);
 
   // console.log("in usercard user is", user);
   const renderCardImage = (images) => {
@@ -34,7 +34,7 @@ const UserCard = () => {
         <span>
           <ul className="userlinks">
             <li>
-              <Link to="/tweets/explore/">Explore</Link>
+              <Link to="/tweets/search">Explore</Link>
             </li>
             <li>
               <Link to="/tweets/Lists/">Lists</Link>

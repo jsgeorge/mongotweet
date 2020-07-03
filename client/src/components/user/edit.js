@@ -6,10 +6,11 @@ import classnames from "classnames";
 import FileUpload from "../utils/fileupload";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import Avatar from "./../user/avatar";
 
 const EditUser = () => {
   //const [user, setUser] = useState({});
-  const {user, setuser} = useContext(UserContext)
+  const { user, setuser, isloggedin } = useContext(UserContext);
   const [uid, setUid] = useState();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,14 +19,14 @@ const EditUser = () => {
   const [lastname, setLastname] = useState("");
   const [errors, setErrors] = useState([]);
   const [redirect, setRedirect] = useState(false);
- // const [state, dispatch] = useContext(UserContext);
+  // const [state, dispatch] = useContext(UserContext);
   //const RegisterUser = () => {};
   const [images, setImages] = useState({});
   const [formSuccess, setFormSucess] = useState(false);
   const [edited, setEdited] = useState({});
 
   useEffect(() => {
-     console.log('EditUserPage user:', user);
+    console.log("EditUserPage user:", user, isloggedin);
     if (user && user) {
       setEdited({
         username: user.username,
@@ -94,7 +95,7 @@ const EditUser = () => {
   if (redirect) {
     return <Redirect to="/user" />;
   }
-
+  if (!isloggedin || !user) return <Redirect to="/" />;
   return (
     <div className="page-wrapper">
       <div className="row">
@@ -103,30 +104,9 @@ const EditUser = () => {
           <div className="form-wrapper">
             <h3>Edit Your Profile</h3>
             <h5>
-              {user && user.images ? (
-                <div
-                  className="avatar"
-                  style={{
-                    background: `url(${renderCardImage(images)}) no-repeat`,
-                  }}
-                />
-              ) : (
-                <FontAwesomeIcon
-                  icon={faUser}
-                  size="lg"
-                  style={{
-                    border: "2px solid blue",
-                    borderRadius: "100px",
-                    color: "blue",
-                  }}
-                />
-              )}
-              {user && !user.username
-                ? user.name + " " + user.lastname
-                : null}
-              {user && user.username
-                ? user.username
-                : null}
+              {user ? <Avatar images={user.images} size="avt-lg" /> : null}
+              {user && !user.username ? user.name + " " + user.lastname : null}
+              {user && user.username ? user.username : null}
             </h5>
 
             {errors.form && (

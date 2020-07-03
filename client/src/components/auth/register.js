@@ -6,6 +6,8 @@ import classnames from "classnames";
 import FileUpload from "../utils/fileupload";
 
 const SignupPage = () => {
+  const { user, isloggedin } = useContext(UserContext);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -60,7 +62,7 @@ const SignupPage = () => {
       try {
         const response = await axios.post("/users", newUser);
         if (!response.data.regSuccess) {
-         setErrors({ form: response.data.message });
+          setErrors({ form: response.data.message });
         } else {
           setRedirect(true);
         }
@@ -78,7 +80,7 @@ const SignupPage = () => {
   if (redirect) {
     return <Redirect to="/auth/signin" />;
   }
-
+  if (isloggedin) return <Redirect to="/tweets" />;
   return (
     <div className="page-wrapper">
       <div className="row">
