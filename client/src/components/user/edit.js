@@ -8,7 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const EditUser = () => {
-  const [user, setUser] = useState({});
+  //const [user, setUser] = useState({});
+  const {user, setuser} = useContext(UserContext)
   const [uid, setUid] = useState();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,24 +18,22 @@ const EditUser = () => {
   const [lastname, setLastname] = useState("");
   const [errors, setErrors] = useState([]);
   const [redirect, setRedirect] = useState(false);
-  const [state, dispatch] = useContext(UserContext);
+ // const [state, dispatch] = useContext(UserContext);
   //const RegisterUser = () => {};
   const [images, setImages] = useState({});
   const [formSuccess, setFormSucess] = useState(false);
   const [edited, setEdited] = useState({});
 
   useEffect(() => {
-    if (state.user && state.user[0]) {
-      console.log("user", state.user[0]);
-      setUid(state.user[0].user._id);
-      setUser(state.user[0].user);
+     console.log('EditUserPage user:', user);
+    if (user && user) {
       setEdited({
-        username: state.user[0].user.username,
-        email: state.user[0].user.email,
-        name: state.user[0].user.name,
-        lastname: state.user[0].user.lastname,
-        username: state.user[0].user.username,
-        images: state.user[0].user.images,
+        username: user.username,
+        email: user.email,
+        name: user.name,
+        lastname: user.lastname,
+        username: user.username,
+        images: user.images,
       });
     }
   }, []);
@@ -104,7 +103,7 @@ const EditUser = () => {
           <div className="form-wrapper">
             <h3>Edit Your Profile</h3>
             <h5>
-              {state.user[0] && state.user[0].images ? (
+              {user && user.images ? (
                 <div
                   className="avatar"
                   style={{
@@ -122,11 +121,11 @@ const EditUser = () => {
                   }}
                 />
               )}
-              {state.user[0] && !state.user[0].user.username
-                ? state.user[0].user.name + " " + state.user[0].user.lastname
+              {user && !user.username
+                ? user.name + " " + user.lastname
                 : null}
-              {state.user[0] && state.user[0].user.username
-                ? state.user[0].user.username
+              {user && user.username
+                ? user.username
                 : null}
             </h5>
 

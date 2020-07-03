@@ -4,42 +4,45 @@ import FileUpload from "../utils/fileupload";
 import classnames from "classnames";
 import axios from "axios";
 import { TweetContext } from "../../context/tweet-context";
+import { UserContext } from '../../context/user-context';
 //import { flashErrorMessage } from "../layout/flash-message";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //import { faHashtag } from "@fortawesome/react-fontawesome";
+import Avatar from '../user/avatar';
 
 const AddTweet = ({ type, user}) => {
   const [mode] = useState(type);
+ // const {user, setuser } = useContext(UserContext)
   // const [id] = useState(uid);
-  const [username, setUsername] = useState("");
-   const [dispatch] = useContext(TweetContext);
-  const [avatar, setAvatar] = useState("");
+ // const [username, setUsername] = useState("");
+ //  const [dispatch] = useContext(TweetContext);
+//  const [avatar, setAvatar] = useState("");
   const [errors, setErrors] = useState({});
   const [category, setCategory] = useState("");
   const [tweet, setTweet] = useState("");
   const [formSuccess, setFormSucess] = useState(false);
   const [formError, setFormError] = useState("");
-  const [images, setImages] = useState({});
+ const [images, setImages] = useState({});
    const [redirect, setRedirect] = useState(false);
      const [redirectDesk, setRedirectDesk] = useState(false);
   const [uploadedImages, setUploadedImages] = useState([]);
   
   useEffect(() => {
    
-       try {
-       setAvatar(user.images)
-       }catch(err){
-          console.log(err);
-       }
-       try{
-      if (user.username) setUsername(user.username);
-      else setUsername(user.name + ' ' + user.lastname)
-       }
-       catch(err){
-         console.log(err);
-       }
+      //  try {
+      //  setAvatar(user.images)
+      //  }catch(err){
+      //     console.log(err);
+      //  }
+       //try{
+      // if (user.username) setUsername(user.username);
+      // else setUsername(user.name + ' ' + user.lastname)
+      //  }
+      //  catch(err){
+      //    console.log(err);
+      //  }
    
-  },[user]);
+  },[]);
 
   const validData = () => {
     let errs = {};
@@ -73,7 +76,7 @@ const AddTweet = ({ type, user}) => {
     if (validData()) {
       let newTweet = {
         author: user._id,
-        avatar: avatar,
+        avatar: user.images,
         text: tweet,
         category: category,
         images: images,
@@ -122,11 +125,13 @@ const AddTweet = ({ type, user}) => {
   if (redirectDesk) {
   return <Redirect to="/" />;
   }
-  const placeholder = `What is on you mind ${username}`;
+  const placeholder = `What is on you mind`;
   
 
   return (
-    // <div className="add-tweet">
+    <span>
+     {/* <div className="add-tweet"> */}
+    <Avatar images={user.images} />
     <div
       className={classnames("add-tweet", {
         "add-tweet-full": images && images.length > 0,
@@ -179,6 +184,7 @@ const AddTweet = ({ type, user}) => {
       </div>
     
     </div>
+    </span>
   );
 };
 

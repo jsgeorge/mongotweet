@@ -9,9 +9,10 @@ const SigninPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
-  const [state, dispatch] = useContext(UserContext);
+  //const [state, dispatch] = useContext(UserContext);
+  const {user, setuser, loggedin, setisloggedin} =  useContext(UserContext);
   const [errors, setErrors] = useState({});
-
+ 
   useEffect(() => {});
 
   const validData = () => {
@@ -35,7 +36,6 @@ const SigninPage = () => {
 
   const signinUser = async () => {
     setErrors({});
-    console.log(validData());
     if (validData()) {
       let userData = {
         email: email,
@@ -43,14 +43,17 @@ const SigninPage = () => {
       };
       try {
         const response = await axios.post("/auth", userData);
-        dispatch({
-          type: "LOGIN_USER",
-          payload: response.data,
-        });
+        // dispatch({
+        //   type: "LOGIN_USER",
+        //   payload: response.data,
+        // });
         if (!response.data.loginSuccess) {
           console.log(response.data.message);
           setErrors({ form: response.data.message });
         } else {
+          console.log(response.data.user);
+           setuser(response.data.user);
+           setisloggedin(true);
           localStorage.setItem("jwtToken", response.data.token);
           setRedirect(true);
         }

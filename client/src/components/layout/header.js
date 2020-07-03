@@ -11,10 +11,12 @@ import SearchTweets from "../tweets/search";
 
 const Header = () => {
   //const [redirect, setRedirect] = useState(false);
-  const [state, dispatch] = useContext(UserContext);
+  //const [state, dispatch] = useContext(UserContext);
   const [setError] = useState("");
- 
-  useEffect(() => {});
+  const {user, setuser} = useContext(UserContext)
+  useEffect(() => {
+     console.log('Header user:', user);
+  });
 
   const renderCardImage = (images) => {
     return images[0].url;
@@ -32,7 +34,8 @@ const Header = () => {
       >
         <div className="container">
           <div className="navbar-header">
-            {!state.user && !state.user[0] ? (
+            {/* {!state.user && !state.user[0] ? ( */}
+           {  user ? (
               <Link to="/">
                  <div className="logo"/>
               </Link>
@@ -61,7 +64,8 @@ const Header = () => {
                 className="primary-clr"
               />
             </Link>
-            {state.user && state.user[0] ? (
+            {/* {state.user && state.user[0] ? ( */}
+            {user ? (
               <Link
                 to="/tweets/add"
                 className="btnAddTweet"
@@ -75,18 +79,11 @@ const Header = () => {
               </Link>
             ) : null}
 
-            { state.user && state.user[0] && state.user[0].user && state.user[0].user.images ? (
+            {/* { state.user && state.user[0] && state.user[0].user && state.user[0].user.images ? ( */}
+                 { user && user.images ? (
               <Link to="/user">
-                {/* <FontAwesomeIcon
-                    icon={faUser}
-                    size="lg"
-                    style={{
-                      border: "2px solid rgb(17, 47, 184)",
-                      borderRadius: "100px",
-                      color: "rgb(17, 47, 184)",
-                    }}
-                  /> */}
-              <Avatar images={state.user[0].user.images} size="avt-sm" /> 
+              {/* <Avatar images={state.user[0].user.images} size="avt-sm" />  */}
+              <Avatar images={user.images} size="avt-sm"/>
               </Link>
             ) : (
               <Link to="/auth/signin">

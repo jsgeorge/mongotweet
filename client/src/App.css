@@ -139,7 +139,8 @@ button,
   height: 580px;
 }
 .add-tweet input,
-.add-tweet textarea {
+.add-tweet textarea,
+.add-comment input {
   border:none;
 }
 /*file upload */
@@ -370,6 +371,12 @@ ul li {
 }
 .chat-text {
   font-size: 18px;
+  padding:0;
+  margin:0;
+  
+}
+.chat-text-det {
+  font-size: 22px;
   padding:0;
   margin:0;
   

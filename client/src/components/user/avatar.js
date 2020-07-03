@@ -7,9 +7,13 @@ const renderCardImage = (images) => {
 };
 
 const Avatar = ({ images, size }) => {
+
+  useEffect(()=>{
+    if (images &&  images.length > 0 ) console.log('in Avatar images=', images.url);
+  },[images])
   return (
     <div>
-      {images && images.length > 0 && images[0].url ? (
+      {images && images.length > 0  ? (
         <div
           className="avatar"
           id={size}

@@ -9,22 +9,37 @@ import Categories from "../categories";
 import TweetListing from "../tweets/listing";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+// import jwtDecode from "jwt-decode";
+// import axios from "axios";
 
 const UserPage = () => {
   const [redirect, setRedirect] = useState(false);
-  const [state, dispatch] = useContext(UserContext);
-  const [images, setImages] = useState({});
+ // const [state, dispatch] = useContext(UserContext);
+  const {user, setuser, isloggedin, setisloggedin } = useContext(UserContext)
   const [formSuccess, setFormSucess] = useState(false);
 
   useEffect(() => {
-   
+    console.log('UserPage user:',user);
+  // const setAuthUser = async (token) => {
+  //     const response = await axios.post("/users/id", { id: token.id });
+  //     dispatch({
+  //         type: "SET_USER",
+  //         payload: response.data,
+  //     });
+  //   };
+  //   if (localStorage.jwtToken){
+  //       console.log('User is authenticted')
+  //       setAuthUser(jwtDecode(localStorage.getItem("jwtToken")));
+  //   }   
   }, []);
 
   const onLogout = () => {
     localStorage.clear();
-    dispatch({
-      type: "LOGOUT_USER",
-    });
+    // dispatch({
+    //   type: "LOGOUT_USER",
+    // });
+   setuser({});
+    setisloggedin(false);
     setRedirect(true);
   };
 
@@ -34,19 +49,20 @@ const UserPage = () => {
 
  
  if (redirect) return <Redirect to="/" />;
+const { name, lastname, username, images, email } = user;
 
   return (
     <div className="user-wrapper">
       <div className="row">
         <div className="col-lg-3 col-md-2  col-sm-3 col-xs-3 Lsidebar">
-          {state.user ? <UserCard user={state.user[0]} /> : null}
+          {user ? <UserCard user={user} /> : null}
         </div>
          <div className="col-lg-6 col-md-7 col-sm-8 col-xs-9 content">
           <div className="user-page">
             <h4>User Profile</h4>
             <h5>
-              {state.user[0] && state.user[0] ? (
-                <Avatar images={state.user[0].user.images} size="avt-lg" />
+              {user && user ? (
+                <Avatar images={user.images} size="avt-lg" />
               ) : (
                 <FontAwesomeIcon
                   icon={faUser}
@@ -58,20 +74,20 @@ const UserPage = () => {
                   }}
                 />
               )}
-              {state.user[0] &&
-              !state.user[0].user.username &&
-              state.user[0].user.name
-                ? state.user[0].user.name + " " + state.user[0].user.lastname
+              {user &&
+              !user.username &&
+              user.name
+                ? user.name + " " + user.lastname
                 : null}
 
-              {state.user[0] && state.user[0].user.username
-                ? state.user[0].user.username
+              {user && user.username
+                ? user.username
                 : null}
             </h5>
-            {state.user[0] && state.user[0].user.name
-              ? state.user[0].user.name + " " + state.user[0].user.lastname
+            {user && user.name
+              ? user.name + " " + user.lastname
               : null}
-            <h6>{state.user[0] ? state.user[0].user.email : null}</h6>
+            <h6>{user ? user.email : null}</h6>
             <button
               className="btn btn-default btn-sm"
               style={{ marginTop: "20px", color: "#111" }}
@@ -86,8 +102,8 @@ const UserPage = () => {
             <div className="usertweets">
               <h5>Your Tweets</h5>
               <div>
-                {state.user[0] && state.user[0].user._id ? (
-                  <TweetListing uid={state.user[0].user._id} />
+                {user && user._id ? (
+                  <TweetListing uid={user._id} />
                 ) : null}
               </div>
             </div>

@@ -4,23 +4,24 @@ import { UserContext } from "../../context/user-context";
 import { Redirect} from "react-router-dom";
 
 const AddTweetPage = () => {
-  const [state, dispatch] = useContext(UserContext);
+  //const [state, dispatch] = useContext(UserContext);
+  const {user, setuser } = useContext(UserContext);
   //if (state.user) console.log(state.user[0]);
   const[ redirect, setRedirect] = useState(false);
 
  useEffect(() => {
-  
+     console.log('AddTweetPage user:',user);
   }, []);
 
-  if  (!state.user[0] ) return (<Redirect to="/" />);
+  if  (!user ) return (<Redirect to="/" />);
 
   return (
     <div className="page-wrapper">
     
-      {state.user && state.user[0] ? (
+      {user  ? (
         <AddTweet
           type="mobile"
-          user={state.user[0].user}
+          user={user}
         />
       ) :null}
     </div>

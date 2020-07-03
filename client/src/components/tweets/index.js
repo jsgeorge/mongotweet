@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
-import jwtDecode from "jwt-decode";
+// import jwtDecode from "jwt-decode";
+// import axios from "axios";
 import AddTweet from "./add";
 import { UserContext } from "../../context/user-context";
 
@@ -11,33 +11,27 @@ import Categories from "../categories";
 //import UserSignin from "../auth/login";
 
 export default function TweetsPage() {
-  const [state, dispatch] = useContext(UserContext);
+//const [state, dispatch] = useContext(UserContext);
   
   //const [isAuthenticted, setIsAuthenticated] = useState(false);
   const [error, setError] = useState("");
-  const [user, setUser] = useState({});
+  const {user, setuser} = useContext(UserContext);
 
   useEffect(() => {
-   const setAuthUser = async (token) => {
-    const response = await axios.post("/users/id", { id: token.id });
-    dispatch({
-        type: "SET_USER",
-        payload: response.data,
-    });
-    };
-    if (localStorage.jwtToken){
-        console.log('User is authenticted')
-        setAuthUser(jwtDecode(localStorage.getItem("jwtToken")));
-    }   
+   console.log('TweetsPage user:', user);
+  //  const setAuthUser = async (token) => {
+  //     const response = await axios.post("/users/id", { id: token.id });
+  //     dispatch({
+  //         type: "SET_USER",
+  //         payload: response.data,
+  //     });
+  //   };
+  //   if (localStorage.jwtToken){
+  //       console.log('User is authenticted')
+  //       setAuthUser(jwtDecode(localStorage.getItem("jwtToken")));
+  //   }   
       },[]);
       
-  const setAuthUser = async (token) => {
-    const response = await axios.post("/users/id", { id: token.id });
-    dispatch({
-      type: "SET_USER",
-      payload: response.data,
-    });
-  };
 
   if (error) return <Redirect to="/auth/signin" />;
   // if (state.user) console.log(state.user[0]);
@@ -52,10 +46,16 @@ export default function TweetsPage() {
           <strong>Home</strong>
         </h4>
         <div className="add-tweet-panel">
-          {state.user && state.user[0] ? (
+          {/* {state.user && state.user[0] ? (
             <AddTweet
               type="desktop"
               user={state.user[0].user}
+            />
+          ) : null} */}
+           {user ? (
+            <AddTweet
+              type="desktop"
+              user={user}
             />
           ) : null}
         </div>

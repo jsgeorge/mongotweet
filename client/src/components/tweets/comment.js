@@ -5,18 +5,22 @@ import classnames from "classnames";
 import axios from "axios";
 import { TweetContext } from "../../context/tweet-context";
 //import { flashErrorMessage } from "../layout/flash-message";
+import Avatar from '../user/avatar';
 
-const NewCommentForm = ({ id, uid, user }) => {
+const NewCommentForm = ({ id,  user }) => {
   const [tweetid] = useState(id);
-  const [userid] = useState(uid);
-  const [author] = useState(user);
+  const [userid] = useState(user._id);
+  const [author] = useState(user.username);
   const [dispatch] = useContext(TweetContext);
+  const [avatar] = useState(user.avatar);
   const [errors, setErrors] = useState({});
   const [comment, setComment] = useState("");
   const [formSuccess, setFormSuccess] = useState(false);
   const [formError, setFormError] = useState(false)
   const [redirect, setRedirect] = useState(false);
-  useEffect(() => {});
+  useEffect(() => {
+      if (user.images &&  user.images.length > 0 ) console.log('in Avatar images=', user.images.url);
+  });
 
   const validData = () => {
     let errs = {};
@@ -93,8 +97,12 @@ const NewCommentForm = ({ id, uid, user }) => {
           {errors.tweet && <span className="help-block">{errors.email}</span>}
         </div>
  */}
+  <div className="avatar-wrapper">
+                <Avatar images={user.images} size="avt-sm" />
+            </div>
       <div className={classnames("form-group", { "has-error": errors })}>
         {errors.comment && <span className="help-block">{errors.comment}</span>}
+        
         <input
           className="form-control"
           value={comment}

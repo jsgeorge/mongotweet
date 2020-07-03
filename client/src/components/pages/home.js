@@ -6,9 +6,10 @@ import { UserContext } from "../../context/user-context";
 // import axios from "axios";
 
 export default function HomePage() {
-  const [state, dispatch] = useContext(UserContext);
-
-  // useEffect(() => {
+  //const [state, dispatch] = useContext(UserContext);
+  const {user, setuser} = useContext(UserContext)
+   useEffect(() => {
+      //console.log('HomePage user:', state.user[0]);
   //   const setAuthUser = async (token) => {
   //   const response = await axios.post("/users/id", { id: token.id });
   //   dispatch({
@@ -20,10 +21,10 @@ export default function HomePage() {
   //       console.log('User is authenticted')
   //       setAuthUser(jwtDecode(localStorage.getItem("jwtToken")));
   //   }   
-  //     },[]);
+       },[]);
 
  
-  if (localStorage.jwtToken) return <Redirect to="/tweets" />;
+ // if (localStorage.jwtToken || user) return <Redirect to="/tweets" />;
 
   return (
     <div className="home-wrapper">

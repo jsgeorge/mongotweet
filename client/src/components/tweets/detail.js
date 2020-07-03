@@ -7,14 +7,12 @@ import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TweetContext } from "../../context/tweet-context";
 import { UserContext } from "../../context/user-context";
-
-
 import AuthorDetail from "./author";
 import UserCommands from "./userSection";
 import UserEditCommands from "./userEditCmds";
 import UserCard from "../user/card";
 import Categories from "../categories";
-
+import Avatar from '../user/avatar';
 
 export default function TweetDetail({ match }) {
   const [state, dispatch] = useContext(TweetContext);
@@ -32,25 +30,25 @@ export default function TweetDetail({ match }) {
     //     setError("Error. Cannot set user. user logged off or time expired");
     //   }
     // }
-    // const { id } = match.params;
-    // if (id) {
-    //   const fetchData = async () => {
-    //     try {
-    //       const response = await axios.get(`/chats/article?id=${id}`);
-    //       dispatch({
-    //         type: "FETCH_TWEET",
-    //         payload: response.data[0],
-    //       });
-    //       // console.log("detail respnse.data", response.data);
-    //     } catch (err) {
-    //       console.log(err);
-    //       //setError("Cannot retrieve the selected tweet. Network error");
-    //     }
-    //   };
-    //   fetchData();
-    // } else {
-    //   setError("Cannot retrive selecte tweet");
-    // }
+    const { id } = match.params;
+    if (id) {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(`/chats/article?id=${id}`);
+          dispatch({
+            type: "FETCH_TWEET",
+            payload: response.data[0],
+          });
+          // console.log("detail respnse.data", response.data);
+        } catch (err) {
+          console.log(err);
+          //setError("Cannot retrieve the selected tweet. Network error");
+        }
+      };
+      fetchData();
+    } else {
+      setError("Cannot retrive selecte tweet");
+    }
   
   }, []);
   // const setAuthUser = async (token) => {
@@ -83,6 +81,7 @@ export default function TweetDetail({ match }) {
   const {
     _id,
     author,
+    avatar,
     text,
     tag,
     category,
@@ -110,13 +109,14 @@ export default function TweetDetail({ match }) {
                 className="primary-clr"
               />
             </Link>
-
+             <Avatar images={avatar} />
             <strong>{tag ? tag : null}</strong>
             {author ? <AuthorDetail author={author} /> : null}
             <span className="chat-date"> {displayDate(createdAt)}</span>
             <br />
-            {text ? text : null}
+            {text ? <span className="chat-text-det">{text}</span> : null}
           </div>
+
           {images && images.length > 0 && images[0].url ? (
             <div
               className="image"
@@ -125,13 +125,17 @@ export default function TweetDetail({ match }) {
               }}
             />
           ) : null}
+
           <div className="card-text">
             <UserEditCommands id={match.params.id} author={author} />
+          
             <div className="actions">
               Comments {comments ? comments.length : "0"} Likes:{" "}
               {likes ? likes : "0"}
             </div>
+
             <UserCommands id={match.params.id} author={author} />
+           
             <div className="comments">
               {comments && comments.length > 0 ? (
                 <span>
@@ -146,8 +150,10 @@ export default function TweetDetail({ match }) {
                 <p> No comments yet</p>
               )}
             </div>
+
           </div>
         </div>
+
         <div className="col-lg-3 col-md-3 col-sm-2 col-xs-4 Rsidebar">
           <Categories />
         </div>

@@ -5,26 +5,32 @@ import { UserContext } from "../../context/user-context";
 
 const UserCard = () => {
   const [redirect, setRedirect] = useState(false);
-  const [state, dispatch] = useContext(UserContext);
-  const [user, setUser] = useState({});
+ // const [state, dispatch] = useContext(UserContext);
+  //const [user, setUser] = useState({});
+  const {user, setuser, isloggedin, setisloggedin} = useContext(UserContext)
+
   // console.log("in usercard user is", user);
   const renderCardImage = (images) => {
     return images[0].url;
   };
-  useEffect(() => {
-    if (state.user && state.user[0]) setUser(state.user[0].user);
-  });
+  // useEffect(() => {
+  //    console.log('UserCard user:', state.user[0]);
+  //   if (state.user && state.user[0]) setUser(state.user[0].user);
+  // });
   const onLogout = () => {
     localStorage.clear();
-    dispatch({
-      type: "LOGOUT_USER",
-    });
+    // dispatch({
+    //   type: "LOGOUT_USER",
+    // });
+    setuser({});
+    setisloggedin(false);
     setRedirect(true);
   };
 
   return (
     <div className="user-card">
-      {state.user && state.user[0] ? (
+      {/* {state.user && state.user[0] ? ( */}
+      {user ? (
         <span>
           <ul className="userlinks">
             <li>
