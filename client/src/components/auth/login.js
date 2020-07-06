@@ -4,6 +4,7 @@ import { UserContext } from "../../context/user-context";
 import axios from "axios";
 import classnames from "classnames";
 import { flashErrorMessage } from "../layout/flash-message";
+import setAuthorizationToken from "../../utils/setAuthToken";
 
 const SigninPage = () => {
   const [email, setEmail] = useState("");
@@ -51,10 +52,10 @@ const SigninPage = () => {
           console.log(response.data.message);
           setErrors({ form: response.data.message });
         } else {
-          console.log(response.data.user);
           setuser(response.data.user);
           setisloggedin(true);
           localStorage.setItem("jwtToken", response.data.token);
+          setAuthorizationToken(localStorage.jwtToken);
           setRedirect(true);
         }
       } catch (error) {

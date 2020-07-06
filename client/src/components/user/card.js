@@ -13,15 +13,11 @@ const UserCard = () => {
   const renderCardImage = (images) => {
     return images[0].url;
   };
-  // useEffect(() => {
-  //    console.log('UserCard user:', state.user[0]);
-  //   if (state.user && state.user[0]) setUser(state.user[0].user);
-  // });
+  useEffect(() => {
+    //   if (state.user && state.user[0]) setUser(state.user[0].user);
+  });
   const onLogout = () => {
     localStorage.clear();
-    // dispatch({
-    //   type: "LOGOUT_USER",
-    // });
     setuser({});
     setisloggedin(false);
     setRedirect(true);
@@ -30,7 +26,7 @@ const UserCard = () => {
   return (
     <div className="user-card">
       {/* {state.user && state.user[0] ? ( */}
-      {user ? (
+      {isloggedin && user ? (
         <span>
           <ul className="userlinks">
             <li>
@@ -50,22 +46,23 @@ const UserCard = () => {
             </li>
           </ul>
 
-          <div>
-            <h4>
-              <Avatar images={user.images} size="avt-sm" />
-              {!user.username && user.name
-                ? user.name + " " + user.lastname
-                : null}
-
+          <div className="card-user">
+            <Avatar images={user.images} size="avt-sm" />
+            {!user.username && user.name
+              ? user.name + " " + user.lastname
+              : null}
+            <span className="username">
               {user.username ? user.username : null}
-            </h4>
-            <button
-              className="btn btn-default btn-sm"
-              style={{ marginTop: "20px", color: "#111" }}
-              onClick={() => onLogout()}
-            >
-              Logout
-            </button>{" "}
+            </span>
+            <div>
+              <button
+                className="btn btn-default btn-sm"
+                style={{ marginTop: "20px", color: "#111" }}
+                onClick={() => onLogout()}
+              >
+                Logout
+              </button>{" "}
+            </div>
           </div>
         </span>
       ) : (

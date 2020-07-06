@@ -12,7 +12,7 @@ import UserCommands from "./userSection";
 import UserEditCommands from "./userEditCmds";
 import UserCard from "../user/card";
 import Categories from "../categories";
-import Avatar from '../user/avatar';
+import Avatar from "../user/avatar";
 
 export default function TweetDetail({ match }) {
   const [state, dispatch] = useContext(TweetContext);
@@ -49,7 +49,6 @@ export default function TweetDetail({ match }) {
     } else {
       setError("Cannot retrive selecte tweet");
     }
-  
   }, []);
   // const setAuthUser = async (token) => {
   //   const response = await axios.post("/users/id", { id: token.id });
@@ -97,19 +96,20 @@ export default function TweetDetail({ match }) {
   return (
     <div className="page-wrapper">
       <div className="row">
-        <div className="col-lg-3 col-md-2  col-sm-3 col-xs-3 Lsidebar">
+        <div className="col-lg-2 col-md-2  col-sm-3 col-xs-3 Lsidebar">
           <UserCard />
         </div>
-        <div className="col-lg-6 col-md-7 col-sm-8   col-xs-9 content">
-          <div className="card-text">
-            <Link to="/tweets">
+        <div className="col-lg-7 col-md-7 col-sm-8   col-xs-9 content">
+          <div className="card-text-det">
+            <Link to="/tweets" className="backlink">
               <FontAwesomeIcon
                 icon={faLongArrowAltLeft}
                 size="lg"
                 className="primary-clr"
-              />
+              />{" "}
+              Tweet
             </Link>
-             <Avatar images={avatar} />
+            <Avatar images={avatar} />
             <strong>{tag ? tag : null}</strong>
             {author ? <AuthorDetail author={author} /> : null}
             <span className="chat-date"> {displayDate(createdAt)}</span>
@@ -128,14 +128,14 @@ export default function TweetDetail({ match }) {
 
           <div className="card-text">
             <UserEditCommands id={match.params.id} author={author} />
-          
+
             <div className="actions">
               Comments {comments ? comments.length : "0"} Likes:{" "}
               {likes ? likes : "0"}
             </div>
 
             <UserCommands id={match.params.id} author={author} />
-           
+
             <div className="comments">
               {comments && comments.length > 0 ? (
                 <span>
@@ -150,7 +150,6 @@ export default function TweetDetail({ match }) {
                 <p> No comments yet</p>
               )}
             </div>
-
           </div>
         </div>
 

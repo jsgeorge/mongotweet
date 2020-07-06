@@ -7,10 +7,8 @@ export default function ModelPage({ match }) {
   console.log(id);
   return (
     <div className="row">
-      <div className="col-lg-3 col-md-3  col-sm-3 Lsidebar">Lsidebar</div>
-      <div className=" col-lg-6 col-md-6 col-sm-6 content">
-        this section is call the webContent
-      </div>
+      <div className="col-lg-2 col-md-3  col-sm-3 Lsidebar">Lsidebar</div>
+      <div className=" col-lg-7 col-md-6 col-sm-6 content">Content</div>
       <div className="col-lg-3 col-md-3 col-sm-3 Rsidebar">Rsidebar</div>
     </div>
   );

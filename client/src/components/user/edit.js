@@ -26,7 +26,6 @@ const EditUser = () => {
   const [edited, setEdited] = useState({});
 
   useEffect(() => {
-    console.log("EditUserPage user:", user, isloggedin);
     if (user && user) {
       setEdited({
         username: user.username,

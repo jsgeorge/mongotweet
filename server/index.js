@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 //const cookieParser = require("cookie-parser");
 const cloudinary = require("cloudinary");
 const mongoose = require("mongoose");
+const path = require("path");
 
 //Routes
 const users = require("./routes/users");
@@ -64,26 +65,25 @@ app.use("/categories", categories);
 
 //default
 if (process.env.NODE_ENV === "production") {
-  // const path = require("path");
-  // app.get("/*", (req, res) => {
-  //   res.sendfile(path.resolve(__dirname, "../client", "build", "index.html"));
-  // });
+
   //Exprees will serve up production assets
-  app.use(express.static("client/build"));
+  //app.use(express.static("client/build"));
 
   //Express serve up index.html file if it doesn't recognize route
-  const path = require("path");
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-  app.get("*", function (_, res) {
-    res.sendFile(path.join(__dirname, "../client/build/index.html"), function (
-      err
-    ) {
-      if (err) {
-        res.status(500).send(err);
-      }
-    });
+  // app.get("*", (req, res) => {
+  //   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  // });
+  // app.get("*", function (_, res) {
+  //   res.sendFile(path.join(__dirname, "../client/build/index.html"), function (
+  //     err
+  //   ) {
+  //     if (err) {
+  //       res.status(500).send(err);
+  //     }
+  //   });
+  // });
+   app.get("/*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
   });
 }
 

@@ -15,7 +15,6 @@ const TweetEdit = ({ match }) => {
   const [error, setError] = useState("");
   useEffect(() => {
     const { id } = match.params;
-    //console.log("in detail chaid._id=", id);
 
     if (id) {
       const fetchData = async () => {

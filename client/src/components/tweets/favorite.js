@@ -6,7 +6,7 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 const FavoriteButton = ({ id, uid }) => {
-  const [state, dispatch] = useContext(UserContext);
+  //const [state, dispatch] = useContext(UserContext);
   const [error, setError] = useState("");
   const [favorite, setFavorite] = useState(false);
 
@@ -23,29 +23,29 @@ const FavoriteButton = ({ id, uid }) => {
       />
     );
   const AddFavorite = async (id, uid) => {
-    try {
-      console.log("Adding to favorite");
-      const response = await axios.post(`/users/addFav?uid=${uid}&id=${id}`);
-      dispatch({
-        type: "ADD_FAVORITE",
-        payload: response.data,
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    // try {
+    //   console.log("Adding to favorite");
+    //   const response = await axios.post(`/users/addFav?uid=${uid}&id=${id}`);
+    //   dispatch({
+    //     type: "ADD_FAVORITE",
+    //     payload: response.data,
+    //   });
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
   const SubtractFavorite = async (id, uid) => {
-    try {
-      console.log("Deletiung from favorite");
-      const response = await axios.post(`/users/delFav?uid=${uid}&id=${id}`);
-      dispatch({
-        type: "DEL_FAVORITE",
-        payload: response.data,
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    // try {
+    //   console.log("Deletiung from favorite");
+    //   const response = await axios.post(`/users/delFav?uid=${uid}&id=${id}`);
+    //   dispatch({
+    //     type: "DEL_FAVORITE",
+    //     payload: response.data,
+    //   });
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
   const changeFavorite = async (id, uid) => {

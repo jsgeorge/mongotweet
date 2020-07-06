@@ -14,10 +14,7 @@ const Header = () => {
   //const [state, dispatch] = useContext(UserContext);
   const [setError] = useState("");
   const { user, isloggedin } = useContext(UserContext);
-  useEffect(() => {
-    console.log("isloggedin", isloggedin);
-    console.log("Header user:", user);
-  });
+  useEffect(() => {});
 
   return (
     <div className="header">
@@ -42,18 +39,22 @@ const Header = () => {
               </Link>
             )}
           </div>
-          <div className="navbar-left desktop-search">
-            <SearchTweets />{" "}
-          </div>
+          {isloggedin ? (
+            <div className="navbar-left desktop-search">
+              <SearchTweets />{" "}
+            </div>
+          ) : null}
           <div className="navbar-right">
-            <Link to="/tweets">
-              <FontAwesomeIcon
-                icon={faHome}
-                size="lg"
-                className="primary-clr"
-              />{" "}
-              <span className="nav-link-lbl"> Home</span>
-            </Link>
+            {isloggedin ? (
+              <Link to="/tweets">
+                <FontAwesomeIcon
+                  icon={faHome}
+                  size="lg"
+                  className="primary-clr"
+                />{" "}
+                <span className="nav-link-lbl"> Home</span>
+              </Link>
+            ) : null}
             <Link to="/tweets/search" className="btnMobileSrch">
               <FontAwesomeIcon
                 icon={faSearch}
@@ -78,21 +79,18 @@ const Header = () => {
 
             {/* { state.user && state.user[0] && state.user[0].user && state.user[0].user.images ? ( */}
             {isloggedin && user ? (
-              <Link to="/user">
-                {/* <Avatar images={state.user[0].user.images} size="avt-sm" />  */}
-                <Avatar images={user.images} size="avt-sm" />
-              </Link>
+              <span>
+                <Link to="/user/profile" className="desk">
+                  {/* <Avatar images={state.user[0].user.images} size="avt-sm" />  */}
+                  <Avatar images={user.images} size="avt-head" />
+                </Link>
+                <Link to="/user" className="mobile">
+                  {/* <Avatar images={state.user[0].user.images} size="avt-sm" />  */}
+                  <Avatar images={user.images} size="avt-head" />
+                </Link>
+              </span>
             ) : (
               <Link to="/auth/signin">
-                {/* <FontAwesomeIcon
-                  icon={faUser}
-                  size="lg"
-                  style={{
-                    border: "2px solid #aaa",
-                    borderRadius: "100px",
-                    color: "#aaa",
-                  }}
-                /> */}
                 <span>Signin</span>
               </Link>
             )}

@@ -7,6 +7,8 @@ import HomePage from "./components/pages/home";
 import SigninPage from "./components/auth/login";
 import SignupPage from "./components/auth/register";
 import UserPage from "./components/user";
+import ProfilePage from "./components/user/profile";
+
 import EditUser from "./components/user/edit";
 import TweetsPage from "./components/tweets";
 import TweetQuery from "./components/tweets/query";
@@ -33,18 +35,14 @@ const Routes = () => {
       <Route path="/tweets/:id/edit" exact component={TweetEdit} />
       <Route path="/tweets/search" exact component={SearchPage} />
       <Route path="/tweets/add" exact component={AddTweetPage} />
-      {/* <Route path="/chats/:id" exact component={Auth(Chat, true)} />
-        <Route path="/user/favorites" exact component={Auth(Favorites, true)} />
-        <Route path="/user/edit" exact component={Auth(EditAccount, true)} />*/}
       <Route path="/auth/signin" exact component={SigninPage} />
       <Route path="/auth/signup" exact component={SignupPage} />
-      {/* <Route path="/user/list" exact component={Auth(UserList, true)} />
-        <Route path="/user/favorites" exact component={Auth(Cart, true)} /> */}
       <Auth path="/user/edit" exact component={EditUser} />
+      <Auth path="/user/profile" exact component={ProfilePage} />
       <Auth path="/user" exact component={UserPage} />
       <Route path="/tweets" exact component={TweetsPage} />
       <Route path="/model/:qrytype/:name/:id" exact component={ModelPage} />
-      ' '
+      <Route path="/modelpage" exct component={ModelPage} />
       <Route path="/" exact component={HomePage} />
       <Route
         render={() => (

@@ -27,7 +27,6 @@ const EditTweetForm = ({ item }) => {
     //setEdited({ text: item.text, tag: item.tag });
     // setTweet(item.text);
     // setCategory(item.tag);
-    console.log(edited);
   });
 
   const validData = () => {
@@ -88,14 +87,16 @@ const EditTweetForm = ({ item }) => {
 
   return (
     <div className="add-tweet">
-      <Link to={`/tweets/${item._id}/view`}>
-        <FontAwesomeIcon
-          icon={faLongArrowAltLeft}
-          size="lg"
-          style={{ color: "blue" }}
-        />
-      </Link>
-
+      <h3>
+        <Link to={`/tweets/${item._id}/view`}>
+          <FontAwesomeIcon
+            icon={faLongArrowAltLeft}
+            size="lg"
+            style={{ color: "blue" }}
+          />
+        </Link>
+        Edit Tweet
+      </h3>
       {edited ? (
         <span>
           <div className="form-group">

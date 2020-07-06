@@ -15,7 +15,7 @@ const SignupPage = () => {
   const [lastname, setLastname] = useState("");
   const [errors, setErrors] = useState([]);
   const [redirect, setRedirect] = useState(false);
-  const [dispatch] = useContext(UserContext);
+  //const [dispatch] = useContext(UserContext);
   //const RegisterUser = () => {};
   const [images, setImages] = useState([]);
   const [formSuccess, setFormSucess] = useState(false);

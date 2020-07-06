@@ -32,23 +32,24 @@ export default function TweetListing({ uid }) {
 
   //if (state.tweets) console.log(state.tweets);
 
-
   return (
-    <div className="tweets-wrapper">
-    {error ? <div className="has-error">{error}</div> : null}
-      {state.tweets &&
-      state.tweets.articles &&
-      state.tweets.articles.length > 0 ? (
-        state.tweets.articles.map((tweet) => (
-          <TweetItem key={tweet._id} tweet={tweet} />
-        ))
-      ) : (
-        <p>
-          {!uid
-            ? "Bummer! There are no current tweets. Check back later or make some of your own"
-            : "Snap! You have no current tweets. Add your tweet soon"}
-        </p>
-      )}
+    <div className="content-wrapper border-top">
+      <div className="tweets-wrapper">
+        {error ? <div className="has-error">{error}</div> : null}
+        {state.tweets &&
+        state.tweets.articles &&
+        state.tweets.articles.length > 0 ? (
+          state.tweets.articles.map((tweet) => (
+            <TweetItem key={tweet._id} tweet={tweet} />
+          ))
+        ) : (
+          <p>
+            {!uid
+              ? "Bummer! There are no current tweets. Check back later or make some of your own"
+              : "Snap! You have no current tweets. Add your tweet soon"}
+          </p>
+        )}
+      </div>
     </div>
   );
 }

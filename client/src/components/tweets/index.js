@@ -18,7 +18,6 @@ export default function TweetsPage() {
   const { user, isloggedin } = useContext(UserContext);
 
   useEffect(() => {
-    console.log("TweetsPage user:", user, isloggedin);
     //  const setAuthUser = async (token) => {
     //     const response = await axios.post("/users/id", { id: token.id });
     //     dispatch({
@@ -34,16 +33,18 @@ export default function TweetsPage() {
 
   if (error) return <Redirect to="/auth/signin" />;
   // if (state.user) console.log(state.user[0]);
+  if (!isloggedin) return <Redirect to={"/"} />;
   return (
     <div className="page-wrapper">
       <div className="row">
-        <div className="col-lg-3 col-md-2  col-sm-3 col-xs-3 Lsidebar">
+        <div className="col-lg-2 col-md-2  col-sm-3 col-xs-3 Lsidebar">
           <UserCard />
         </div>
-        <div className="col-lg-6 col-md-7 col-sm-8 col-xs-9 content">
-          <h4>
-            <strong>Home</strong>
-          </h4>
+        <div className="col-lg-7 col-md-7 col-sm-8 col-xs-9 content">
+          <div className="content-wrapper">
+            <h3>Home</h3>
+          </div>
+
           <div className="add-tweet-panel">
             {/* {state.user && state.user[0] ? (
             <AddTweet

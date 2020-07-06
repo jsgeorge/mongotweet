@@ -58,41 +58,41 @@ export default function TweetQuery({ match }) {
         console.log(err);
         setError("Cannot retrieve the selected tweets");
       }
-      
     };
     fetchData();
-   
   }, [dispatch]);
 
-
   return (
-    <div className="row">
-      <div className="col-lg-3 col-md-2  col-sm-3 col-xs-3 Lsidebar">
-        <UserCard />
-      </div>
-      <div className="col-lg-6 col-md-7 col-sm-8 col-xs-9 content">
-        <div>
-          <Link to="/tweets">
-            <FontAwesomeIcon
-              icon={faLongArrowAltLeft}
-              size="lg"
-              style={{ color: "blue" }}
-            />
-          </Link>
+    <div clssName="page-wraper">
+      <div className="row">
+        <div className="col-lg-3 col-md-2  col-sm-3 col-xs-3 Lsidebar">
+          <UserCard />
         </div>
-        <div className="tweets-wrapper">
-
-          {state.tweets && state.tweets.articles && state.tweets.articles.length > 0 ? (
-            state.tweets.articles.map((tweet) => (
-              <TweetItem key={tweet._id} tweet={tweet} />
-            ))
-          ) : (
-            <p>Sorry, No current tweets for the selected criteria</p>
-          )}
+        <div className="col-lg-6 col-md-7 col-sm-8 col-xs-9 content">
+          <div>
+            <Link to="/tweets">
+              <FontAwesomeIcon
+                icon={faLongArrowAltLeft}
+                size="lg"
+                style={{ color: "blue" }}
+              />
+            </Link>
+          </div>
+          <div className="tweets-wrapper">
+            {state.tweets &&
+            state.tweets.articles &&
+            state.tweets.articles.length > 0 ? (
+              state.tweets.articles.map((tweet) => (
+                <TweetItem key={tweet._id} tweet={tweet} />
+              ))
+            ) : (
+              <p>Sorry, No current tweets for the selected criteria</p>
+            )}
+          </div>
         </div>
-      </div>
-      <div className="col-lg-3 col-md-3 col-sm-2 col-xs-4 Rsidebar">
-        <Categories />
+        <div className="col-lg-3 col-md-3 col-sm-2 col-xs-4 Rsidebar">
+          <Categories />
+        </div>
       </div>
     </div>
   );

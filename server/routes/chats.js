@@ -13,10 +13,8 @@ router.get("/", (req, res) => {
 });
 
 router.post("/view", (req, res) => {
-  console.log("chats/view");
   let findArgs = {};
   if (req.body.filters) {
-    console.log(req.body.filters[0]);
     //findArgs = req.body.filters[0];
     if (req.body.filters[0].text)
       findArgs = { text: { $regex: "/*" + req.body.filters[0].text + "/*" } };
@@ -26,7 +24,7 @@ router.post("/view", (req, res) => {
   let order = "desc";
   let sortBy = "createdAt";
   let limit = 1000;
-  
+
   Chat.find(findArgs)
     .sort([["createdAt", "desc"]])
     .limit(limit)
@@ -40,15 +38,15 @@ router.post("/view", (req, res) => {
     });
 });
 
-router.post("/article", (req, res) => {
+router.post("/article", auth, (req, res) => {
   let newChat = {
-    author: req.body.author,
+    author: req.userid,
     avatar: req.body.avatar,
     text: req.body.text,
     tag: req.body.category,
     images: req.body.images,
-    comments:[],
-    likes:0
+    comments: [],
+    likes: 0,
   };
   console.log(newChat);
   const chat = new Chat(newChat);
@@ -71,11 +69,11 @@ router.post("/article", (req, res) => {
   });
 });
 
-router.post("/comment", (req, res) => {
+router.post("/comment", auth, (req, res) => {
   console.log(req.body);
   const text = req.body.text;
   const user = req.body.user;
-  const uid = req.body.uid;
+  const uid = req.userid;
   Chat.findOneAndUpdate(
     { _id: req.query.id },
     { $push: { comments: { uid: uid, user: user, text: text } } },
@@ -165,7 +163,7 @@ router.get("/article", (req, res) => {
     });
 });
 
-router.post("/like", (req, res) => {
+router.post("/like", auth, (req, res) => {
   Chat.findOneAndUpdate(
     { _id: req.query.id },
     { $inc: { likes: 1 } },
@@ -173,7 +171,7 @@ router.post("/like", (req, res) => {
     (err, doc) => {
       if (err) return res.json({ editSuccess: false, err });
       User.findOneAndUpdate(
-        { _id: req.query.uid },
+        { _id: req.userid },
         { $push: { likes: { id: mongoose.Types.ObjectId(req.query.id) } } },
         { new: true },
         (err, doc) => {
@@ -186,9 +184,6 @@ router.post("/like", (req, res) => {
 });
 
 router.post("/dislike", (req, res) => {
-  console.log("/chat/dislike");
-  console.log("chatid", req.query.id);
-  console.log("userid", req.query.uid);
   Chat.findOneAndUpdate(
     { _id: req.query.id },
     { $inc: { likes: -1 } },
@@ -200,7 +195,7 @@ router.post("/dislike", (req, res) => {
       }
       console.log("decrimented chat likes");
       User.findOneAndUpdate(
-        { _id: req.query.uid },
+        { _id: req.userid },
         { $pull: { likes: { id: mongoose.Types.ObjectId(req.query.id) } } },
         { new: true },
         (err, doc) => {
@@ -218,7 +213,7 @@ router.post("/dislike", (req, res) => {
   );
 });
 
-router.post("/update", (req, res) => {
+router.post("/update", auth, (req, res) => {
   console.log(req.body);
   Chat.findOneAndUpdate(
     { _id: req.query.id },
@@ -234,7 +229,7 @@ router.post("/update", (req, res) => {
     }
   );
 });
-router.delete("/", (req, res) => {
+router.delete("/", auth, (req, res) => {
   Chat.findOneAndDelete({ _id: req.query.id }, (err, doc) => {
     if (err) return res.json({ editSuccess: false, err });
 

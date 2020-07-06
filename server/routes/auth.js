@@ -19,17 +19,15 @@ router.get("/", auth, (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  console.log(req.body);
-
   User.findOne({ email: req.body.email }, (err, user) => {
-    if (!user){
-      console.log("Wrong email. user not found")
+    if (!user) {
+      console.log("Wrong email. user not found");
       return res.json({
         loginSuccess: false,
         message: "Login failed, email not found",
       });
     }
-    
+
     user.comparePassword(req.body.password, (err, isMatch) => {
       if (!isMatch) {
         console.log("wrong password");
@@ -38,7 +36,6 @@ router.post("/", (req, res) => {
           message: "Login failed. Wrong password",
         });
       }
-      console.log("login successful");
       // res.status(200).json({
       //   loginSuccess: true
       // });

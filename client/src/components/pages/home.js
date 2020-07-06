@@ -8,20 +8,7 @@ import { UserContext } from "../../context/user-context";
 export default function HomePage() {
   //const [state, dispatch] = useContext(UserContext);
   const { user, setuser, isloggedin } = useContext(UserContext);
-  useEffect(() => {
-    //console.log('HomePage user:', state.user[0]);
-    //   const setAuthUser = async (token) => {
-    //   const response = await axios.post("/users/id", { id: token.id });
-    //   dispatch({
-    //       type: "SET_USER",
-    //       payload: response.data,
-    //   });
-    //   };
-    //   if (localStorage.jwtToken){
-    //       console.log('User is authenticted')
-    //       setAuthUser(jwtDecode(localStorage.getItem("jwtToken")));
-    //   }
-  }, []);
+  useEffect(() => {}, []);
 
   // if (localStorage.jwtToken || user) return <Redirect to="/tweets" />;
   if (isloggedin) return <Redirect to="/tweets" />;

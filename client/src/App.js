@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./App.css";
 import Routes from "./routes";
 import { BrowserRouter } from "react-router-dom";
@@ -14,21 +14,21 @@ function App() {
   const [isloggedin, setisloggedin] = useState(false);
   const [user, setuser] = useState({});
 
-  useEffect(() =>{
+  useEffect(() => {
     const setAuthUser = async (token) => {
-        const response = await axios.post("/users/id", { id: token.id });
-        setuser(response.data.user);
-      };
+      const response = await axios.post("/users/id", { id: token.id });
+      setuser(response.data.user);
+    };
 
-    if (localStorage.jwtToken){
-      console.log('User is authenticted')
+    if (localStorage.jwtToken) {
+      console.log("User is authenticted");
       setisloggedin(true);
       setAuthUser(jwtDecode(localStorage.getItem("jwtToken")));
     }
-  },[])
+  }, []);
 
   return (
-    <UserContext.Provider value={{isloggedin, setisloggedin, user, setuser}}>
+    <UserContext.Provider value={{ isloggedin, setisloggedin, user, setuser }}>
       <CategoryContextProvider>
         <TweetContextProvider>
           <BrowserRouter>

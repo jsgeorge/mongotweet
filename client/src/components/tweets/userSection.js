@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../../context/user-context";
- import jwtDecode from "jwt-decode";
+import jwtDecode from "jwt-decode";
 
 //import jwtDecode from "jwt-decode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,14 +13,13 @@ import NewCommentForm from "./comment";
 
 const UserCommands = ({ id, author }) => {
   //const [state, dispatch] = useContext(UserContext);
-  const {user, setuser} = useContext(UserContext)
+  const { user, setuser } = useContext(UserContext);
   const [setError] = useState("");
   //const [user, setuser] = useState({});
   const [userlikes, setuserlikes] = useState([{}]);
   const [displayname, setdisplayname] = useState("");
- 
+
   useEffect(() => {
-     console.log('TweetDetail UserSection user:', user);
     //  const setAuthUser = async (token) => {
     // const response = await axios.post("/users/id", { id: token.id });
     // dispatch({
@@ -31,7 +30,7 @@ const UserCommands = ({ id, author }) => {
     // if (localStorage.jwtToken){
     //     console.log('User is authenticted')
     //     setAuthUser(jwtDecode(localStorage.getItem("jwtToken")));
-    // }   
+    // }
     // //if (state.user && state.user[0]) {
     //   setuser(state.user[0].user);
     //   setuserlikes(state.user[0].user.likes);
@@ -42,14 +41,13 @@ const UserCommands = ({ id, author }) => {
     //       state.user[0].user.name + " " + state.user[0].user.lastname
     //     );
     //   }
-    if(user){
+    if (user) {
       setuserlikes(user.likes);
-      if(user.username){
+      if (user.username) {
         setdisplayname(user.username);
-      }else{
+      } else {
         setdisplayname(user.name + " " + user.lastname);
       }
-    
     }
   }, []);
   return (
@@ -58,14 +56,14 @@ const UserCommands = ({ id, author }) => {
         <div className="tweet-user-section">
           <div className="tweet-user-buttons">
             <div className="button_wrap">
-              <LikeTweetButton id={id} uid={user._id} userlikes={userlikes} />
+              <LikeTweetButton id={id} userlikes={userlikes} />
             </div>
 
             {/* <div className="button_wrap">
               <FavoriteButton id={id} uid={state.user[0].user._id} />
             </div> */}
           </div>
-         
+
           <NewCommentForm id={id} user={user} />
         </div>
       ) : null}

@@ -19,6 +19,9 @@ button {
 .container {
   min-width: 220px;
 }
+.card-user {
+  padding-top: 20px;
+}
 nav .navbar {
 }
 .navbar-header {
@@ -27,8 +30,8 @@ nav .navbar {
   padding: 0;
 }
 .logo {
-  width:200px;
-  height:40px;
+  width: 200px;
+  height: 40px;
   background: url(./images/logo.jpeg) no-repeat;
 }
 .mobile-search {
@@ -65,7 +68,7 @@ nav .navbar {
 }
 .navbar-right a {
   margin-right: 20px;
-  margin-top:5px;
+  margin-top: 5px;
   float: left;
   width: 100px;
   margin-right: 40px;
@@ -78,9 +81,17 @@ nav .navbar {
   background: #fff;
 }
 .content {
-  padding-top: 20px;
-  border-left: 1px solid rgb(174, 174, 245);
+  border-left: 15px solid rgb(192, 192, 240);
   border-right: 1px solid rgb(183, 183, 240);
+  min-height: 200px;
+  padding: 20px 0;
+}
+.backlink {
+  display: block;
+  padding: 10px 0 20px 0;
+}
+.content-wrapper {
+  padding: 0 20px;
 }
 .Rsidebar {
   padding-top: 20px;
@@ -141,7 +152,7 @@ button,
 .add-tweet input,
 .add-tweet textarea,
 .add-comment input {
-  border:none;
+  border: none;
 }
 /*file upload */
 .file_upload_wrapper {
@@ -167,12 +178,14 @@ textarea {
   background: #fff;
   border-bottom: 1px solid #ccc;
 }
+.border-top {
+  border-top: 10px solid rgb(219, 219, 219);
+}
 .card_item_wrapper:first-child {
-  border-top: 14px solid #ccc;
+  /* border-top: 14px solid #ccc; */
 }
 .card_item_wrapper .card-text {
   padding: 0;
-  
 }
 .image {
   width: 100%;
@@ -183,39 +196,42 @@ textarea {
   margin-top: 5px;
 }
 .avatar-wrapper {
-  float:left;
-  width:20px;
-  height:20px;
-  margin-right:5px;
- 
+  float: left;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
 }
-.tweet-item-wrapper{
- 
-  float:left;
-  width:90%;
-  height:20px;
-
-  
+.tweet-item-wrapper {
+  float: left;
+  width: 90%;
+  height: 20px;
+  margin-top: 5px;
 }
-.user-page{
+.user-page {
   padding: 0 25px;
 }
 .avatar {
-  width: 22px;
-  height: 20px;
+  width: 34px;
+  height: 30px;
   background-position: center !important;
   background-size: cover !important;
   margin: 0 10px 10px 0;
   border-radius: 100px;
   float: left;
+  border: 1px solid #aaa;
+}
+#avt-head {
+  margin-top: 5px;
+  width: 22px;
+  height: 20px;
 }
 #avt-lg {
   width: 60px;
   height: 60px;
 }
 #avt-sm {
-  width: 22px;
-  height: 20px;
+  width: 26px;
+  height: 26px;
 }
 
 .tweets-wrapper {
@@ -369,17 +385,20 @@ ul li {
 .desktop-categories {
   display: block;
 }
-.chat-text {
+a.chat-text {
   font-size: 18px;
-  padding:0;
-  margin:0;
-  
+  padding: 0;
+  margin: 0;
+  clear: left;
+  display: block;
+  width: 100%;
+  padding: 10px 0 0 0;
 }
 .chat-text-det {
   font-size: 22px;
-  padding:0;
-  margin:0;
-  
+  padding: 0;
+  margin: 0;
+  clear: left;
 }
 .usertweets {
   margin-top: 30px;
@@ -408,6 +427,7 @@ ul li {
 }
 a.tag-link {
   color: rgb(6, 77, 170);
+  margin-left: 15px;
 }
 .like_link {
 }
@@ -422,7 +442,7 @@ a.tag-link {
   margin: 0 20px;
 }
 .desktop-categories {
-  padding-top: 20px;
+  padding: 20px;
 }
 .category-card ul li {
   font-size: 20px;
@@ -434,9 +454,15 @@ a.tag-link {
 .user-card {
   padding-top: 20px;
 }
-.userlinks li a {
+.userlinks li a,
+.userlinks li a:visited,
+.userlinks li a:hover,
+.userlinks li a:active,
+.card-user .username {
   font-size: 20px;
   font-weight: bold;
+  color: #111;
+  text-decoration: none;
 }
 .form {
   padding: 0 30px;
@@ -472,7 +498,12 @@ a.tag-link {
   height: 25px;
   display: block;
 }
-
+.mobile {
+  display: none;
+}
+.desk {
+  display: block;
+}
 @media (min-width: 991px) and (max-width: 1000px) {
   .desktop-search {
     width: 300px;
@@ -480,8 +511,16 @@ a.tag-link {
   .card_item_wrapper {
     width: 90%;
   }
+  .mobile {
+    display: none;
+  }
+  .desk {
+    display: block;
+  }
 }
 @media (min-width: 771px) and (max-width: 990px) {
+  .header {
+  }
   .navbar-header {
     width: 200px;
   }
@@ -496,11 +535,10 @@ a.tag-link {
     display: block;
   }
   .Rsidebar {
-    display:none;
+    display: none;
   }
-  .content{
-   border-right:none;
-    
+  .content {
+    border-right: none;
   }
   .desktop-categories {
     display: block;
@@ -515,9 +553,15 @@ a.tag-link {
     width: 90%;
   }
   .btnWide {
-  width: 100px;
-  margin-bottom: 10px;
-}
+    width: 100px;
+    margin-bottom: 10px;
+  }
+  .mobile {
+    display: none;
+  }
+  .desk {
+    display: block;
+  }
 }
 /*@media (min-width: 581px) and (max-width: 770px) {
   .container {
@@ -558,12 +602,12 @@ a.tag-link {
   .header {
     margin: 0;
     padding: 0;
-    position:fixed;
-    top:0;
-    left:0;
-    z-index:999;
-    width:100%;
-    background:#fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    background: #fff;
   }
   .header .container {
     width: 95%;
@@ -601,8 +645,7 @@ a.tag-link {
   .page-wrapper {
     margin: 0;
     padding: 0;
-    margin-top:10px;
-    
+    margin-top: 25px;
   }
   .tweet-wrapper {
     margin: 0;
@@ -611,7 +654,7 @@ a.tag-link {
   .tweets-wrapper {
     margin: 0;
     padding: 0;
-    clear:left;
+    clear: left;
   }
   .row {
     margin: 0;
@@ -620,21 +663,21 @@ a.tag-link {
   .Lsidebar {
     display: block;
   }
-  .Rsidebar{
-   display:none;
-  } 
- .desktop-categories {
+  .Rsidebar {
     display: none;
-  
+  }
+  .desktop-categories {
+    display: none;
   }
   .btnWide {
-  width: 100px;
-  margin-bottom: 10px;
-}
+    width: 100px;
+    margin-bottom: 10px;
+  }
   .content {
     margin: 0;
     padding: 0;
-  
+    padding-top: 20px;
+    padding-left: 15px;
   }
 
   .card_item_wrapper {
@@ -647,21 +690,19 @@ a.tag-link {
   .card_item_wrapper:first-child {
     border-top: none;
   }
-    
-  
-.card_item_wrapper .card-text {
-    padding: 0 15px;
-    font-size:14px;
-   
+
+  .card_item_wrapper .card-text {
+    padding: 0 5px;
+    font-size: 14px;
   }
   .card_item_wrapper .image {
     width: 100%;
   }
   .card_item_wrapper .chat-text {
-    font-size: 16px;
-    clear:left;
-    display:block;
-    padding-top:5px;
+    font-size: 18px;
+    clear: left;
+    display: block;
+    padding-top: 5px;
   }
   .card_item_wrapper .actions {
     width: 100%;
@@ -697,6 +738,14 @@ a.tag-link {
   .user-wrapper {
     padding-top: 0px;
   }
+  .back-link {
+    float: left;
+    margin-right: 10px;
+  }
+  .back-link2 {
+    float: left;
+    margin: 10px 0;
+  }
   .mobile-search input {
     width: 90%;
     background: #eee;
@@ -723,49 +772,73 @@ a.tag-link {
   .wrap {
     width: 200px;
   }
-  ul.category-nav li{
-    width:100%;
-    margin:0;
-    margin-bottom:5px;
-    
+  ul.category-nav li {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 5px;
   }
-  ul.category-nav li a{
-    font-size:15px;
-    margin:0;
+  ul.category-nav li a {
+    font-size: 15px;
+    margin: 0;
   }
-  
+  .mobile {
+    display: none;
+  }
+  .desk {
+    display: block;
+  }
 }
 
-@media  (max-width:500px){
-  .page-wrapper{
-    margin-top:30px;
+@media (max-width: 500px) {
+  .page-wrapper {
+    margin-top: 30px;
   }
-  ul.category-nav{
-    width:90%;
-    margin-left:15px;
+  .content-wrapper {
+    padding: 0;
+    margin: 0;
+    width: 100%;
   }
-  ul.category-nav li{
-    width:100%;
-    margin:0;
-    margin-bottom:5px;
-    
+  .content h3 {
+    margin-left: 15px;
   }
-  ul.category-nav li a{
-    font-size:15px;
-    margin:0;
+  ul.category-nav {
+    width: 90%;
+    margin-left: 15px;
   }
-  .content{
-    border:none;
-    width:100%;
-    padding-top:0;
+  ul.category-nav li {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 5px;
   }
-  .Lsidebar{
-    display:none;
+  ul.category-nav li a {
+    font-size: 15px;
+    margin: 0;
   }
-  .Rsidebar{
-    display:none;
+  .content {
+    border: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  .card-text {
+    margin-left: 10px;
+  }
+  a.chat-text {
+    font-size: 18px;
+  }
+  .Lsidebar {
+    display: none;
+  }
+  .Rsidebar {
+    display: none;
   }
   .desktop-categories {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
+  .desk {
     display: none;
   }
 }
