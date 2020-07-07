@@ -67,12 +67,12 @@ const UserCard = () => {
         </span>
       ) : (
         <span>
-          <Link className="btn btn-primary btnWide" to="/auth/signin">
+          <Link className="btn btn-primary btnMed" to="/auth/signin">
             Signin
           </Link>{" "}
           <br />
           <Link
-            className="btn btn-default btnDefault btnWide"
+            className="btn btn-default btnDefault btnMed"
             to="/auth/signup"
           >
             Signup

@@ -135,24 +135,29 @@ button,
   text-align: center;
   margin-bottom: 100px;
 }
-.add-tweet-panel {
+/* .add-tweet-panel {
   font-size: 20px;
-}
+} */
 .add-tweet {
-  padding: 20px 0;
-
+  padding: 0;
+  width:90%;
   height: 280px;
-  background: #fff;
+ 
+  float:left;
 }
 .add-tweet-full {
-  padding: 20px 0;
+  padding:  0;
   border-bottom: 14px solid #ccc;
   height: 580px;
+}
+.input-tweet{
+  width:80%%;
 }
 .add-tweet input,
 .add-tweet textarea,
 .add-comment input {
   border: none;
+
 }
 /*file upload */
 .file_upload_wrapper {
@@ -165,6 +170,9 @@ button,
 }
 textarea {
   font-size: 20px;
+}
+.card-text-det{
+  margin:0 15px;
 }
 
 .card_item_wrapper {
@@ -195,11 +203,21 @@ textarea {
   margin: 0;
   margin-top: 5px;
 }
+.card-text-det .image{
+  margin: 0 15px 10px 15px;
+}
 .avatar-wrapper {
   float: left;
   width: 20px;
   height: 20px;
   margin-right: 5px;
+}
+.avatar-wrapperL {
+  float: left;
+  width: 40px;
+  height: 60px;
+  margin-right: 5px;
+ 
 }
 .tweet-item-wrapper {
   float: left;
@@ -226,8 +244,8 @@ textarea {
   height: 20px;
 }
 #avt-lg {
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
 }
 #avt-sm {
   width: 26px;
@@ -332,8 +350,22 @@ textarea {
   clear: left;
   font-size: 14px;
   margin: 0;
+  border-top:1px solid #ccc;
+  padding-top:10px;
 }
-
+.add-comment {
+   border-top:1px solid #ccc;
+  padding-top:10px;
+}
+.add-comment textarea{
+  color:#111;
+  font-size:14px;
+  border:none;
+  width:80%
+}
+.add-comment button{
+  float:right;
+}
 .has-error {
   color: red;
 }
@@ -365,6 +397,8 @@ textarea {
 }
 .btnDefault {
   border: 1px solid rgb(6, 77, 170);
+  color:blue;
+  background:#fff;
 }
 .btnAddTweet {
   display: none;
@@ -839,6 +873,12 @@ a.tag-link {
     display: block;
   }
   .desk {
+    display: none;
+  }
+  .content-wrapper{
+    border:none;
+  }
+  .content-wrapper h3{
     display: none;
   }
 }

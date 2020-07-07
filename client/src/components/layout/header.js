@@ -45,7 +45,7 @@ const Header = () => {
             </div>
           ) : null}
           <div className="navbar-right">
-            {isloggedin ? (
+           
               <Link to="/tweets">
                 <FontAwesomeIcon
                   icon={faHome}
@@ -54,7 +54,7 @@ const Header = () => {
                 />{" "}
                 <span className="nav-link-lbl"> Home</span>
               </Link>
-            ) : null}
+          
             <Link to="/tweets/search" className="btnMobileSrch">
               <FontAwesomeIcon
                 icon={faSearch}

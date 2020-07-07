@@ -24,13 +24,13 @@ const TweetItem = ({ tweet }) => {
     <div className="card_item_wrapper">
         <div className="card-text">
             <div className="avatar-wrapper">
-                <Avatar images={avatar}/>
+                <Avatar images={avatar} />
             </div>
             <div className="tweet-item-wrapper">
                 <Link to={`/tweets/query/${tag}`} className="tag-link">
                   <strong>{tag ? tag : null}</strong>
-                </Link>
-                <AuthorDetail author={author} />{" "}
+                </Link> {"@"}
+                <AuthorDetail author={author} type="tweet"/>{" "}
                 <span className="chat-date">{displayDate(createdAt)}</span>
             </div>
             {text ? (

@@ -51,13 +51,15 @@ router.post("/article", auth, (req, res) => {
   console.log(newChat);
   const chat = new Chat(newChat);
   chat.save((err, doc) => {
-    if (err) return res.json({ addSuccess: false, errmsg: err });
+    if (err) return res.status(401).json({ addSuccess: false, message: err });
     let tag = req.body.category;
     Category.find({ name: tag }, (err2, ctgry) => {
       if (err2 || ctgry.length === 0) {
         const category = new Category({ name: tag });
         category.save((err, doc2) => {
-          if (err) console.log("Error in adding category");
+          if (err) {
+            console.log("Error in adding category");
+          } 
         });
       }
     });
@@ -79,7 +81,7 @@ router.post("/comment", auth, (req, res) => {
     { $push: { comments: { uid: uid, user: user, text: text } } },
     { new: true },
     (err, doc) => {
-      if (err) return res.json({ success: false, err });
+      if (err) return res.status(401).json({ editsuccess: false, message: err });
       res.status(200).json({
         editSuccess: true,
       });
@@ -169,13 +171,13 @@ router.post("/like", auth, (req, res) => {
     { $inc: { likes: 1 } },
     { new: true },
     (err, doc) => {
-      if (err) return res.json({ editSuccess: false, err });
+      if (err) return res.status(401).json({ editSuccess: false, message: err });
       User.findOneAndUpdate(
         { _id: req.userid },
         { $push: { likes: { id: mongoose.Types.ObjectId(req.query.id) } } },
         { new: true },
         (err, doc) => {
-          if (err) return res.json({ success: false, err });
+          if (err) return res.status(401).json({ editsuccess: false, message: err });
           res.status(200).json({ editSuccess: true });
         }
       );
@@ -183,15 +185,15 @@ router.post("/like", auth, (req, res) => {
   );
 });
 
-router.post("/dislike", (req, res) => {
+router.post("/dislike", auth, (req, res) => {
   Chat.findOneAndUpdate(
     { _id: req.query.id },
     { $inc: { likes: -1 } },
     { new: true },
     (err, doc) => {
       if (err) {
-        console.log("chat error", err);
-        return res.json({ editSuccess: false, err });
+        console.log("chat update error", err);
+        return res.status(401).json({ editSuccess: false, message: err });
       }
       console.log("decrimented chat likes");
       User.findOneAndUpdate(
@@ -201,7 +203,7 @@ router.post("/dislike", (req, res) => {
         (err, doc) => {
           if (err) {
             console.log("user error", err);
-            return res.json({ success: false, err });
+            return res.status(401).json({ editSuccess: false, message: err });
           }
           console.log("decrimented user likes");
           res.status(200).json({
@@ -220,8 +222,8 @@ router.post("/update", auth, (req, res) => {
     { $set: req.body },
     { new: true },
     (err, doc) => {
-      if (err) return res.json({ editSuccess: false, err });
-      console.log(doc);
+      if (err) return res.status(401).json({ editSuccess: false, message: err });
+     
       res.status(200).json({
         tweet: doc,
         editSuccess: true,
@@ -231,7 +233,7 @@ router.post("/update", auth, (req, res) => {
 });
 router.delete("/", auth, (req, res) => {
   Chat.findOneAndDelete({ _id: req.query.id }, (err, doc) => {
-    if (err) return res.json({ editSuccess: false, err });
+    if (err) return res.status(401).json({ editSuccess: false, message: err });
 
     User.find({}, (err, users) => {
       users.map((u) => {
@@ -246,7 +248,7 @@ router.delete("/", auth, (req, res) => {
               (err, doc) => {
                 if (err) {
                   console.log("user error", err);
-                  return res.json({ success: false, err });
+                  return res.status(401).json({ editSuccess: false, message: err });
                 }
                 console.log("decrimented user likes");
                 res.status(200).json({

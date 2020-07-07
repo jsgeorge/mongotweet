@@ -33,7 +33,7 @@ export default function TweetsPage() {
 
   if (error) return <Redirect to="/auth/signin" />;
   // if (state.user) console.log(state.user[0]);
-  if (!isloggedin) return <Redirect to={"/"} />;
+  // if (!isloggedin) return <Redirect to={"/"} />;
   return (
     <div className="page-wrapper">
       <div className="row">
@@ -53,7 +53,7 @@ export default function TweetsPage() {
             />
           ) : null} */}
             {isloggedin && user ? (
-              <AddTweet type="desktop" user={user} />
+              <AddTweet  user={user} type="desktop"/>
             ) : null}
           </div>
           <TweetListing />

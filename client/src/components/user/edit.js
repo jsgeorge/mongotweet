@@ -71,7 +71,7 @@ const EditUser = () => {
     if (validData()) {
       console.log("edited user", edited);
       try {
-        const response = await axios.patch(`/users?uid=${uid}`, edited);
+        const response = await axios.patch(`/users`, edited);
         if (!response.data.editSuccess) {
           console.log("Error in updating user", response.data.message);
           setErrors({
@@ -82,7 +82,7 @@ const EditUser = () => {
         }
       } catch (err) {
         setErrors({
-          form: "Error in createing user.Unknown or network error",
+          form: "Error in updating user. Unknown or network error",
         });
       }
     }

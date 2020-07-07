@@ -23,9 +23,9 @@ export default function TweetListing({ uid }) {
           payload: response.data,
         });
       } catch (err) {
-        console.log(err);
-        setError("Cannot retrieve the selected tweets. Network error");
-      }
+      //   console.log(err);
+      //   setError("Cannot retrieve the selected tweets. Network error");
+       }
     };
     fetchData();
   }, [dispatch]);
@@ -43,11 +43,11 @@ export default function TweetListing({ uid }) {
             <TweetItem key={tweet._id} tweet={tweet} />
           ))
         ) : (
-          <p>
+          <div className="card-text">
             {!uid
               ? "Bummer! There are no current tweets. Check back later or make some of your own"
               : "Snap! You have no current tweets. Add your tweet soon"}
-          </p>
+          </div>
         )}
       </div>
     </div>

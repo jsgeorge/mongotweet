@@ -7,7 +7,7 @@ let auth = (req, res, next) => {
     //let token = req.localStorage.jwtToken;
     const authorizationHeader = req.headers["authorization"];
     let token;
-
+     console.log("authorizationHeader", authorizationHeader);
     if (authorizationHeader) {
       token = authorizationHeader.split(" ")[1];
     }

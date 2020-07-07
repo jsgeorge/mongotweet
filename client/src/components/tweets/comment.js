@@ -95,19 +95,17 @@ const NewCommentForm = ({ id, user }) => {
         </div>
  */}{" "}
       <div className="row">
-        <div className="col-md-1" style={{ background: "#ccc" }}>
-          <div className="avatar-wrapper">
+        <div className="col-md-1">
             <Avatar images={user.images} size="avt-sm" />
-          </div>
         </div>
-        <div className="col-md-11">
+        <div className="col-md-10" >
           <div className={classnames("form-group", { "has-error": errors })}>
             {errors.comment && (
               <span className="help-block">{errors.comment}</span>
             )}
 
-            <input
-              className="form-control"
+            <textarea
+              rows={3}
               value={comment}
               placeholder="Add you comment"
               onChange={(e) => setComment(e.target.value)}
@@ -118,7 +116,7 @@ const NewCommentForm = ({ id, user }) => {
             className="btn btn-primary"
             onClick={() => onSubmit()}
           >
-            GO
+            submit
           </button>
 
           {/* {formSuccess ? (

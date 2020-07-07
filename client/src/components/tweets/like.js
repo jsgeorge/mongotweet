@@ -23,7 +23,7 @@ const LikeTweetButton = ({ id, uid, userlikes }) => {
       <FontAwesomeIcon
         icon={faStar}
         style={{ marginLeft: "4px" }}
-        className="primary"
+        className="primary-clr"
       />
     ) : (
       <FontAwesomeIcon
@@ -69,14 +69,16 @@ const LikeTweetButton = ({ id, uid, userlikes }) => {
   };
 
   return (
+    <span>
     <button
       className="like_link"
       onClick={() => {
         handlechatLike();
       }}
     >
-      {handleStar()} Like
-    </button>
+      {handleStar()}
+    </button> Like
+    </span>
   );
 };
 

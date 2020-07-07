@@ -25,13 +25,6 @@ const SignupPage = () => {
     setErrors({});
     let errs = {};
 
-    if (!username) {
-      errs.username = "Inalid/Missing username";
-    }
-    if (!password) {
-      errs.password = "Invalid/Missing password";
-    }
-
     if (!name) {
       errs.name = "Invalid/Missing first name";
     }
@@ -41,7 +34,11 @@ const SignupPage = () => {
     if (!email) {
       errs.email = "Invalid/Missing email";
     }
-    if (!username || !password || !email || !name || !lastname) {
+    if (!password) {
+      errs.password = "Invalid/Missing password";
+    }
+   
+    if ( !password || !email || !name || !lastname) {
       setErrors(errs);
       return false;
     } else {

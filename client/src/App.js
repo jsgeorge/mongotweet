@@ -9,6 +9,7 @@ import { TweetContextProvider } from "./context/tweet-context";
 import { CategoryContextProvider } from "./context/category-context";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
+import setAuthorizationToken from "./utils/setAuthToken";
 
 function App() {
   const [isloggedin, setisloggedin] = useState(false);
@@ -23,7 +24,8 @@ function App() {
     if (localStorage.jwtToken) {
       console.log("User is authenticted");
       setisloggedin(true);
-      setAuthUser(jwtDecode(localStorage.getItem("jwtToken")));
+      setAuthUser(jwtDecode(localStorage.jwtToken))
+      setAuthorizationToken(localStorage.jwtToken);
     }
   }, []);
 

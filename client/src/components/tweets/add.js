@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //import { faHashtag } from "@fortawesome/react-fontawesome";
 import Avatar from "../user/avatar";
 
-const AddTweet = ({ type, user }) => {
+const AddTweet = ({  user, type }) => {
   const [mode] = useState(type);
   //const { user, setuser } = useContext(UserContext);
   const [errors, setErrors] = useState({});
@@ -23,7 +23,7 @@ const AddTweet = ({ type, user }) => {
   const [redirectDesk, setRedirectDesk] = useState(false);
   const [uploadedImages, setUploadedImages] = useState([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => { console.log(user)}, [user]);
 
   const validData = () => {
     let errs = {};
@@ -97,23 +97,22 @@ const AddTweet = ({ type, user }) => {
   const onSubmit = async () => {
     await addTweet();
   };
-
+  if (!user) return <Redirect to="/" />;;
   if (redirect) {
     return <Redirect to="/tweets" />;
   }
   if (redirectDesk) {
     return <Redirect to="/" />;
   }
-  const placeholder = `What is on you mind`;
+  const placeholder = `What is on you mind ${user.name} ${user.lastname}`;
 
   return (
     <div className="content-wrapper">
       <div className="row">
-        {/* <div className="add-tweet"> */}
-        <div className="col-md-1" style={{ marginTop: "25px" }}>
-          <Avatar images={user.images} />
+        <div className="avatar-wrapperL">
+          <Avatar images={user.images} size="avt-lg"/>
         </div>
-        <div className="col-md-11">
+        <div className="col-md-9">
           <div
             className={classnames("add-tweet", {
               "add-tweet-full": images && images.length > 0,
@@ -129,7 +128,7 @@ const AddTweet = ({ type, user }) => {
               />
             </div>
 
-            <div className="form-group">
+           <div className="form-group">
               <input
                 type="text"
                 className="form-control"
@@ -169,7 +168,7 @@ const AddTweet = ({ type, user }) => {
                 Tweet
               </button>
             </div>
-          </div>
+          </div> 
         </div>
       </div>
     </div>

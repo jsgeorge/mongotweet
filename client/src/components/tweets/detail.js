@@ -111,7 +111,7 @@ export default function TweetDetail({ match }) {
             </Link>
             <Avatar images={avatar} />
             <strong>{tag ? tag : null}</strong>
-            {author ? <AuthorDetail author={author} /> : null}
+            {author ? <AuthorDetail author={author} type='tweet'/> : null}
             <span className="chat-date"> {displayDate(createdAt)}</span>
             <br />
             {text ? <span className="chat-text-det">{text}</span> : null}
@@ -126,7 +126,7 @@ export default function TweetDetail({ match }) {
             />
           ) : null}
 
-          <div className="card-text">
+          <div className="card-text-det">
             <UserEditCommands id={match.params.id} author={author} />
 
             <div className="actions">
@@ -139,11 +139,11 @@ export default function TweetDetail({ match }) {
             <div className="comments">
               {comments && comments.length > 0 ? (
                 <span>
-                  <h5>Comments</h5>
+                  
                   {comments.map((c) => (
-                    <p key={c.id}>
-                      <strong>{c.user}</strong> <br /> {c.text}
-                    </p>
+                    <span key={c.uid}>
+                      <strong><AuthorDetail author={c.uid} type="comment"/></strong> <br /> {c.text}
+                    </span>
                   ))}
                 </span>
               ) : (

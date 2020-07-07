@@ -30,6 +30,7 @@ router.get("/id", (req, res) => {
         username: user.username,
         lastname: user.lastname,
         name: user.name,
+        images: user.images
       };
       // console.log(
       //   uid,
@@ -41,7 +42,7 @@ router.get("/id", (req, res) => {
     });
   } else {
     console.log("Error in fetching user");
-    return res.status(301).json({ errors: { form: "zUser is undefined" } });
+    return res.status(301).json({ errors: { form: "User is undefined" } });
   }
 });
 router.post("/id", (req, res) => {
@@ -77,9 +78,7 @@ router.post("/id", (req, res) => {
 router.post("/", (req, res) => {
   User.findOne({ email: req.body.email }, function (err, existingUser) {
     if (existingUser) {
-      return res
-        .status(400)
-        .json({ regSuccess: false, message: "Email already in use" });
+      return res.status(401).json({ regSuccess: false, message: "Email already in use" });
     } else {
       let user = new User({
         email: req.body.email,
@@ -92,7 +91,7 @@ router.post("/", (req, res) => {
       });
       user.save((err, doc) => {
         if (err)
-          return res.json({
+          return res.status(401).json({
             regSuccess: false,
             message: "Unknown error",
           });
@@ -103,14 +102,14 @@ router.post("/", (req, res) => {
     }
   });
 });
-router.patch("/", (req, res) => {
+router.patch("/", auth, (req, res) => {
   console.log(req.body);
   User.findOneAndUpdate(
-    { _id: req.query.uid },
+    { _id: req.userid },
     { $set: req.body },
     { new: true },
     (err, doc) => {
-      if (err) return res.json({ editSuccess: false, message: err });
+      if (err) return res.status(401).json({ editSuccess: false, message: err });
       res.status(200).json({
         editSuccess: true,
       });
@@ -207,12 +206,12 @@ router.get("/list", (req, res) => {
   });
 });
 
-router.get("/logout", auth, (req, res) => {
-  User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, doc) => {
-    if (err) return res.json({ success: false, err });
-    return res.status(200).send({ success: true });
-  });
-});
+// router.get("/logout", auth, (req, res) => {
+//   User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, doc) => {
+//     if (err) return res.json({ success: false, err });
+//     return res.status(200).send({ success: true });
+//   });
+// });
 
 router.post("/uploadimage", formidable(), (req, res) => {
   cloudinary.uploader.upload(
