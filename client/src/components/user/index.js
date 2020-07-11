@@ -28,7 +28,7 @@ export default function UserPage() {
           <div className="user-page">
             <h5>
               {user.images.length > 0 ? (
-                <Avatar images={user.images} size="avt-sm" />
+                <Avatar images={user.images} size="avt-lg" />
               ) : null}
               {!user.username && user.name
                 ? user.name + " " + user.lastname
@@ -52,7 +52,13 @@ export default function UserPage() {
                   <Link to="/tweets/Fvorites/">Favorites</Link>
                 </li>
                 <li>
-                  <Link to="/tweets/following/">Following</Link>
+                  <Link to="/tweets/Messges/">Nofifications</Link>
+                </li>
+                <li>
+                  <Link to="/tweets/Fvorites/">Bookmarks</Link>
+                </li>
+                <li>
+                  <Link to="/users">Following</Link>
                 </li>
               </ul>
             </div>

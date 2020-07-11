@@ -41,7 +41,6 @@ router.post("/view", (req, res) => {
 router.post("/article", auth, (req, res) => {
   let newChat = {
     author: req.userid,
-    avatar: req.body.avatar,
     text: req.body.text,
     tag: req.body.category,
     images: req.body.images,
@@ -59,7 +58,7 @@ router.post("/article", auth, (req, res) => {
         category.save((err, doc2) => {
           if (err) {
             console.log("Error in adding category");
-          } 
+          }
         });
       }
     });
@@ -81,7 +80,8 @@ router.post("/comment", auth, (req, res) => {
     { $push: { comments: { uid: uid, user: user, text: text } } },
     { new: true },
     (err, doc) => {
-      if (err) return res.status(401).json({ editsuccess: false, message: err });
+      if (err)
+        return res.status(401).json({ editsuccess: false, message: err });
       res.status(200).json({
         editSuccess: true,
       });
@@ -171,13 +171,15 @@ router.post("/like", auth, (req, res) => {
     { $inc: { likes: 1 } },
     { new: true },
     (err, doc) => {
-      if (err) return res.status(401).json({ editSuccess: false, message: err });
+      if (err)
+        return res.status(401).json({ editSuccess: false, message: err });
       User.findOneAndUpdate(
         { _id: req.userid },
         { $push: { likes: { id: mongoose.Types.ObjectId(req.query.id) } } },
         { new: true },
         (err, doc) => {
-          if (err) return res.status(401).json({ editsuccess: false, message: err });
+          if (err)
+            return res.status(401).json({ editsuccess: false, message: err });
           res.status(200).json({ editSuccess: true });
         }
       );
@@ -222,8 +224,9 @@ router.post("/update", auth, (req, res) => {
     { $set: req.body },
     { new: true },
     (err, doc) => {
-      if (err) return res.status(401).json({ editSuccess: false, message: err });
-     
+      if (err)
+        return res.status(401).json({ editSuccess: false, message: err });
+
       res.status(200).json({
         tweet: doc,
         editSuccess: true,
@@ -248,7 +251,9 @@ router.delete("/", auth, (req, res) => {
               (err, doc) => {
                 if (err) {
                   console.log("user error", err);
-                  return res.status(401).json({ editSuccess: false, message: err });
+                  return res
+                    .status(401)
+                    .json({ editSuccess: false, message: err });
                 }
                 console.log("decrimented user likes");
                 res.status(200).json({

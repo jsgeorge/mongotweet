@@ -39,10 +39,16 @@ const UserCard = () => {
               <Link to="/tweets/Messges/">Messages</Link>
             </li>
             <li>
+              <Link to="/tweets/Messges/">Notifications</Link>
+            </li>
+            <li>
               <Link to="/tweets/Fvorites/">Favorites</Link>
             </li>
             <li>
-              <Link to="/tweets/following/">Following</Link>
+              <Link to="/tweets/Messges/">Bookmarks</Link>
+            </li>
+            <li>
+              <Link to="/users">Following</Link>
             </li>
           </ul>
 
@@ -71,10 +77,7 @@ const UserCard = () => {
             Signin
           </Link>{" "}
           <br />
-          <Link
-            className="btn btn-default btnDefault btnMed"
-            to="/auth/signup"
-          >
+          <Link className="btn btn-default btnDefault btnMed" to="/auth/signup">
             Signup
           </Link>
         </span>

@@ -7,12 +7,10 @@ import { TweetContext } from "../../context/tweet-context";
 import { UserContext } from "../../context/user-context";
 //import { flashErrorMessage } from "../layout/flash-message";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import { faHashtag } from "@fortawesome/react-fontawesome";
 import Avatar from "../user/avatar";
 
-const AddTweet = ({  user, type }) => {
+const AddTweet = ({ user, type }) => {
   const [mode] = useState(type);
-  //const { user, setuser } = useContext(UserContext);
   const [errors, setErrors] = useState({});
   const [category, setCategory] = useState("");
   const [tweet, setTweet] = useState("");
@@ -23,7 +21,7 @@ const AddTweet = ({  user, type }) => {
   const [redirectDesk, setRedirectDesk] = useState(false);
   const [uploadedImages, setUploadedImages] = useState([]);
 
-  useEffect(() => { console.log(user)}, [user]);
+  useEffect(() => {}, []);
 
   const validData = () => {
     let errs = {};
@@ -39,19 +37,8 @@ const AddTweet = ({  user, type }) => {
       setErrors(errs);
       return false;
     }
-    //console.log(errors);
-    //if (errors) return false;
-
     return true;
   };
-
-  // const fetchTweets = async () => {
-  //   const response = await axios.post("/chats/view");
-  //   dispatch({
-  //     type: "FETCH_TWEETS",
-  //     payload: response.data,
-  //   });
-  // };
 
   const addTweet = async () => {
     if (validData()) {
@@ -63,19 +50,6 @@ const AddTweet = ({  user, type }) => {
         images: images,
       };
 
-      //***Removed const response = await axios.post("/chats/article", newTweet);
-      // dispatch({
-      //   type: "CREATE_TWEET",
-      //   payload: response.data,
-      //*** */ });
-      // if (response.data.addSuccess) {
-      //   setTweet("");
-      //   setCategory("");
-      //   setFormError(false);
-      //   if (mode === "mobile") setRedirect(true);
-      //   setFormError(true);
-      // } else {
-      // }
       const response = await axios
         .post("/chats/article", newTweet)
         .then((res) => {
@@ -97,7 +71,7 @@ const AddTweet = ({  user, type }) => {
   const onSubmit = async () => {
     await addTweet();
   };
-  if (!user) return <Redirect to="/" />;;
+  if (!user) return <Redirect to="/" />;
   if (redirect) {
     return <Redirect to="/tweets" />;
   }
@@ -110,7 +84,7 @@ const AddTweet = ({  user, type }) => {
     <div className="content-wrapper">
       <div className="row">
         <div className="avatar-wrapperL">
-          <Avatar images={user.images} size="avt-lg"/>
+          <Avatar images={user.images} size="avt-med" />
         </div>
         <div className="col-md-9">
           <div
@@ -128,7 +102,7 @@ const AddTweet = ({  user, type }) => {
               />
             </div>
 
-           <div className="form-group">
+            <div className="form-group">
               <input
                 type="text"
                 className="form-control"
@@ -168,7 +142,7 @@ const AddTweet = ({  user, type }) => {
                 Tweet
               </button>
             </div>
-          </div> 
+          </div>
         </div>
       </div>
     </div>

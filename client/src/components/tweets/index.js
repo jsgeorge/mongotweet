@@ -1,69 +1,73 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
-// import jwtDecode from "jwt-decode";
-// import axios from "axios";
-import AddTweet from "./add";
-import { UserContext } from "../../context/user-context";
+import React, { useEffect, useContext, useState } from "react";
+import axios from "axios";
+import TweetItem from "./item";
+import { TweetContext } from "../../context/tweet-context";
 
-import TweetListing from "./listing";
-import UserCard from "../user/card";
-import Categories from "../categories";
-//import UserSignin from "../auth/login";
-
-export default function TweetsPage() {
-  //const [state, dispatch] = useContext(UserContext);
-
-  //const [isAuthenticted, setIsAuthenticated] = useState(false);
+export default function TweetListing({ uid, type }) {
+  const [state, dispatch] = useContext(TweetContext);
   const [error, setError] = useState("");
-  const { user, isloggedin } = useContext(UserContext);
+  const [header, setHeader] = useState("");
+  const [cnt, setcnt] = useState(0);
+  //const [filters, setFilters] = useState([]);
+  let sortBy = { sortby: "createdAt", order: "desc" };
 
   useEffect(() => {
-    //  const setAuthUser = async (token) => {
-    //     const response = await axios.post("/users/id", { id: token.id });
-    //     dispatch({
-    //         type: "SET_USER",
-    //         payload: response.data,
-    //     });
-    //   };
-    //   if (localStorage.jwtToken){
-    //       console.log('User is authenticted')
-    //       setAuthUser(jwtDecode(localStorage.getItem("jwtToken")));
-    //   }
-  }, []);
+    let filters = [];
+    console.log("Listing uid-", uid);
+    const fetchData = async () => {
+      if (uid) filters = { filters: [{ author: uid }] };
 
-  if (error) return <Redirect to="/auth/signin" />;
-  // if (state.user) console.log(state.user[0]);
-  // if (!isloggedin) return <Redirect to={"/"} />;
+      try {
+        const response = await axios.post("/chats/view", filters);
+        dispatch({
+          type: "FETCH_TWEETS",
+          payload: response.data,
+        });
+
+        setcnt(response.data.size);
+      } catch (err) {
+        console.log(err);
+        setError("Cannot retrieve the selected tweets. Network error");
+      }
+    };
+    fetchData();
+  }, [uid, dispatch]);
+
+  //if (state.tweets) console.log(state.tweets);
+
   return (
-    <div className="page-wrapper">
-      <div className="row">
-        <div className="col-lg-2 col-md-2  col-sm-3 col-xs-3 Lsidebar">
-          <UserCard />
-        </div>
-        <div className="col-lg-7 col-md-7 col-sm-8 col-xs-9 content">
-          <div className="content-wrapper">
-            <h3>Home</h3>
+    <span>
+      {type && type === "number" ? (
+        <span>
+          {" "}
+          {state.tweets && state.tweets.articles ? (
+            <span>{cnt} tweets</span>
+          ) : (
+            "No tweets"
+          )}
+        </span>
+      ) : (
+        <div className="content-wrapper border-top">
+          <div className="tweets-wrapper">
+            {error ? <div className="has-error">{error}</div> : null}
+            {state.tweets &&
+            state.tweets.articles &&
+            state.tweets.articles.length > 0 ? (
+              state.tweets.articles.map((tweet) => (
+                <TweetItem key={tweet._id} tweet={tweet} />
+              ))
+            ) : (
+              <div className="card-text">
+                {!uid
+                  ? "Bummer! There are no current tweets. Check back later or make some of your own"
+                  : "Snap! You have no current tweets. Add your tweet soon"}
+              </div>
+            )}
           </div>
-
-          <div className="add-tweet-panel">
-            {/* {state.user && state.user[0] ? (
-            <AddTweet
-              type="desktop"
-              user={state.user[0].user}
-            />
-          ) : null} */}
-            {isloggedin && user ? (
-              <AddTweet  user={user} type="desktop"/>
-            ) : null}
-          </div>
-          <TweetListing />
         </div>
-        <div className="col-lg-3 col-md-3 col-sm-2 col-xs-4 Rsidebar">
-          <div className="desktop-categories">
-            <Categories />
-          </div>
-        </div>
-      </div>
-    </div>
+      )}
+    </span>
   );
 }
+
+//export default TweetListing;

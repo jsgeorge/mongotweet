@@ -5,10 +5,11 @@ import classnames from "classnames";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { TweetContext } from "../../context/tweet-context";
-import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { UserContext } from "../../context/user-context";
+import Avatar from "./../user/avatar";
 
 const EditTweetForm = ({ item }) => {
+  const user = useContext(UserContext);
   const [dispatch] = useContext(TweetContext);
   const [errors, setErrors] = useState({});
   const [tweet, setTweet] = useState("");
@@ -87,75 +88,82 @@ const EditTweetForm = ({ item }) => {
 
   return (
     <div className="add-tweet">
-      <h3>
-        <Link to={`/tweets/${item._id}/view`}>
-          <FontAwesomeIcon
-            icon={faLongArrowAltLeft}
-            size="lg"
-            style={{ color: "blue" }}
-          />
-        </Link>
-        Edit Tweet
-      </h3>
-      {edited ? (
-        <span>
-          <div className="form-group">
-            <textarea
-              name="text"
-              className="form-control"
-              value={edited.text}
-              placeholder={"Enter tweet"}
-              onChange={handleChange}
-            />
+      {user && edited ? (
+        <div className="row">
+          <div className="avatar-wrapperL">
+            <Avatar images={user.images} size="avt-med" />
           </div>
-          <div className="form-group">
-            <input
-              name="tag"
-              className="form-control"
-              type="text"
-              placeholder="category tags"
-              value={edited.tag}
-              onChange={handleChange}
-            />
-          </div>
-          {edited.images && edited.images.length > 0 ? (
+          <div className="col-md-9">
             <div
-              className="image"
-              style={{
-                background: `url(${renderCardImage(edited.images)}) no-repeat`,
-              }}
-            />
-          ) : null}
+              className={classnames("add-tweet", {
+                "add-tweet-full": images && images.length > 0,
+              })}
+            >
+              <div className="form-group">
+                <textarea
+                  name="text"
+                  className="form-control"
+                  style={{ fontSize: "20px" }}
+                  value={edited.text}
+                  onChange={handleChange}
+                  rows="5"
+                />
+              </div>
 
-          {/* <FileUpload
+              <div className="form-group">
+                Tag
+                <input
+                  name="tag"
+                  className="form-control"
+                  type="text"
+                  placeholder="category tags"
+                  value={edited.tag}
+                  onChange={handleChange}
+                />
+              </div>
+              {edited.images && edited.images.length > 0 ? (
+                <div
+                  className="image"
+                  style={{
+                    background: `url(${renderCardImage(
+                      edited.images
+                    )}) no-repeat`,
+                  }}
+                />
+              ) : null}
+
+              {/* <FileUpload
           imagesHandler={(images) => imagesHandler(images)}
           reset={formSuccess}
         /> */}
-          <FileUpload
-            images={images}
-            setImages={setImages}
-            reset={formSuccess}
-          />
-          {/* </form> */}
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => onSubmit()}
-          >
-            reTweet
-          </button>
+              <div className="file_upload_wrapper">
+                <FileUpload
+                  images={images}
+                  setImages={setImages}
+                  reset={formSuccess}
+                />
+              </div>
+              {/* </form> */}
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => onSubmit()}
+              >
+                reTweet
+              </button>
+            </div>
+            {errors.tweet ? (
+              <div className="has-error">Error {errors.tweet}</div>
+            ) : null}
+            {errors.category ? (
+              <div className="has-error">Error {errors.category}</div>
+            ) : null}
 
-          {errors.tweet ? (
-            <div className="has-error">Error {errors.tweet}</div>
-          ) : null}
-          {errors.category ? (
-            <div className="has-error">Error {errors.category}</div>
-          ) : null}
-
-          {formError ? (
-            <div className="has-error">Error - Could not add tweet</div>
-          ) : null}
-        </span>
+            {formError ? (
+              <div className="has-error">Error - Could not add tweet</div>
+            ) : null}
+          </div>
+        </div>
       ) : (
         <p>NO tweet found</p>
       )}

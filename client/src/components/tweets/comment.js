@@ -10,7 +10,7 @@ import Avatar from "../user/avatar";
 const NewCommentForm = ({ id, user }) => {
   const [tweetid] = useState(id);
   const [userid] = useState(user._id);
-  const [author] = useState(user.username);
+  //const [author] = useState(user.username);
   const [dispatch] = useContext(TweetContext);
   const [avatar] = useState(user.avatar);
   const [errors, setErrors] = useState({});
@@ -39,7 +39,6 @@ const NewCommentForm = ({ id, user }) => {
     console.log(validData());
     if (validData()) {
       let newComment = {
-        user: author,
         text: comment,
       };
       //console.log(newComment);
@@ -96,9 +95,9 @@ const NewCommentForm = ({ id, user }) => {
  */}{" "}
       <div className="row">
         <div className="col-md-1">
-            <Avatar images={user.images} size="avt-sm" />
+          <Avatar images={user.images} size="avt-sm" />
         </div>
-        <div className="col-md-10" >
+        <div className="col-md-10">
           <div className={classnames("form-group", { "has-error": errors })}>
             {errors.comment && (
               <span className="help-block">{errors.comment}</span>

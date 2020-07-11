@@ -53,6 +53,8 @@ router.post("/", (req, res) => {
           name: user.name,
           lastname: user.lastname,
           images: user.images,
+          following: user.following,
+          likes: user.likes,
         };
 
         res

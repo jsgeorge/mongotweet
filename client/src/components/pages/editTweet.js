@@ -1,9 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { TweetContext } from "../../context/tweet-context";
-import EditTweetForm from "./editForm.js";
+import EditTweetForm from "../tweets/editForm.js";
+import UserCard from "../user/card";
+import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const TweetEdit = ({ match }) => {
+const EditTweetPage = ({ match }) => {
   const [state, dispatch] = useContext(TweetContext);
   const [category, setCategory] = useState("");
   const [tweet, setTweet] = useState("");
@@ -13,6 +17,7 @@ const TweetEdit = ({ match }) => {
 
   const [redirect, setRedirect] = useState(false);
   const [error, setError] = useState("");
+
   useEffect(() => {
     const { id } = match.params;
 
@@ -37,16 +42,32 @@ const TweetEdit = ({ match }) => {
   }, [match.params, dispatch]);
 
   return (
-    <div>
-      {!state.tweet ? (
-        <div className="card_item_wrapper">
-          <p>Cannot display the current tweet</p>
+    <div className="page-wrapper">
+      <div className="row">
+        <div className="col-lg-2 col-md-2  col-sm-3 col-xs-3 Lsidebar">
+          <UserCard />
         </div>
-      ) : (
-        <EditTweetForm item={state.tweet} />
-      )}
+        <div className="col-lg-7 col-md-7 col-sm-8   col-xs-9 content">
+          <Link to={`/tweets/${match.params.id}/view`}>
+            <FontAwesomeIcon
+              icon={faLongArrowAltLeft}
+              size="lg"
+              style={{ color: "blue" }}
+            />
+          </Link>
+          Edit Tweet
+          {!state.tweet ? (
+            <div className="card_item_wrapper">
+              <p>Cannot display the current tweet</p>
+            </div>
+          ) : (
+            <EditTweetForm item={state.tweet} />
+          )}
+        </div>
+        <div className="col-lg-3 col-md-3 col-sm-2 col-xs-4 Rsidebar"></div>
+      </div>
     </div>
   );
 };
 
-export default TweetEdit;
+export default EditTweetPage;

@@ -5,17 +5,20 @@ const formidable = require("express-formidable");
 const { auth } = require("../middleware/auth");
 const cloudinary = require("cloudinary");
 
-router.get("/", (req, res) => {
-  User.find({}, (err, users) => {
-    if (err) return res.status(400).send(err);
-    res.status(200).send(users);
-  });
+router.get("/", auth, (req, res) => {
+  User.find(
+    { _id: { $ne: mongoose.Types.ObjectId(req.userid) } },
+    (err, users) => {
+      if (err) return res.status(400).send(err);
+      res.status(200).json(users);
+    }
+  );
 });
 
 router.get("/id", (req, res) => {
   // console.log("get user query by id");
   const uid = req.query.id; //"5e87a4aeec5ce0255c8c4b98";
-  // console.log("uid", uid);
+  //console.log("uid", uid);
 
   if (uid) {
     User.findOne({ _id: mongoose.Types.ObjectId(uid) }).exec((err, user) => {
@@ -30,7 +33,9 @@ router.get("/id", (req, res) => {
         username: user.username,
         lastname: user.lastname,
         name: user.name,
-        images: user.images
+        images: user.images,
+        following: user.following,
+        likes: user.likes,
       };
       // console.log(
       //   uid,
@@ -64,6 +69,7 @@ router.post("/id", (req, res) => {
         name: user.name,
         lastname: user.lastname,
         images: user.images,
+        following: user.following,
         likes: user.likes,
       };
       // console.log(currentUser.lastname);
@@ -78,7 +84,9 @@ router.post("/id", (req, res) => {
 router.post("/", (req, res) => {
   User.findOne({ email: req.body.email }, function (err, existingUser) {
     if (existingUser) {
-      return res.status(401).json({ regSuccess: false, message: "Email already in use" });
+      return res
+        .status(401)
+        .json({ regSuccess: false, message: "Email already in use" });
     } else {
       let user = new User({
         email: req.body.email,
@@ -87,7 +95,7 @@ router.post("/", (req, res) => {
         name: req.body.name,
         lastname: req.body.lastname,
         likes: [],
-        following: []
+        following: [],
       });
       user.save((err, doc) => {
         if (err)
@@ -109,7 +117,8 @@ router.patch("/", auth, (req, res) => {
     { $set: req.body },
     { new: true },
     (err, doc) => {
-      if (err) return res.status(401).json({ editSuccess: false, message: err });
+      if (err)
+        return res.status(401).json({ editSuccess: false, message: err });
       res.status(200).json({
         editSuccess: true,
       });
@@ -151,9 +160,9 @@ router.patch("/", auth, (req, res) => {
 //   );
 // });
 
-router.post("/addtoFollowing", auth, (req, res) => {
+router.post("/follow", auth, (req, res) => {
   User.findOneAndUpdate(
-    { _id: req.user._id },
+    { _id: req.userid },
     { $push: { following: { id: mongoose.Types.ObjectId(req.query.id) } } },
     { new: true },
     (err, doc) => {
@@ -165,9 +174,9 @@ router.post("/addtoFollowing", auth, (req, res) => {
   );
 });
 
-router.post("/deletfromFollowing", auth, (req, res) => {
+router.post("/unfollow", auth, (req, res) => {
   User.findOneAndUpdate(
-    { _id: req.user._id },
+    { _id: req.userid },
     { $pull: { following: { id: mongoose.Types.ObjectId(req.query.id) } } },
     { new: true },
     (err, doc) => {
@@ -228,6 +237,5 @@ router.post("/uploadimage", formidable(), (req, res) => {
     }
   );
 });
-
 
 module.exports = router;

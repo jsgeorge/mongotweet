@@ -84,7 +84,7 @@ nav .navbar {
   border-left: 15px solid rgb(192, 192, 240);
   border-right: 1px solid rgb(183, 183, 240);
   min-height: 200px;
-  padding: 20px 0;
+  padding: 0;
 }
 .backlink {
   display: block;
@@ -94,10 +94,10 @@ nav .navbar {
   padding: 0 20px;
 }
 .Rsidebar {
-  padding-top: 20px;
+  padding: 0px;
 }
 .Lsidebar {
-  padding-top: 20px;
+  padding: 0px;
 }
 .noborder {
   border: none;
@@ -115,6 +115,10 @@ a:active {
 .tweet-author {
   font-size: 12px;
   font-weight: bold;
+  /* float: left;
+  min-width: 100px;
+  height: 25px;
+  padding: 0; */
 }
 .card_item_wrapper a {
   color: #111;
@@ -140,24 +144,22 @@ button,
 } */
 .add-tweet {
   padding: 0;
-  width:90%;
+  width: 90%;
   height: 280px;
- 
-  float:left;
+  float: left;
 }
 .add-tweet-full {
-  padding:  0;
+  padding: 0;
   border-bottom: 14px solid #ccc;
   height: 580px;
 }
-.input-tweet{
-  width:80%%;
+.input-tweet {
+  width: 80%;
 }
 .add-tweet input,
 .add-tweet textarea,
 .add-comment input {
   border: none;
-
 }
 /*file upload */
 .file_upload_wrapper {
@@ -171,10 +173,10 @@ button,
 textarea {
   font-size: 20px;
 }
-.card-text-det{
-  margin:0 15px;
+.border-top {
+  border-top: 10px solid rgb(219, 219, 219);
 }
-
+/* CARD ITEM          */
 .card_item_wrapper {
   width: 100%;
   padding: 10px 0;
@@ -186,12 +188,23 @@ textarea {
   background: #fff;
   border-bottom: 1px solid #ccc;
 }
-.border-top {
-  border-top: 10px solid rgb(219, 219, 219);
+
+.card-text-det {
+  margin: 0 15px;
 }
-.card_item_wrapper:first-child {
-  /* border-top: 14px solid #ccc; */
+.tweet-detail {
+  margin: 0 45px;
 }
+.tweet-detail .actions {
+  width: 50%;
+  float: left;
+  margin-top: 10px;
+}
+.tweet-detail .edit-buttons-wrapper {
+  width: 50%;
+  float: left;
+}
+
 .card_item_wrapper .card-text {
   padding: 0;
 }
@@ -203,21 +216,20 @@ textarea {
   margin: 0;
   margin-top: 5px;
 }
-.card-text-det .image{
+.card-text-det .image {
   margin: 0 15px 10px 15px;
 }
 .avatar-wrapper {
   float: left;
   width: 20px;
   height: 20px;
-  margin-right: 5px;
+  margin-right: 15px;
 }
 .avatar-wrapperL {
   float: left;
   width: 40px;
   height: 60px;
-  margin-right: 5px;
- 
+  margin: 0 15px;
 }
 .tweet-item-wrapper {
   float: left;
@@ -225,8 +237,11 @@ textarea {
   height: 20px;
   margin-top: 5px;
 }
-.user-page {
-  padding: 0 25px;
+.author-wrapper {
+  padding-top: 3px;
+}
+.card-detail-image {
+  margin: 0 15px;
 }
 .avatar {
   width: 34px;
@@ -243,7 +258,7 @@ textarea {
   width: 22px;
   height: 20px;
 }
-#avt-lg {
+#avt-med {
   width: 40px;
   height: 40px;
 }
@@ -251,7 +266,10 @@ textarea {
   width: 26px;
   height: 26px;
 }
-
+#avt-lg {
+  width: 60px;
+  height: 60px;
+}
 .tweets-wrapper {
   margin: 0;
   padding: 0;
@@ -292,12 +310,18 @@ textarea {
 }
 
 .card_item_wrapper .actions {
-  clear: left;
+  /* clear: left;
   display: flex;
   padding: 0x;
   font-size: 12px;
   color: gray;
+  margin-top: 10px; */
+  width: 100%;
   margin-top: 10px;
+  padding: 0px 40px;
+  font-size: 14px;
+  color: #41547e;
+  border-top: 1px;
 }
 .card_item_wrapper .actions .button_wrapp button {
   border: none;
@@ -350,31 +374,34 @@ textarea {
   clear: left;
   font-size: 14px;
   margin: 0;
-  border-top:1px solid #ccc;
-  padding-top:10px;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
 }
 .add-comment {
-   border-top:1px solid #ccc;
-  padding-top:10px;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
 }
-.add-comment textarea{
-  color:#111;
-  font-size:14px;
-  border:none;
-  width:80%
+.add-comment textarea {
+  color: #111;
+  font-size: 14px;
+  border: none;
+  width: 80%;
 }
-.add-comment button{
-  float:right;
+.add-comment button {
+  float: right;
 }
 .has-error {
   color: red;
+}
+.user-page {
+  padding: 0 25px;
 }
 .buttons a {
   border-radius: 100px;
   margin-right: 5px;
 }
 .user-edit-buttons {
-  padding: 10px 15px;
+  padding: 10px 0;
 }
 .user-edit-buttons a {
   margin-right: 5px;
@@ -397,8 +424,8 @@ textarea {
 }
 .btnDefault {
   border: 1px solid rgb(6, 77, 170);
-  color:blue;
-  background:#fff;
+  color: blue;
+  background: #fff;
 }
 .btnAddTweet {
   display: none;
@@ -424,15 +451,26 @@ a.chat-text {
   padding: 0;
   margin: 0;
   clear: left;
-  display: block;
   width: 100%;
-  padding: 10px 0 0 0;
+  padding: 0 40px;
 }
 .chat-text-det {
   font-size: 22px;
   padding: 0;
   margin: 0;
   clear: left;
+  width: 100%;
+  display: block;
+  padding: 0 40px;
+}
+.comment-text-det {
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  clear: left;
+  width: 100%;
+  display: block;
+  padding: 0 32px;
 }
 .usertweets {
   margin-top: 30px;
@@ -460,8 +498,8 @@ a.chat-text {
   float: left;
 }
 a.tag-link {
-  color: rgb(6, 77, 170);
-  margin-left: 15px;
+  color: #555;
+  margin: 10px 5px;
 }
 .like_link {
 }
@@ -537,6 +575,17 @@ a.tag-link {
 }
 .desk {
   display: block;
+}
+.btnFollow {
+  float: right;
+  width: 90px;
+}
+.user-item-wrapper {
+  float: left;
+  width: 40%;
+  height: 50px;
+  margin-top: 5px;
+  margin-left: 5px;
 }
 @media (min-width: 991px) and (max-width: 1000px) {
   .desktop-search {
@@ -679,7 +728,10 @@ a.tag-link {
   .page-wrapper {
     margin: 0;
     padding: 0;
-    margin-top: 25px;
+    margin-top: 20px;
+  }
+  .page-wrapper .card-text {
+    margin: 0 15px;
   }
   .tweet-wrapper {
     margin: 0;
@@ -700,6 +752,17 @@ a.tag-link {
   .Rsidebar {
     display: none;
   }
+  ul.userlinks li,
+  .card-user {
+    margin-left: 10px;
+  }
+  ul.userlinks li a,
+  ul.userlinks li a:hover {
+    font-size: 16px;
+  }
+  .card-user .username {
+    font-size: 14px;
+  }
   .desktop-categories {
     display: none;
   }
@@ -711,9 +774,11 @@ a.tag-link {
     margin: 0;
     padding: 0;
     padding-top: 20px;
-    padding-left: 15px;
   }
-
+  .content-wrapper {
+    margin: 0;
+    border-top: none;
+  }
   .card_item_wrapper {
     width: 100%;
     min-width: 100px;
@@ -726,7 +791,8 @@ a.tag-link {
   }
 
   .card_item_wrapper .card-text {
-    padding: 0 5px;
+    padding: 0px;
+    margin: 0;
     font-size: 14px;
   }
   .card_item_wrapper .image {
@@ -738,16 +804,16 @@ a.tag-link {
     display: block;
     padding-top: 5px;
   }
-  .card_item_wrapper .actions {
-    width: 100%;
-    margin-top: 10px;
-    margin: 0px 15px;
-    font-size: 14px;
+  .avatar-wrapper {
+    margin: 0;
+    margin-right: 10px;
   }
-  .cart_item_wrapper .tweet-author {
+  .tweet-author {
     font-size: 12px;
     font-weight: bold;
+    margin-right: 15px;
   }
+
   .desktop-categories {
     display: block;
   }
@@ -854,8 +920,15 @@ a.tag-link {
     padding: 0;
     margin: 0;
   }
-  .card-text {
-    margin-left: 10px;
+  .card_item_wrapper .card-text {
+    padding: 0px;
+    margin: 0 15px;
+  }
+  .card_item_wrapper .actions {
+    margin: 10px 0 0 15px;
+  }
+  .avatar-wrapper {
+    margin-right: 15px;
   }
   a.chat-text {
     font-size: 18px;
@@ -875,10 +948,23 @@ a.tag-link {
   .desk {
     display: none;
   }
-  .content-wrapper{
-    border:none;
+  .content-wrapper {
+    border: none;
   }
-  .content-wrapper h3{
+  .content-wrapper h3 {
     display: none;
+  }
+  .tweet-detail .actions {
+    width: 100%;
+    float: none;
+    margin-top: 10px;
+  }
+  .tweet-detail .edit-buttons-wrapper {
+    width: 100%;
+    float: none;
+    clear: left;
+  }
+  .card-detail-image {
+    margin: 0;
   }
 }

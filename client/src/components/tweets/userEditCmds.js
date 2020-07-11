@@ -47,11 +47,7 @@ const UserEditCommands = ({ id, author }) => {
   if (redirect) return <Redirect to="/tweets" />;
 
   return (
-    <div>
-      {/* {state.user &&
-      state.user[0] &&
-      state.user[0].user._id &&
-      state.user[0].user._id === author ? ( */}
+    <div className="edit-buttons-wrapper">
       {isloggedin && user && user._id === author ? (
         <span>
           <div className="user-edit-buttons">
@@ -61,7 +57,7 @@ const UserEditCommands = ({ id, author }) => {
               Edit
             </Link>
 
-            <button className="btn btn-danger" onClick={handleShow}>
+            <button className="btn btn-danger btn-sm" onClick={handleShow}>
               Delete
             </button>
 
@@ -73,10 +69,16 @@ const UserEditCommands = ({ id, author }) => {
                 Are You sure you want to delete this tweet?
               </Modal.Body>
               <Modal.Footer>
-                <button className="btn btn-primary" onClick={handleClose}>
-                  Close
+                <button
+                  className="btn btn-default btnDefault btn-sm"
+                  onClick={handleClose}
+                >
+                  Cancel
                 </button>
-                <button className="btn btn-danger" onClick={handleDelete}>
+                <button
+                  className="btn btn-danger btn-sm"
+                  onClick={handleDelete}
+                >
                   Delete
                 </button>
               </Modal.Footer>

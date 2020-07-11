@@ -3,7 +3,7 @@ import axios from "axios";
 import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import TweetItem from "./item";
+import TweetItem from "../tweets/item";
 import { TweetContext } from "../../context/tweet-context";
 import Categories from "../categories";
 import UserCard from "../user/card";
@@ -20,9 +20,6 @@ export default function TweetQuery({ match }) {
 
     try {
       const { qrytype, name, id } = match.params;
-      console.log(qrytype);
-      console.log(name);
-      console.log(id);
 
       if (qrytype == "category") {
         setHeader(name);
@@ -45,15 +42,12 @@ export default function TweetQuery({ match }) {
     const fetchData = async () => {
       // if (listype == "main") {
 
-      console.log(filters);
-      console.log("filters in fetchData", filters);
       try {
         const response = await axios.post("/chats/view", filters);
         dispatch({
           type: "FETCH_TWEETS",
           payload: response.data,
         });
-        console.log("response.data", response.data);
       } catch (err) {
         console.log(err);
         setError("Cannot retrieve the selected tweets");
@@ -63,13 +57,13 @@ export default function TweetQuery({ match }) {
   }, [dispatch]);
 
   return (
-    <div clssName="page-wraper">
+    <div className="page-wraper">
       <div className="row">
-        <div className="col-lg-3 col-md-2  col-sm-3 col-xs-3 Lsidebar">
+        <div className="col-lg-2 col-md-2  col-sm-3 col-xs-3 Lsidebar">
           <UserCard />
         </div>
-        <div className="col-lg-6 col-md-7 col-sm-8 col-xs-9 content">
-          <div>
+        <div className="col-lg-7 col-md-7 col-sm-8 col-xs-9 content">
+          <div className="content-wrapper">
             <Link to="/tweets">
               <FontAwesomeIcon
                 icon={faLongArrowAltLeft}

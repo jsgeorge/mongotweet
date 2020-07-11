@@ -21,11 +21,15 @@ const Avatar = ({ images, size }) => {
       ) : (
         <FontAwesomeIcon
           icon={faUser}
-          size="lg"
+          size="sm"
           id={size}
+          className="primary-clr"
           style={{
-            border: "2px solid blue",
+            border: "2px solid rgb(6, 135, 199)",
             borderRadius: "100px",
+            paddng: "6px",
+            width: "30px",
+            height: "30px",
           }}
         />
       )}

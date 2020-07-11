@@ -4,16 +4,14 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Avatar from "../user/avatar";
 
-export default function AuthorDetail({ author, type }) {
- // const [state, dispatch] = useContext(TweetContext);
+export default function AuthorDetail({ author, tag, type }) {
+  // const [state, dispatch] = useContext(TweetContext);
   const [user, setuser] = useState("");
   //const { username, lastname, name } = author;
   const [error, setError] = useState("");
 
   useEffect(() => {
-    console.log('author type', type)
     if (author) {
-
       const getUser = async () => {
         try {
           const response = await axios.get(`/users/id?id=${author}`);
@@ -21,9 +19,10 @@ export default function AuthorDetail({ author, type }) {
           //   type: "FETCH_AUTHOR",
           //   payload: response.data,
           // });
+          // console.log("user in Author", response.data);
           setuser(response.data);
         } catch (error) {
-          console.log("ERROR", error);
+          // console.log("ERROR", error);
           setError("unknown user");
         }
       };
@@ -36,26 +35,35 @@ export default function AuthorDetail({ author, type }) {
 
   if (!user && !user.data) return null;
 
-  const {name, lastname, username, images } =  user.userdata;
- 
+  const { name, lastname, username, images } = user.userdata;
+
   if (error || !user) return <span>{error}</span>;
   return (
     <span>
-    {type=="tweet" ?
-    <span className="tweet-author">
-      {" "}
-       {username ? username : name + " " + lastname}
-    </span>
-    :
-    <span className="tweet-author">
-       <div className="avatar-wrapper">
-                <Avatar images={images} size="avt-sm"/>
-            </div>
-          <div className="tweet-item-wrapper">
-       {username ? username : name + " " + lastname}
-       </div>
-    </span>
-    }
+      {type == "tweet" ? (
+        <span>
+          {/* <div className="avatar-wrapper">
+            <Avatar images={images} size="avt-sm" />
+          </div> */}
+          {/* {"@"} */}
+          <span className="tweet-author">
+            {"@"}
+            {username ? username : name + " " + lastname}
+          </span>
+          {/* <Link to={`/tweets/query/${tag}`} className="tag-link"> */}
+          {/* <strong>{tag ? tag : null}</strong> */}
+          {/* </Link> */}
+        </span>
+      ) : (
+        <span className="tweet-author">
+          <div className="avatar-wrapper">
+            <Avatar images={images} size="avt-sm" />
+          </div>
+          <div className="author-wrapper">
+            {username ? username : name + " " + lastname}
+          </div>
+        </span>
+      )}
     </span>
   );
 }

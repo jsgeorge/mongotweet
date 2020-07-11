@@ -14,49 +14,15 @@ import UserCard from "../user/card";
 import Categories from "../categories";
 import Avatar from "../user/avatar";
 
-export default function TweetDetail({ match }) {
+export default function TweetDetail({ tweet }) {
   const [state, dispatch] = useContext(TweetContext);
   // const [isAuthenticted, setIsAuthenticated] = useState(false);
   const [setError] = useState("");
   const [like, setLike] = useState(false);
   const [favorite, setFavorite] = useState(false);
 
-  useEffect(() => {
-    // if (!state.user && localStorage.jwtToken) {
-    //   try {
-    //     setAuthUser(jwtDecode(localStorage.jwtToken));
-    //     //setIsAuthenticated(true);
-    //   } catch (err) {
-    //     setError("Error. Cannot set user. user logged off or time expired");
-    //   }
-    // }
-    const { id } = match.params;
-    if (id) {
-      const fetchData = async () => {
-        try {
-          const response = await axios.get(`/chats/article?id=${id}`);
-          dispatch({
-            type: "FETCH_TWEET",
-            payload: response.data[0],
-          });
-          // console.log("detail respnse.data", response.data);
-        } catch (err) {
-          console.log(err);
-          //setError("Cannot retrieve the selected tweet. Network error");
-        }
-      };
-      fetchData();
-    } else {
-      setError("Cannot retrive selecte tweet");
-    }
-  }, []);
-  // const setAuthUser = async (token) => {
-  //   const response = await axios.post("/users/id", { id: token.id });
-  //   dispatch({
-  //     type: "SET_USER",
-  //     payload: response.data,
-  //   });
-  // };
+  useEffect(() => {}, []);
+
   const renderCardImage = (images) => {
     return images[0].url;
   };
@@ -65,18 +31,13 @@ export default function TweetDetail({ match }) {
   };
   //if (error) return <Redirect to="/auth/signin" />;
 
-  if (!state.tweet)
+  if (!tweet)
     return (
       <div className="card_item_wrapper">
         <p>Cannot display the current tweet</p>
       </div>
     );
-  else {
-    //console.log("detail state.tweet=", state.tweet);
-    // console.log( "***detail state.tweet.author passed to fetch_author",
-    // state.tweet.author
-    //);
-  }
+
   const {
     _id,
     author,
@@ -88,73 +49,70 @@ export default function TweetDetail({ match }) {
     images,
     comments,
     likes,
-  } = state.tweet;
-  if (!state.tweet)
-    return <div className="has-error">Cannot retrieve the current tweet.</div>;
-  //else console.log("tweet detail", state.tweet);
+  } = tweet;
 
   return (
-    <div className="page-wrapper">
-      <div className="row">
-        <div className="col-lg-2 col-md-2  col-sm-3 col-xs-3 Lsidebar">
-          <UserCard />
+    <div className="tweet-detail-wrapper">
+      <div className="card-text-det">
+        <Link to="/tweets" className="backlink">
+          <FontAwesomeIcon
+            icon={faLongArrowAltLeft}
+            size="lg"
+            className="primary-clr"
+          />{" "}
+          Tweet
+        </Link>
+
+        <div className="avatar-wrapper">
+          <Avatar images={avatar} />
         </div>
-        <div className="col-lg-7 col-md-7 col-sm-8   col-xs-9 content">
-          <div className="card-text-det">
-            <Link to="/tweets" className="backlink">
-              <FontAwesomeIcon
-                icon={faLongArrowAltLeft}
-                size="lg"
-                className="primary-clr"
-              />{" "}
-              Tweet
-            </Link>
-            <Avatar images={avatar} />
-            <strong>{tag ? tag : null}</strong>
-            {author ? <AuthorDetail author={author} type='tweet'/> : null}
-            <span className="chat-date"> {displayDate(createdAt)}</span>
-            <br />
-            {text ? <span className="chat-text-det">{text}</span> : null}
-          </div>
+        <strong>
+          {" "}
+          <Link to={`/tweets/query/${tag}`} className="tag-link">
+            <strong>
+              {"#"}
+              {tag ? tag : null}
+            </strong>
+          </Link>{" "}
+        </strong>
+        {author ? <AuthorDetail author={author} type="tweet" /> : null}
+        <span className="chat-date"> {displayDate(createdAt)}</span>
 
-          {images && images.length > 0 && images[0].url ? (
-            <div
-              className="image"
-              style={{
-                background: `url(${renderCardImage(images)}) no-repeat`,
-              }}
-            />
-          ) : null}
+        {text ? <span className="chat-text-det">{text}</span> : null}
+      </div>
+      <div className="card-detail-image">
+        {images && images.length > 0 && images[0].url ? (
+          <div
+            className="image"
+            style={{
+              background: `url(${renderCardImage(images)}) no-repeat`,
+            }}
+          />
+        ) : null}
+      </div>
+      <div className="tweet-detail">
+        <div className="actions">
+          Comments {comments ? comments.length : "0"} Likes:{" "}
+          {likes ? likes : "0"}
+        </div>
+        <UserEditCommands id={_id} author={author} />
 
-          <div className="card-text-det">
-            <UserEditCommands id={match.params.id} author={author} />
-
-            <div className="actions">
-              Comments {comments ? comments.length : "0"} Likes:{" "}
-              {likes ? likes : "0"}
-            </div>
-
-            <UserCommands id={match.params.id} author={author} />
-
-            <div className="comments">
-              {comments && comments.length > 0 ? (
-                <span>
-                  
-                  {comments.map((c) => (
-                    <span key={c.uid}>
-                      <strong><AuthorDetail author={c.uid} type="comment"/></strong> <br /> {c.text}
-                    </span>
-                  ))}
+        <UserCommands id={_id} author={author} />
+        <div className="comments">
+          {comments && comments.length > 0 ? (
+            <span>
+              {comments.map((c) => (
+                <span key={c.uid}>
+                  <strong>
+                    <AuthorDetail author={c.uid} type="comment" />
+                  </strong>{" "}
+                  <span className="comment-text-det">{c.text}</span>
                 </span>
-              ) : (
-                <p> No comments yet</p>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div className="col-lg-3 col-md-3 col-sm-2 col-xs-4 Rsidebar">
-          <Categories />
+              ))}
+            </span>
+          ) : (
+            <p> No comments yet</p>
+          )}
         </div>
       </div>
     </div>
