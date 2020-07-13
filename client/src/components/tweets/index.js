@@ -13,7 +13,7 @@ export default function TweetListing({ uid, type }) {
 
   useEffect(() => {
     let filters = [];
-    console.log("Listing uid-", uid);
+
     const fetchData = async () => {
       if (uid) filters = { filters: [{ author: uid }] };
 

@@ -231,11 +231,10 @@ textarea {
   height: 60px;
   margin: 0 15px;
 }
-.tweet-item-wrapper {
+.tweet-author-wrapper {
   float: left;
-  width: 90%;
+
   height: 20px;
-  margin-top: 5px;
 }
 .author-wrapper {
   padding-top: 3px;
@@ -446,7 +445,8 @@ ul li {
 .desktop-categories {
   display: block;
 }
-a.chat-text {
+a.chat-text,
+.user-item-text {
   font-size: 18px;
   padding: 0;
   margin: 0;

@@ -57,19 +57,13 @@ const UserItem = ({ cuser }) => {
   return (
     <div className="card_item_wrapper">
       <div className="card-text">
-        <div className="avatar-wrapper">
-          <Link to={`/user/${cuser._id}/profile`}>
-            <Avatar images={images} />
-          </Link>
-        </div>
-
         <div className="user-item-wrapper">
           <Link to={`/user/${cuser._id}/profile`}>
             <AuthorDetail author={cuser._id} type="tweet" />
           </Link>
           {/*   Show Number of Tweets         */}
-
-          <div>
+          <br />
+          <div className="user-item-text">
             <TweetListing uid={user._id} type={"number"} />
           </div>
         </div>

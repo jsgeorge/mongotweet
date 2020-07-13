@@ -9,9 +9,9 @@ const renderCardImage = (images) => {
 const Avatar = ({ images, size }) => {
   useEffect(() => {}, []);
   return (
-    <div>
+    <span>
       {images && images.length > 0 ? (
-        <div
+        <span
           className="avatar"
           id={size}
           style={{
@@ -33,7 +33,7 @@ const Avatar = ({ images, size }) => {
           }}
         />
       )}
-    </div>
+    </span>
   );
 };
 

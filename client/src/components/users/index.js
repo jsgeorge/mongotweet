@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 import UserItem from "./item";
 import { UsersContext } from "../../context/users-context";
 
@@ -18,14 +19,14 @@ export default function UsersListing() {
         setusers(response.data);
       } catch (err) {
         console.log(err);
-        setError("Cannot retrieve the selected tweets. Network error");
+        setError("Cannot retrieve users. Network error");
       }
     };
     fetchData();
   }, []);
 
   //if (users) console.log(users);
-
+  if (!users) return <Redirect to="/" />;
   return (
     <div className="content-wrapper">
       <div className="tweets-wrapper">

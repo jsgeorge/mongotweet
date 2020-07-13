@@ -58,6 +58,7 @@ const EditUser = () => {
     setEdited({ ...edited, [e.target.name]: e.target.value });
   };
   const updateUser = async () => {
+    console.log(images);
     if (images) {
       edited.images = images;
     }

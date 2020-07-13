@@ -16,37 +16,36 @@ const TweetItem = ({ tweet }) => {
     return Moment(d).format("MMM D h:mm A");
   };
 
-  const {
-    _id,
-    author,
-    avatar,
-    text,
-    tag,
-    images,
-    createdAt,
-    comments,
-    likes,
-  } = tweet;
+  const { _id, author, text, tag, images, createdAt, comments, likes } = tweet;
 
   return (
     <div className="card_item_wrapper">
       <div className="card-text">
-        <div className="avatar-wrapper">
+        <div className="author-line">
+          {/* <div className="avatar-wrapper">
           <Link to={`/user/${author}/profile`}>
             <Avatar images={avatar} />
           </Link>
-        </div>
+        </div> */}
 
-        <div className="tweet-item-wrapper">
+          {/* <div className="tweet-item-wrapper"> */}
+          {/* <Link to={`/tweets/query/tag/${tag}`} className="tag-link">
+            <strong>
+              {"#"}
+              {tag ? tag : null}
+            </strong>
+          </Link>{" "} */}
+
+          <AuthorDetail author={author} />
+
+          {/* </div> */}
           <Link to={`/tweets/query/tag/${tag}`} className="tag-link">
             <strong>
               {"#"}
               {tag ? tag : null}
             </strong>
-          </Link>{" "}
-          <Link to={`/user/${author}/profile`}>
-            <AuthorDetail author={author} type="tweet" />
           </Link>
+
           <span className="chat-date">{displayDate(createdAt)}</span>
         </div>
         {text ? (
@@ -68,7 +67,6 @@ const TweetItem = ({ tweet }) => {
       ) : null}
 
       <div className="actions">
-        
         {comments ? (
           <span>
             comments {comments.length} likes: {likes}

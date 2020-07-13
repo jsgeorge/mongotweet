@@ -3,8 +3,9 @@ import React, { useContext, useEffect, useState } from "react";
 //import jwtDecode from "jwt-decode";
 import axios from "axios";
 import Avatar from "../user/avatar";
+import { Link } from "react-router-dom";
 
-export default function AuthorDetail({ author, tag, type }) {
+export default function AuthorDetail({ author }) {
   // const [state, dispatch] = useContext(TweetContext);
   const [user, setuser] = useState("");
   //const { username, lastname, name } = author;
@@ -22,7 +23,7 @@ export default function AuthorDetail({ author, tag, type }) {
           // console.log("user in Author", response.data);
           setuser(response.data);
         } catch (error) {
-          // console.log("ERROR", error);
+          console.log("ERROR", error);
           setError("unknown user");
         }
       };
@@ -39,31 +40,18 @@ export default function AuthorDetail({ author, tag, type }) {
 
   if (error || !user) return <span>{error}</span>;
   return (
-    <span>
-      {type == "tweet" ? (
-        <span>
-          {/* <div className="avatar-wrapper">
-            <Avatar images={images} size="avt-sm" />
-          </div> */}
-          {/* {"@"} */}
-          <span className="tweet-author">
-            {"@"}
-            {username ? username : name + " " + lastname}
-          </span>
-          {/* <Link to={`/tweets/query/${tag}`} className="tag-link"> */}
-          {/* <strong>{tag ? tag : null}</strong> */}
-          {/* </Link> */}
+    <span style={{ display: "block" }}>
+      {/* {type == "tweet" ? ( */}
+      <Link to={`/user/${author}/profile`}>
+        <span className="avatar-wrapper">
+          <Avatar images={images} size="avt-sm" />
         </span>
-      ) : (
-        <span className="tweet-author">
-          <div className="avatar-wrapper">
-            <Avatar images={images} size="avt-sm" />
-          </div>
-          <div className="author-wrapper">
-            {username ? username : name + " " + lastname}
-          </div>
+
+        <span className="tweet-author-wrapper">
+          {"@"}
+          {username ? username : name + " " + lastname}
         </span>
-      )}
+      </Link>
     </span>
   );
 }

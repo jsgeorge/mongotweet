@@ -63,12 +63,6 @@ const UserItem2 = ({ uid }) => {
   return (
     <div className="card_item_wrapper">
       <div className="card-text">
-        <div className="avatar-wrapper">
-          <Link to={`/user/${uid}/profile`}>
-            <Avatar images={images} />
-          </Link>
-        </div>
-
         <div className="user-item-wrapper">
           <Link to={`/user/${uid}/profile`}>
             <AuthorDetail author={uid} type="tweet" />

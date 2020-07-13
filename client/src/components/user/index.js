@@ -27,7 +27,7 @@ export default function UserPage() {
         <div className=" col-lg-6 col-md-6 col-sm-6 content">
           <div className="user-page">
             <h5>
-              {user.images.length > 0 ? (
+              {user.images && user.images.length > 0 ? (
                 <Avatar images={user.images} size="avt-lg" />
               ) : null}
               {!user.username && user.name

@@ -31,7 +31,7 @@ export default function TweetDetail({ tweet }) {
   };
   //if (error) return <Redirect to="/auth/signin" />;
 
-  if (!tweet)
+  if (!tweet || !tweet.author)
     return (
       <div className="card_item_wrapper">
         <p>Cannot display the current tweet</p>
@@ -63,56 +63,52 @@ export default function TweetDetail({ tweet }) {
           Tweet
         </Link>
 
-        <div className="avatar-wrapper">
-          <Avatar images={avatar} />
-        </div>
-        <strong>
-          {" "}
-          <Link to={`/tweets/query/${tag}`} className="tag-link">
+        <div className="author-line">
+          <AuthorDetail author={author} />
+          <Link to={`/tweets/query/tag/${tag}`} className="tag-link">
             <strong>
               {"#"}
               {tag ? tag : null}
             </strong>
-          </Link>{" "}
-        </strong>
-        {author ? <AuthorDetail author={author} type="tweet" /> : null}
-        <span className="chat-date"> {displayDate(createdAt)}</span>
+          </Link>
 
-        {text ? <span className="chat-text-det">{text}</span> : null}
-      </div>
-      <div className="card-detail-image">
-        {images && images.length > 0 && images[0].url ? (
-          <div
-            className="image"
-            style={{
-              background: `url(${renderCardImage(images)}) no-repeat`,
-            }}
-          />
-        ) : null}
-      </div>
-      <div className="tweet-detail">
-        <div className="actions">
-          Comments {comments ? comments.length : "0"} Likes:{" "}
-          {likes ? likes : "0"}
+          <span className="chat-date">{displayDate(createdAt)}</span>
         </div>
-        <UserEditCommands id={_id} author={author} />
+        <div className="chat-text-det">{text}</div>
+        <div className="card-detail-image">
+          {images && images.length > 0 && images[0].url ? (
+            <div
+              className="image"
+              style={{
+                background: `url(${renderCardImage(images)}) no-repeat`,
+              }}
+            />
+          ) : null}
+        </div>
+        <div className="tweet-detail">
+          <div className="actions">
+            Comments {comments ? comments.length : "0"} Likes:{" "}
+            {likes ? likes : "0"}
+          </div>
+          <UserEditCommands id={_id} author={author} />
 
-        <UserCommands id={_id} author={author} />
-        <div className="comments">
-          {comments && comments.length > 0 ? (
-            <span>
-              {comments.map((c) => (
-                <span key={c.uid}>
-                  <strong>
-                    <AuthorDetail author={c.uid} type="comment" />
-                  </strong>{" "}
-                  <span className="comment-text-det">{c.text}</span>
-                </span>
-              ))}
-            </span>
-          ) : (
-            <p> No comments yet</p>
-          )}
+          <UserCommands id={_id} author={author} />
+          <div className="comments">
+            {comments && comments.length > 0 ? (
+              <span>
+                {comments.map((c) => (
+                  <span key={c.uid}>
+                    <strong>
+                      <AuthorDetail author={c.uid} type="comment" />
+                    </strong>{" "}
+                    <span className="comment-text-det">{c.text}</span>
+                  </span>
+                ))}
+              </span>
+            ) : (
+              <p> No comments yet</p>
+            )}
+          </div>
         </div>
       </div>
     </div>
