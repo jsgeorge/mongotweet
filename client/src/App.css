@@ -445,6 +445,9 @@ ul li {
 .desktop-categories {
   display: block;
 }
+.tweet-author-wrapper {
+  font-weight: bold;
+}
 a.chat-text,
 .user-item-text {
   font-size: 18px;
