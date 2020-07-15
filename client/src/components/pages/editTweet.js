@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+
+import { UserContext } from "../../context/user-context";
 import { TweetContext } from "../../context/tweet-context";
 import EditTweetForm from "../tweets/editForm.js";
 import UserCard from "../user/card";
@@ -8,6 +10,7 @@ import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const EditTweetPage = ({ match }) => {
+  const { user, setuser, isloggedin } = useContext(UserContext);
   const [state, dispatch] = useContext(TweetContext);
   const [category, setCategory] = useState("");
   const [tweet, setTweet] = useState("");
@@ -40,6 +43,7 @@ const EditTweetPage = ({ match }) => {
       setError("Cannot retrive selecte tweet");
     }
   }, [match.params, dispatch]);
+  if (!isloggedin) return <Redirect to="/" />;
 
   return (
     <div className="page-wrapper">

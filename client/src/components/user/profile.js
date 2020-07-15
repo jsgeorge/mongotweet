@@ -60,10 +60,8 @@ const ProfilePage = ({ match }) => {
   const displayUserProfile = () => {
     let usr = {};
     if (!match.params.id) {
-      console.log("profile current user", user._id, user);
       usr = user;
     } else {
-      console.log("profile other user", match.params.id, otheruser);
       usr = otheruser;
     }
     const { name, lastname, username, images, email } = usr;

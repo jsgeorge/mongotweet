@@ -64,9 +64,7 @@ const UserItem2 = ({ uid }) => {
     <div className="card_item_wrapper">
       <div className="card-text">
         <div className="user-item-wrapper">
-          <Link to={`/user/${uid}/profile`}>
-            <AuthorDetail author={uid} type="tweet" />
-          </Link>
+          <AuthorDetail author={uid} type="tweet" />
         </div>
       </div>
       {/* {!following ? (

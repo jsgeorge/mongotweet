@@ -1,9 +1,12 @@
 import React, { useEffect, useContext, useState } from "react";
 import axios from "axios";
+import { Link, Redirect } from "react-router-dom";
 import UserItem2 from "../users/item2";
 import { UsersContext } from "../../context/users-context";
+import { UserContext } from "../../context/user-context";
 
 export default function FollowingListing({ following }) {
+  const { user, setuser, isloggedin } = useContext(UserContext);
   const [error, setError] = useState("");
   const [header, setHeader] = useState("");
   const { users, setusers } = useContext(UsersContext);
@@ -11,7 +14,6 @@ export default function FollowingListing({ following }) {
   //let sortBy = { sortby: "createdAt", order: "desc" };
 
   useEffect(() => {
-    if (following) console.log("following list", following);
     // let filters = [];
     // const fetchData = async () => {
     //   try {
@@ -24,6 +26,7 @@ export default function FollowingListing({ following }) {
     // };
     // fetchData();
   }, []);
+  if (!isloggedin || !user) return <Redirect to="/" />;
 
   return (
     <div className="content-wrapper">

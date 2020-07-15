@@ -23,13 +23,14 @@ export default function UsersPage() {
         <div className="col-lg-7 col-md-7 col-sm-8 col-xs-9 content">
           <div className="content-wrapper">
             <h3>Who to follow</h3>
-          </div>
-          {/* <div className="add-tweet-panel">
+
+            {/* <div className="add-tweet-panel">
             {isloggedin && user ? (
               <AddTweet user={user} type="desktop" />
             ) : null} 
           </div>*/}
-          <UsersListing />
+            <UsersListing />
+          </div>
         </div>
         <div className="col-lg-3 col-md-3 col-sm-2 col-xs-4 Rsidebar">
           {/* <div className="desktop-categories">

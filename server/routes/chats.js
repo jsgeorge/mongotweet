@@ -219,6 +219,12 @@ router.post("/dislike", auth, (req, res) => {
 
 router.post("/update", auth, (req, res) => {
   console.log(req.body);
+  if (req.body.author != req.userid) {
+    return res.status(401).json({
+      editSuccess: false,
+      message: "You are not alowwed to edit the tweet",
+    });
+  }
   Chat.findOneAndUpdate(
     { _id: req.query.id },
     { $set: req.body },
@@ -235,6 +241,12 @@ router.post("/update", auth, (req, res) => {
   );
 });
 router.delete("/", auth, (req, res) => {
+  if (req.query.author != req.userid) {
+    return res.status(401).json({
+      editSuccess: false,
+      message: "You are not alowwed to delete the tweet",
+    });
+  }
   Chat.findOneAndDelete({ _id: req.query.id }, (err, doc) => {
     if (err) return res.status(401).json({ editSuccess: false, message: err });
 

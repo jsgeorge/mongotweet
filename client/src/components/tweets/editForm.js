@@ -85,6 +85,7 @@ const EditTweetForm = ({ item }) => {
   if (redirect) {
     return <Redirect to={`/tweets/${item._id}/view`} />;
   }
+  if (!user) return <Redirect to="/" />;
 
   return (
     <div className="add-tweet">

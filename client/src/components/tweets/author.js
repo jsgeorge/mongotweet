@@ -5,7 +5,7 @@ import axios from "axios";
 import Avatar from "../user/avatar";
 import { Link } from "react-router-dom";
 
-export default function AuthorDetail({ author }) {
+export default function AuthorDetail({ author, type }) {
   // const [state, dispatch] = useContext(TweetContext);
   const [user, setuser] = useState("");
   //const { username, lastname, name } = author;
@@ -48,8 +48,25 @@ export default function AuthorDetail({ author }) {
         </span>
 
         <span className="tweet-author-wrapper">
+          {type && type === "user" ? (
+            <span style={{ fontWeight: "bold" }}>
+              {name} {lastname} <br />
+            </span>
+          ) : null}
+
           {"@"}
-          {username ? username : name + " " + lastname}
+          {type && type == "user" ? (
+            <span>
+              <span style={{ fontWeight: "normal" }}>
+                {username ? username : name + " " + lastname}
+              </span>
+            </span>
+          ) : (
+            <span>{username ? username : name + " " + lastname} </span>
+          )}
+          {/* <div className="user-item-text">
+            <TweetListing uid={cuser._id} type={"number"} />
+          </div> */}
         </span>
       </Link>
     </span>

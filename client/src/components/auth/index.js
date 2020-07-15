@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import axios from "axios";
-//import UserPage from "../user";
 
 const Auth = ({ component: Component, ...rest }) => {
   return (

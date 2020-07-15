@@ -30,7 +30,7 @@ const UserEditCommands = ({ id, author }) => {
 
   const deleteTweet = async () => {
     try {
-      await axios.delete(`/chats?id=${id}`);
+      await axios.delete(`/chats?id=${id}&author=${author}`);
       setRedirect(true);
     } catch (err) {
       console.log(err);

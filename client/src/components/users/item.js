@@ -14,9 +14,9 @@ const UserItem = ({ cuser }) => {
   const [otheruser, setotheruser] = useState({});
 
   useEffect(() => {
-    if (user && user.following && user.following.length > 0)
-      user.following.map((l) => {
-        if (l.id === cuser.id) {
+    if (user && user.user.following && user.user.following.length > 0)
+      user.user.following.map((l) => {
+        if (l.id === cuser._id) {
           setfollowing(true);
         }
       });
@@ -58,15 +58,14 @@ const UserItem = ({ cuser }) => {
     <div className="card_item_wrapper">
       <div className="card-text">
         <div className="user-item-wrapper">
-          <Link to={`/user/${cuser._id}/profile`}>
-            <AuthorDetail author={cuser._id} type="tweet" />
-          </Link>
+          <AuthorDetail author={cuser._id} type="user" />
+
           {/*   Show Number of Tweets         */}
           <br />
-          <div className="user-item-text">
-            <TweetListing uid={user._id} type={"number"} />
-          </div>
         </div>
+        {/* <div className="user-item-text">
+          <TweetListing uid={cuser._id} type={"number"} />
+        </div> */}
         {!following ? (
           <button
             className="btn btn-default btnDefault btn-sm btnFollow"
