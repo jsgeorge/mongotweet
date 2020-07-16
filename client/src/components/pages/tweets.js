@@ -21,7 +21,7 @@ export default function TweetsPage() {
         </div>
         <div className="col-lg-7 col-md-7 col-sm-8 col-xs-9 content">
           <div className="content-wrapper">
-            <h3>Home</h3>
+            <h3 className="desk">Home</h3>
           </div>
           <div className="add-tweet-panel">
             {isloggedin && user ? (

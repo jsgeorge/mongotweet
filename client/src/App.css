@@ -127,6 +127,7 @@ nav .navbar {
   border-left: 15px solid rgb(192, 192, 240);
   border-right: 1px solid rgb(183, 183, 240);
   min-height: 200px;
+  min-width: 290px;
   padding: 0;
 }
 .backlink {
@@ -643,7 +644,7 @@ a.tag-link {
 }
 .user-item-wrapper {
   float: left;
-  width: 40%;
+  width: 60%;
   height: 50px;
   margin-top: 5px;
   margin-left: 5px;
@@ -1013,7 +1014,6 @@ a.tag-link {
     border: none;
   }
   .content-wrapper h3 {
-    display: none;
   }
   .tweet-detail .actions {
     width: 100%;

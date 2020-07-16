@@ -22,8 +22,7 @@ export default function UsersPage() {
         </div>
         <div className="col-lg-7 col-md-7 col-sm-8 col-xs-9 content">
           <div className="content-wrapper">
-            <h3>Who to follow</h3>
-
+            <h3>Follow Users</h3>
             {/* <div className="add-tweet-panel">
             {isloggedin && user ? (
               <AddTweet user={user} type="desktop" />
