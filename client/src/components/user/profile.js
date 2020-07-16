@@ -71,13 +71,15 @@ const ProfilePage = ({ match }) => {
           {images && images.length > 0 ? (
             <Avatar images={images} size="avt-lg" />
           ) : null}
-
-          <strong>
-            {!username && name ? name + " " + lastname : username}
-          </strong>
+          {user.name + " " + user.lastname}
+          <br />
+          <span className="username">
+            {"@"}
+            {!user.username ? user.name + " " + user.lastname : user.username}
+          </span>
         </h5>
-        {user && name ? name + " " + lastname : null}
-        <h6>{email}</h6>
+
+        <h5>{email}</h5>
       </span>
     );
   };
@@ -115,8 +117,8 @@ const ProfilePage = ({ match }) => {
             {!match.params.id ? (
               <span>
                 <button
-                  className="btn btn-default btn-sm"
-                  style={{ marginTop: "20px", color: "#111" }}
+                  className="btn btn-default btnDefault btn-sm"
+                  style={{ color: "#111" }}
                   onClick={() => onLogout()}
                 >
                   Logout

@@ -41,7 +41,7 @@ export default function TweetListing({ uid, type }) {
         <span>
           {" "}
           {state.tweets && state.tweets.articles ? (
-            <span>{cnt} tweets</span>
+            <span className="tweet-cnt">{cnt} tweets</span>
           ) : (
             "No tweets"
           )}

@@ -3,8 +3,10 @@ import axios from "axios";
 import { Redirect } from "react-router-dom";
 import UserItem from "./item";
 import { UsersContext } from "../../context/users-context";
+import { UserContext } from "../../context/user-context";
 
 export default function UsersListing() {
+  const { isloggedin, user } = useContext(UserContext);
   const [error, setError] = useState("");
   const [header, setHeader] = useState("");
   const { users, setusers } = useContext(UsersContext);
@@ -19,14 +21,14 @@ export default function UsersListing() {
         setusers(response.data);
       } catch (err) {
         console.log(err);
-        setError("Cannot retrieve users. Network error");
+        setError("Cannot retrieve tue. Network error");
       }
     };
     fetchData();
   }, []);
 
   //if (users) console.log(users);
-  if (!users) return <Redirect to="/" />;
+  if (!isloggedin || !user) return <Redirect to="/" />;
   return (
     <div className="content-wrapper">
       <div className="tweets-wrapper">
@@ -34,9 +36,13 @@ export default function UsersListing() {
         {users && users.length > 0 ? (
           users.map((u) => <UserItem key={u._id} cuser={u} />)
         ) : (
-          <div className="card-text">
-            Bummer! There are no current users. Check back later "
-          </div>
+          <span>
+            {!error && (
+              <div className="card-text">
+                Bummer! There are no current users. Check back later
+              </div>
+            )}
+          </span>
         )}
       </div>
     </div>

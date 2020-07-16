@@ -28,8 +28,8 @@ const Avatar = ({ images, size }) => {
             border: "2px solid rgb(6, 135, 199)",
             borderRadius: "100px",
             paddng: "6px",
-            width: "30px",
-            height: "30px",
+            width: "25px",
+            height: "25px",
           }}
         />
       )}
