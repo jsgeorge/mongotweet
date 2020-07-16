@@ -64,22 +64,22 @@ const ProfilePage = ({ match }) => {
     } else {
       usr = otheruser;
     }
-    const { name, lastname, username, images, email } = usr;
+    const { name, lastname, username, images } = usr;
     return (
       <span>
         <h5>
           {images && images.length > 0 ? (
             <Avatar images={images} size="avt-lg" />
           ) : null}
-          {user.name + " " + user.lastname}
+          {usr ? name + " " + lastname : null}
           <br />
           <span className="username">
             {"@"}
-            {!user.username ? user.name + " " + user.lastname : user.username}
+            {usr && !username ? name + " " + lastname : username}
           </span>
         </h5>
 
-        <h5>{email}</h5>
+        <h5>{!match.params.id ? user.email : null}</h5>
       </span>
     );
   };
@@ -95,78 +95,77 @@ const ProfilePage = ({ match }) => {
         </div>
 
         <div className="col-lg-7 col-md-7 col-sm-8 col-xs-9 content">
-          <div className="user-page">
-            <Link to="/user" className="mobile">
-              <FontAwesomeIcon
-                icon={faLongArrowAltLeft}
-                size="lg"
-                className="back-link primary-clr"
-              />
-            </Link>
-            <Link to="/tweets" className="desk">
-              <FontAwesomeIcon
-                icon={faLongArrowAltLeft}
-                size="lg"
-                className="back-link primary-clr"
-              />
-            </Link>
-            <h4>User Profile</h4>
+          {(!match.params.id && user) || (match.params.id && otheruser) ? (
+            <div className="user-page">
+              <Link to="/user" className="mobile">
+                <FontAwesomeIcon
+                  icon={faLongArrowAltLeft}
+                  size="lg"
+                  className="back-link primary-clr"
+                />
+              </Link>
+              <Link to="/tweets" className="desk">
+                <FontAwesomeIcon
+                  icon={faLongArrowAltLeft}
+                  size="lg"
+                  className="back-link primary-clr"
+                />
+              </Link>
+              <h4>User Profile</h4>
+              <div>{displayUserProfile()}</div>
+              {!match.params.id ? (
+                <span>
+                  <button
+                    className="btn btn-default btnDefault btn-sm"
+                    style={{ color: "#111" }}
+                    onClick={() => onLogout()}
+                  >
+                    Logout
+                  </button>{" "}
+                  <Link to="/user/edit" className="btn btn-primary btn-sm">
+                    Edit
+                  </Link>
+                </span>
+              ) : null}
+              <br />
+              {!match.params.id ? (
+                <div>
+                  <strong>Likes</strong> {user.likes ? user.likes.length : 0}{" "}
+                  <strong>Following</strong>
+                  {user.following ? user.following.length : 0}
+                </div>
+              ) : null}
 
-            <div>{displayUserProfile()}</div>
-
-            {!match.params.id ? (
-              <span>
-                <button
-                  className="btn btn-default btnDefault btn-sm"
-                  style={{ color: "#111" }}
-                  onClick={() => onLogout()}
-                >
-                  Logout
-                </button>{" "}
-                <Link to="/user/edit" className="btn btn-primary btn-sm">
-                  Edit
-                </Link>
-              </span>
-            ) : null}
-            <br />
-            {!match.params.id ? (
-              <div>
-                <strong>Likes</strong> {user.likes ? user.likes.length : 0}{" "}
-                <strong>Following</strong>
-                {user.following ? user.following.length : 0}
-              </div>
-            ) : null}
-
-            <div className="usertweets">
-              <h5>
-                <strong>
-                  {!match.params.id ? "Your Tweets" : "Latest Tweets"}
-                </strong>
-              </h5>
-              <div>
-                {!match.params.id ? (
-                  <TweetListing uid={user._id} />
-                ) : (
-                  <TweetListing uid={match.params.id} />
-                )}
-              </div>
-            </div>
-
-            {!match.params.id ? (
-              <div className="userfollowing">
+              <div className="usertweets">
                 <h5>
-                  {" "}
-                  <strong>Following</strong>{" "}
+                  <strong>
+                    {!match.params.id ? "Your Tweets" : "Latest Tweets"}
+                  </strong>
                 </h5>
-                {user.following ? (
-                  <FollowingListing following={user.following} />
-                ) : (
-                  "Nobody following yet"
-                )}
+                <div>
+                  {!match.params.id ? (
+                    <TweetListing uid={user._id} />
+                  ) : (
+                    <TweetListing uid={match.params.id} />
+                  )}
+                </div>
               </div>
-            ) : null}
 
-            {/*  {!match.params.id ? (
+              {!match.params.id ? (
+                <div className="userfollowing">
+                  <h5>
+                    {" "}
+                    <strong>Following</strong>{" "}
+                  </h5>
+                  {user.following ? (
+                    <FollowingListing following={user.following} />
+                  ) : (
+                    "Nobody following yet"
+                  )}
+                </div>
+              ) : null}
+
+              {/*  {!match.params.id ? (
               <div className="userfollowing">
                 <h5>
                   {" "}
@@ -179,7 +178,8 @@ const ProfilePage = ({ match }) => {
                 )}
               </div>
             ) : null} */}
-          </div>
+            </div>
+          ) : null}
         </div>
         <div className="col-lg-3 col-md-3 col-sm-2 col-xs-4 Rsidebar">
           <Categories />
