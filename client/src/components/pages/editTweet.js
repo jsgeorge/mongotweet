@@ -52,7 +52,8 @@ const EditTweetPage = ({ match }) => {
           <UserCard />
         </div>
         <div className="col-lg-7 col-md-7 col-sm-8   col-xs-9 content">
-          <Link to={`/tweets/${match.params.id}/view`}>
+               <div className="card-text">
+ <Link to={`/tweets/${match.params.id}/view`}>
             <FontAwesomeIcon
               icon={faLongArrowAltLeft}
               size="lg"
@@ -67,6 +68,7 @@ const EditTweetPage = ({ match }) => {
           ) : (
             <EditTweetForm item={state.tweet} />
           )}
+          </div>
         </div>
         <div className="col-lg-3 col-md-3 col-sm-2 col-xs-4 Rsidebar"></div>
       </div>

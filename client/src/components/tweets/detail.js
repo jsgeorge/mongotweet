@@ -52,8 +52,8 @@ export default function TweetDetail({ tweet }) {
   } = tweet;
 
   return (
-    <div className="tweet-detail-wrapper">
-      <div className="card-text-det">
+    <div className="tweet-detail-wrapper" >
+      <div className="card-text">
         <Link to="/tweets" className="backlink">
           <FontAwesomeIcon
             icon={faLongArrowAltLeft}
@@ -71,10 +71,12 @@ export default function TweetDetail({ tweet }) {
               {tag ? tag : null}
             </strong>
           </Link>
-
           <span className="chat-date">{displayDate(createdAt)}</span>
         </div>
+
         <div className="chat-text-det">{text}</div>
+        </div>
+
         <div className="card-detail-image">
           {images && images.length > 0 && images[0].url ? (
             <div
@@ -84,7 +86,7 @@ export default function TweetDetail({ tweet }) {
               }}
             />
           ) : null}
-        </div>
+        
         <div className="tweet-detail">
           <div className="actions">
             Comments {comments ? comments.length : "0"} Likes:{" "}

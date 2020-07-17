@@ -7,6 +7,8 @@ import axios from "axios";
 import { TweetContext } from "../../context/tweet-context";
 import { UserContext } from "../../context/user-context";
 import Avatar from "./../user/avatar";
+import AuthorDetail from "./author";
+import Moment from "moment";
 
 const EditTweetForm = ({ item }) => {
   const user = useContext(UserContext);
@@ -29,7 +31,9 @@ const EditTweetForm = ({ item }) => {
     // setTweet(item.text);
     // setCategory(item.tag);
   });
-
+const displayDate = (d) => {
+    return Moment(d).format("MMM D h:mm A");
+  };
   const validData = () => {
     let errs = {};
     setErrors({});
@@ -90,28 +94,23 @@ const EditTweetForm = ({ item }) => {
   return (
     <div className="add-tweet">
       {user && edited ? (
-        <div className="row">
-          <div className="avatar-wrapperL">
-            <Avatar images={user.images} size="avt-med" />
+        <div className="tweet-form" >
+          <div className="author-line">
+              <AuthorDetail author={item.author} />
+              <span className="chat-date">{displayDate(item.createdAt)}</span>
           </div>
-          <div className="col-md-9">
-            <div
-              className={classnames("add-tweet", {
-                "add-tweet-full": images && images.length > 0,
-              })}
-            >
-              <div className="form-group">
-                <textarea
-                  name="text"
-                  className="form-control"
-                  style={{ fontSize: "20px" }}
-                  value={edited.text}
-                  onChange={handleChange}
-                  rows="5"
-                />
-              </div>
-
-              <div className="form-group">
+          <div className="form-group">
+         
+              <textarea
+                name="text"
+                className="form-control"
+                style={{ fontSize: "20px", borderBottom:"1px solid #ccc" }}
+                value={edited.text}
+                onChange={handleChange}
+                rows="3"
+              />
+          </div>
+          <div className="form-group">
                 Tag
                 <input
                   name="tag"
@@ -120,6 +119,7 @@ const EditTweetForm = ({ item }) => {
                   placeholder="category tags"
                   value={edited.tag}
                   onChange={handleChange}
+                  style={{borderBottom:"1px solid #ccc"}}
                 />
               </div>
               {edited.images && edited.images.length > 0 ? (
@@ -131,39 +131,26 @@ const EditTweetForm = ({ item }) => {
                     )}) no-repeat`,
                   }}
                 />
-              ) : null}
-
-              {/* <FileUpload
-          imagesHandler={(images) => imagesHandler(images)}
-          reset={formSuccess}
-        /> */}
-              <div className="file_upload_wrapper">
-                <FileUpload
-                  images={images}
-                  setImages={setImages}
-                  reset={formSuccess}
-                />
-              </div>
-              {/* </form> */}
+              ) : null}  
+              <div className="form-group" style={{marginTop:"15px"}}> 
               <button
                 type="button"
                 className="btn btn-primary"
                 onClick={() => onSubmit()}
+                style={{float:"right"}}
               >
                 reTweet
               </button>
-            </div>
+              </div>
             {errors.tweet ? (
               <div className="has-error">Error {errors.tweet}</div>
             ) : null}
             {errors.category ? (
               <div className="has-error">Error {errors.category}</div>
             ) : null}
-
             {formError ? (
               <div className="has-error">Error - Could not add tweet</div>
             ) : null}
-          </div>
         </div>
       ) : (
         <p>NO tweet found</p>

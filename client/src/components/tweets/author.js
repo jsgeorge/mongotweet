@@ -54,19 +54,17 @@ export default function AuthorDetail({ author, type }) {
             </span>
           ) : null}
 
-          {"@"}
+          
           {type && type == "user" ? (
-            <span>
-              <span style={{ fontWeight: "normal" }}>
-                {username ? username : name + " " + lastname}
+           
+              <span>
+                {"@"}{username ? username : name + " " + lastname}
               </span>
-            </span>
+           
           ) : (
-            <span>{username ? username : name + " " + lastname} </span>
+            <span ><strong>{"@"}{username ? username : name + " " + lastname}</strong> </span>
           )}
-          {/* <div className="user-item-text">
-            <TweetListing uid={cuser._id} type={"number"} />
-          </div> */}
+         
         </span>
       </Link>
     </span>

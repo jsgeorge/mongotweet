@@ -11,6 +11,7 @@ import TweetDetail from "../tweets/detail";
 import UserCard from "../user/card";
 import Categories from "../categories";
 import Avatar from "../user/avatar";
+import  LoadingSpinner  from "../utils/LoadingSpinner";
 
 export default function TweetDetailPage({ match }) {
   const [state, dispatch] = useContext(TweetContext);
@@ -18,9 +19,12 @@ export default function TweetDetailPage({ match }) {
   const [setError] = useState("");
   const [like, setLike] = useState(false);
   const [favorite, setFavorite] = useState(false);
+const [ isLoading, setisLoading ] = useState(true);
 
   useEffect(() => {
     const { id } = match.params;
+      setisLoading(true);
+   
     if (id) {
       const fetchData = async () => {
         try {
@@ -29,9 +33,11 @@ export default function TweetDetailPage({ match }) {
             type: "FETCH_TWEET",
             payload: response.data[0],
           });
+           setisLoading(false);
           // console.log("detail respnse.data", response.data);
         } catch (err) {
           console.log(err);
+           setisLoading(false);
           //setError("Cannot retrieve the selected tweet. Network error");
         }
       };
@@ -55,6 +61,11 @@ export default function TweetDetailPage({ match }) {
           <UserCard />
         </div>
         <div className="col-lg-7 col-md-7 col-sm-8   col-xs-9 content">
+            {isLoading && (
+             <div className="center">
+               <LoadingSpinner asOverlay />
+               </div>
+           )}
           <TweetDetail tweet={state.tweet} />
         </div>
 

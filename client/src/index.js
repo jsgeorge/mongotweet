@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 //import "bootstrap/dist/css/bootstrap.min.css";
 import "./bootstrap.css";
 import "./index.css";
+import "./LoadingSpinner.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 

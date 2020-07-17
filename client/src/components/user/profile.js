@@ -13,6 +13,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
 import FollowingListing from "./following";
 import LikeListing from "./likes";
+import  LoadingSpinner  from "../utils/LoadingSpinner";
 
 // import jwtDecode from "jwt-decode";
 // import axios from "axios";
@@ -24,19 +25,24 @@ const ProfilePage = ({ match }) => {
   const [formSuccess, setFormSucess] = useState(false);
   const [otheruser, setotheruser] = useState({});
   const [error, setError] = useState("");
+const [ isLoading, setisLoading ] = useState(false);
 
   useEffect(() => {
     // console.log("in profile user._id", user._id);
-
+   
     if (match.params.id) {
+      setisLoading(true);
+  
       // console.log("another user id", match.params.id);
       const getUser = async () => {
         try {
           const response = await axios.get(`/users/id?id=${match.params.id}`);
           setotheruser(response.data.userdata);
+           setisLoading(false);
         } catch (error) {
           console.log("ERROR", error);
           setError("unknown user");
+           setisLoading(false);
         }
       };
       getUser();
@@ -67,11 +73,12 @@ const ProfilePage = ({ match }) => {
     const { name, lastname, username, images } = usr;
     return (
       <span>
+     
         <h5>
           {images && images.length > 0 ? (
             <Avatar images={images} size="avt-lg" />
           ) : null}
-          {usr ? name + " " + lastname : null}
+          <strong> {usr ? name + " " + lastname : null} </strong>
           <br />
           <span className="username">
             {"@"}
@@ -95,8 +102,12 @@ const ProfilePage = ({ match }) => {
         </div>
 
         <div className="col-lg-7 col-md-7 col-sm-8 col-xs-9 content">
-          {(!match.params.id && user) || (match.params.id && otheruser) ? (
-            <div className="user-page">
+           <div className="user-page">
+           {isLoading && (
+             <div className="center">
+               <LoadingSpinner asOverlay />
+               </div>
+           )}
               <Link to="/user" className="mobile">
                 <FontAwesomeIcon
                   icon={faLongArrowAltLeft}
@@ -179,7 +190,7 @@ const ProfilePage = ({ match }) => {
               </div>
             ) : null} */}
             </div>
-          ) : null}
+          
         </div>
         <div className="col-lg-3 col-md-3 col-sm-2 col-xs-4 Rsidebar">
           <Categories />

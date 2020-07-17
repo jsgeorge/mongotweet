@@ -21,36 +21,20 @@ const TweetItem = ({ tweet }) => {
   return (
     <div className="card_item_wrapper">
       <div className="card-text">
-        <div className="author-line">
-          {/* <div className="avatar-wrapper">
-          <Link to={`/user/${author}/profile`}>
-            <Avatar images={avatar} />
-          </Link>
-        </div> */}
-
-          {/* <div className="tweet-item-wrapper"> */}
-          {/* <Link to={`/tweets/query/tag/${tag}`} className="tag-link">
-            <strong>
-              {"#"}
-              {tag ? tag : null}
-            </strong>
-          </Link>{" "} */}
-
+        <div className="author-line" >
+         
           <AuthorDetail author={author} />
-
-          {/* </div> */}
+         
           <Link to={`/tweets/query/tag/${tag}`} className="tag-link">
-            <strong>
-              {"#"}
-              {tag ? tag : null}
-            </strong>
-          </Link>
-
+            <strong>{"#"}{tag ? tag : null}</strong>
+            </Link>
           <span className="chat-date">{displayDate(createdAt)}</span>
+        
         </div>
+
         {text ? (
           <Link to={`/tweets/${_id}/view`} className="chat-text">
-            {text}{" "}
+            {text}
           </Link>
         ) : null}
       </div>
