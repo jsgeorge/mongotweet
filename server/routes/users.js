@@ -37,12 +37,7 @@ router.get("/id", (req, res) => {
         following: user.following,
         likes: user.likes,
       };
-      // console.log(
-      //   uid,
-      //   tweetAuthor.name,
-      //   tweetAuthor.lastname,
-      //   tweetAuthor.username
-      // );
+   
       res.status(200).json({ userdata: tweetAuthor });
     });
   } else {
@@ -126,39 +121,6 @@ router.patch("/", auth, (req, res) => {
   );
 });
 
-// router.post("/addFav", (req, res) => {
-//   console.log("/addFav");
-//   console.log("uid", req.query.uid);
-//   console.log("id", req.query.id);
-//   User.findOneAndUpdate(
-//     { _id: req.query.uid },
-//     { $push: { favorites: { id: mongoose.Types.ObjectId(req.query.id) } } },
-//     { new: true },
-//     (err, doc) => {
-//       if (err) return res.json({ success: false, err });
-//       res.status(200).json({
-//         editSuccess: true,
-//       });
-//     }
-//   );
-// });
-
-// router.get("/delFav", (req, res) => {
-//   console.log("/delFav");
-//   console.log("uid", uid);
-//   console.log("id", id);
-//   User.findOneAndUpdate(
-//     { _id: req.user.uid },
-//     { $pull: { favorites: { id: mongoose.Types.ObjectId(req.query.id) } } },
-//     { new: true },
-//     (err, doc) => {
-//       if (err) return res.json({ success: false, err });
-//       res.status(200).json({
-//         editSuccess: true,
-//       });
-//     }
-//   );
-// });
 
 router.post("/follow", auth, (req, res) => {
   User.findOneAndUpdate(
@@ -215,12 +177,6 @@ router.get("/list", (req, res) => {
   });
 });
 
-// router.get("/logout", auth, (req, res) => {
-//   User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, doc) => {
-//     if (err) return res.json({ success: false, err });
-//     return res.status(200).send({ success: true });
-//   });
-// });
 
 router.post("/uploadimage", formidable(), (req, res) => {
   cloudinary.uploader.upload(

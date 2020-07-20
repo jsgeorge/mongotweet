@@ -30,7 +30,12 @@ function reducer(state, action) {
     case "CREATE_TWEET": {
       return {
         ...state,
-        message: action.payoad,
+        tweets: [...state.tweets, action.payload],
+        message: {
+          type: "success",
+          title: "Success",
+          content: "New Tweet created",
+        },
       };
     }
     case "ADD_COMMENT": {

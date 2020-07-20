@@ -26,7 +26,14 @@ mongoose
   .catch(() => {
     console.log("Connection faild");
   });
-
+// mongoose
+//   .connect(
+//     process.env.MONGODB_CONNSTR 
+//   )
+//   .then(() => {})
+//   .catch((err) => {
+//     console.log("Connection failed", err);
+//   })
 //bodypasrer
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

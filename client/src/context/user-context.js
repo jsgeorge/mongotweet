@@ -53,7 +53,18 @@ export const UserContext = createContext({
 //         },
 //       };
 //     }
-
+//     case "UPDATE_USER": {
+//       const user = action.payload;
+//       return {
+//         ...state,
+//         users: state.users.map((item) => (item._id === user._id ? user : item)),
+//         message: {
+//           type: "success",
+//           title: "Update Successful",
+//           content: `User  has been updated!`,
+//         },
+//       };
+//     }
 //     case "ADD_FAVORITE": {
 //       const user = action.payload;
 //       return {

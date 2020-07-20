@@ -37,8 +37,8 @@ const SignupPage = () => {
     if (!password) {
       errs.password = "Invalid/Missing password";
     }
-   
-    if ( !password || !email || !name || !lastname) {
+
+    if (!password || !email || !name || !lastname) {
       setErrors(errs);
       return false;
     } else {
@@ -87,6 +87,7 @@ const SignupPage = () => {
             <div className="form-header">
               <h3>Sign Up</h3>
             </div>
+            {errors.form && <div className="has-error">{errors.form}</div>}
             <div
               className={classnames("form-group", {
                 "has-error": errors.name,
@@ -128,9 +129,7 @@ const SignupPage = () => {
                 onChange={(e) => setLastname(e.target.value)}
               />
             </div>
-            {errors.form && (
-              <div className="alert alert-danger">{errors.form}</div>
-            )}
+
             <div
               className={classnames("form-group", {
                 "has-error": errors.email,

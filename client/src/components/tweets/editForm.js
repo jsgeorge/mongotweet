@@ -57,7 +57,7 @@ const displayDate = (d) => {
   const handleChange = (e) => {
     setEdited({ ...edited, [e.target.name]: e.target.value });
   };
-  const addTweet = async () => {
+  const updateTweet = async () => {
     if (validData()) {
       let updTweet = {
         ...item,
@@ -81,7 +81,7 @@ const displayDate = (d) => {
   };
 
   const onSubmit = async () => {
-    await addTweet();
+    await updateTweet();
   };
   const renderCardImage = (images) => {
     return images[0].url;

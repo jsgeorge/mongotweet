@@ -143,22 +143,11 @@ router.get("/articles", (req, res) => {
 });
 
 router.get("/article", (req, res) => {
-  // console.log("/chats/articles_by_id");
   let type = req.query.type;
   let items = req.query.id;
   let id = req.query.id;
-  //console.log("id = ", items);
-  // if (type === "array") {
-  //   let ids = req.query.id.split(",");
-  //   items = [];
-  //   items = ids.map((item) => {
-  //     return mongoose.Types.ObjectId(item);
-  //   });
-  // }
-
-  //Chat.find({ _id: { $in: items } })
+ 
   Chat.find({ _id: id })
-    //Product.find({ _id: items })
     .populate("category")
     .exec((err, docs) => {
       return res.status(200).send(docs);

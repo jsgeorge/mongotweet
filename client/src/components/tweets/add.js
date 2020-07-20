@@ -43,8 +43,6 @@ const AddTweet = ({ user, type }) => {
   const addTweet = async () => {
     if (validData()) {
       let newTweet = {
-        // author: user._id,
-        // avatar: user.images,
         text: tweet,
         category: category,
         images: images,

@@ -89,9 +89,7 @@ const SigninPage = () => {
               {/* {state && state.message.content && (
               <FlashMessage message={state.message} />
             )} */}
-              {errors.form && (
-                <div className="alert alert-danger">{errors.form}</div>
-              )}
+              {errors.form && <div className="has-error">{errors.form}</div>}
               <div
                 className={classnames("form-group", { "has-error": errors })}
               >

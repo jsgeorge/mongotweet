@@ -2,15 +2,15 @@ import React, { useEffect, useState, useContext } from "react";
 import "./App.css";
 import Routes from "./routes";
 import { BrowserRouter } from "react-router-dom";
+import jwtDecode from "jwt-decode";
+import axios from "axios";
+
 import Header from "./components/layout/header";
 //import { UserContextProvider } from "./context/user-context";
 import { UserContext } from "./context/user-context";
 import { UsersContext } from "./context/users-context";
-
 import { TweetContextProvider } from "./context/tweet-context";
 import { CategoryContextProvider } from "./context/category-context";
-import jwtDecode from "jwt-decode";
-import axios from "axios";
 import setAuthorizationToken from "./utils/setAuthToken";
 
 function App() {
