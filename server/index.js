@@ -18,22 +18,20 @@ require("dotenv").config();
 
 //Mongooose
 mongoose.Promise = global.Promise;
-mongoose
-  .connect(
-    process.env.MONGODB_URI || "mongodb://localhost/react/mongodb/mongotweet"
-  )
-  .then(() => {})
-  .catch(() => {
-    console.log("Connection faild");
-  });
 // mongoose
 //   .connect(
-//     process.env.MONGODB_CONNSTR 
+//     process.env.MONGODB_URI || "mongodb://localhost/react/mongodb/mongotweet"
 //   )
 //   .then(() => {})
-//   .catch((err) => {
-//     console.log("Connection failed", err);
-//   })
+//   .catch(() => {
+//     console.log("Connection faild");
+//   });
+mongoose
+  .connect(process.env.MONGODB_CONNSTR)
+  .then(() => {})
+  .catch((err) => {
+    console.log("Connection failed", err);
+  });
 //bodypasrer
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
